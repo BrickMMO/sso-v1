@@ -2,7 +2,9 @@
 
 The Single Sign On application for all BrickMMO assets. 
 
-## Requirements:
+***
+
+## Repo Resources
 
 * [BrickMMO](https://www.brickmmo.com/)
 * [BrickMMO SSO](https://sso.brickmmo.com/)
