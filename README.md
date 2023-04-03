@@ -1,6 +1,6 @@
 # BrickMMO SSO Application
 
-The Single Sign On application for all BrickMMO assets. 
+The single sign on application used for all BrickMMO assets. 
 
 ***
 
