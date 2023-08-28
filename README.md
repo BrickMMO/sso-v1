@@ -1,4 +1,4 @@
-# SSO
+# SSO V1
 
 The single sign on application used for all BrickMMO assets. 
 
