@@ -6,12 +6,9 @@ The single sign on application used for all BrickMMO assets.
 
 ## Project Stack
 
-This project uses [PHP](https://www.php.net/) and [Laravel](https://laravel.com/).
-
-<img src="https://console.codeadam.ca/api/image/php" width="60"> <img src="https://console.codeadam.ca/api/image/laravel" width="60">
+This project has not yet been started. Stack has not yet been determined.
 
 ---
-
 ## Repository Resources
 
 * [BrickMMO](https://brickmmo.com)
