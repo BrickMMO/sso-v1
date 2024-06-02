@@ -6,21 +6,22 @@ define('PAGE_TITLE', 'Login');
 
 include('includes/header.php');
 ?>
+
 <h1> SSO For BrickMMO Login </h1>
-<p>Welcome to the BrickMMO project management application.</p>
+<p> Welcome to the BrickMMO project management application. </p>
 
 <form action="" method="POST">
     <input type="hidden" name="submit" value="true">
     <label>
         Email:
-        <br>
         <input type="email" name="email">
+        <br>
     </label>
 
     <label>
         Password:
-        <br>
         <input type="password" name="password">
+        <br>
     </label>
 
     <div class="flex-container">
@@ -36,5 +37,5 @@ include('includes/header.php');
 <hr>
 
 <div class="right">
-    <a href="forgot.php">Forgot Password?</a> | <a href="register.php"> Sign Up</a>
+    <a href="forgot.php">Forgot Password?</a> | <a href="/pages/signup.php"> Sign Up</a>
 </div>
