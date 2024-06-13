@@ -153,3 +153,77 @@ a:hover {
   margin-bottom: 10px;
   font-weight: 700;
 }
+
+/* ==== Main Header CSS ==== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.site-name {
+  font-weight: bold;
+}
+
+.city-form {
+  margin: 0;
+}
+
+.user-info {
+  margin-right: 10px;
+}
+
+/* ==== My Account Page ==== */
+.account-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar {
+  flex-shrink: 0;
+}
+
+.avatar img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.account-details {
+  flex-grow: 1;
+}
+
+.account-details label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.account-details input[type="text"],
+.account-details input[type="email"] {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+#updateButton {
+  margin-top: 10px;
+}
+
+#saveButton {
+  margin-top: 10px;
+}

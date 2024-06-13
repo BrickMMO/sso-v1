@@ -15,12 +15,11 @@ This project has not yet been started. Stack has not yet been determined.
 - Database Setup ✅
 - Create Sign In ✅
 - Create Sign Up ✅
-- Validation On Sign In
-- Validation On Sign Up
-- Dashboard
-- My Account
-- Forgot Password
-- Update Password
+- Validation On Sign In ✅
+- Validation On Sign Up ✅
+- Dashboard ✅
+- My Account ✅
+- Forgot Password ✅
 
 ---
 
