@@ -60,8 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Handle avatar upload
         if (!empty($_FILES['avatar']['name'])) {
             $target_dir = "../assets/uploads/";
+            $sanitized_username = strtolower(str_replace(' ', '_', $name));
             $file_extension = strtolower(pathinfo($_FILES["avatar"]["name"], PATHINFO_EXTENSION));
-            $avatar_name = uniqid('avatar_', true) . '.' . $file_extension;
+            $avatar_name = $sanitized_username . '.' . $file_extension;
             $target_file = $target_dir . $avatar_name;
 
             if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) {

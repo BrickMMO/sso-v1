@@ -1,3 +1,8 @@
+<?php
+include_once('../includes/connect.php');
+include_once('../includes/session.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,9 +26,6 @@
 </head>
 
 <?php
-include('../includes/connect.php');
-include('../includes/session.php');
-
 // Function to destroy session and redirect to login
 function logout()
 {
@@ -39,7 +41,7 @@ if (isset($_GET['logout'])) {
 }
 
 // Fetch cities from the database
-$query = "SELECT * FROM cities WHERE status = 'Active'";
+$query = "SELECT * FROM cities";
 $stmt = $connect->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -73,14 +75,16 @@ if (empty($selectedCityId) && !empty($cities)) {
                     <form action="" method="POST" class="city-form w3-margin-left">
                         <select class="w3-select w3-border" name="city" id="cityDropdown" onchange="this.form.submit()">
                             <?php foreach ($cities as $city) : ?>
-                                <?php
-                                $selected = ($city['id'] == $selectedCityId) ? 'selected' : '';
-                                // Convert city name to lowercase without spaces
-                                $cityName = strtolower(str_replace(' ', '', $city['name']));
-                                ?>
-                                <option value="<?php echo $city['id']; ?>" <?php echo $selected; ?>>
-                                    <?php echo $city['name']; ?>
-                                </option>
+                                <?php if ($city['status'] == "Active") : ?>
+                                    <?php
+                                    $selected = ($city['id'] == $selectedCityId) ? 'selected' : '';
+                                    // Convert city name to lowercase without spaces
+                                    $cityName = strtolower(str_replace(' ', '', $city['name']));
+                                    ?>
+                                    <option value="<?php echo $city['id']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $city['name']; ?>
+                                    </option>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
                     </form>
@@ -96,6 +100,7 @@ if (empty($selectedCityId) && !empty($cities)) {
                     </button>
                     <div class="w3-dropdown-content w3-bar-block w3-border">
                         <a href="./profile.php" class="w3-bar-item w3-button">My Account</a>
+                        <a href="./cities.php" class="w3-bar-item w3-button">Manage City</a>
                         <a href="../" class="w3-bar-item w3-button">Logout</a>
                     </div>
                 </div>

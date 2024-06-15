@@ -161,3 +161,8 @@ a:hover.w3-text-red {
 .w3-custom-padding {
   padding-top: 48px !important;
 }
+
+.w3-image {
+  display: inline-flex;
+  margin: 0 auto;
+}
