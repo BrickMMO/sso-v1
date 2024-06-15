@@ -60,36 +60,76 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 }
 ?>
 
-<h1> Forgot Password </h1>
-
-<form action="" method="POST">
-    <input type="hidden" name="submit" value="true">
-
-    <label>
-        Email:
-        <input type="email" name="email" placeholder="Enter your email address" value="<?php echo htmlspecialchars($email); ?>">
-        <br>
-    </label>
-
-    <label>
-        New Password:
-        <input type="password" name="password" placeholder="Enter your new password">
-        <br>
-    </label>
-
-    <?php
-    if (!empty($errors)) {
-        foreach ($errors as $error) {
-            echo "<div style='color: red;'>$error</div>";
-        }
-    }
-    ?>
-
-    <input type="submit" value="Reset Password">
-</form>
-
-<hr>
-
-<div class="right">
-    <a href="../index.php"> Back to Login</a>
+<div class="w3-panel w3-green">
+    <h3><i class="fa-solid fa-triangle-exclamation"></i> Success!</h3>
+    <p>
+        If there is an account associated to this email, you will receive a
+        link with reset instructions.
+    </p>
 </div>
+
+<div>
+    <form action="" method="POST" onsubmit="return validateForgotForm();" novalidate>
+        <input class="w3-input" type="email" id="email" name="email" autocomplete="off" value="<?php echo htmlspecialchars($email); ?>" />
+        <label for="email" class="w3-text-gray">
+            <i class="fa-solid fa-envelope"></i> Email
+            <span id="email-error" class="w3-text-red"></span>
+        </label>
+
+        <input class="w3-input" type="password" name="password" id="password" autocomplete="off" />
+        <label for="password" class="w3-text-gray">
+            <i class="fa-solid fa-lock"></i>
+            New Password <span id="password-error" class="w3-text-red"></span>
+        </label>
+
+        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" name="submit">
+            <i class="fa-solid fa-question"></i>
+            Reset Password
+        </button>
+
+        <?php
+        if (!empty($errors)) {
+            foreach ($errors as $error) {
+                echo "<div style='color: red;'>$error</div>";
+            }
+        }
+        ?>
+    </form>
+</div>
+
+<div class="w3-container w3-center w3-margin">
+    <button onclick="location.href='../';" class="w3-button w3-grey w3-text-white">
+        <i class="fa-solid fa-caret-left"></i>
+        Back to Login
+    </button>
+</div>
+
+<script>
+    function validateForgotForm() {
+        let errors = 0;
+
+        let email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$";
+        let email = document.getElementById("email");
+        let email_error = document.getElementById("email-error");
+        email_error.innerHTML = "";
+        if (email.value == "") {
+            email_error.innerHTML = "(email is required)";
+            errors++;
+        } else if (!email.value.match(email_pattern)) {
+            email_error.innerHTML = "(email is invalid)";
+            errors++;
+        }
+
+        let password = document.getElementById("password");
+        let password_error = document.getElementById("password-error");
+        password_error.innerHTML = "";
+        if (password.value == "") {
+            password_error.innerHTML = "(password is required)";
+            errors++;
+        }
+
+        if (errors) return false;
+    }
+</script>
+
+<!-- Need Email Verification -->

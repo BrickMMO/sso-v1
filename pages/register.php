@@ -2,7 +2,7 @@
 
 include('../includes/connect.php');
 
-define('PAGE_TITLE', 'Sign UP');
+define('PAGE_TITLE', 'Register');
 
 include('../includes/header.php');
 
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     // Check if email already exists
     if (emailExists($email, $connect)) {
         // Redirect to login page
-        header("Location: ../index.php");
+        header("Location: ../");
     } else {
         // Handle file upload if there are no validation errors
         if (empty($errors)) {
@@ -146,46 +146,95 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 }
 ?>
 
-<h1> SSO For BrickMMO Register </h1>
-<p> Welcome to the BrickMMO project management application. </p>
+<div>
+    <form action="" method="POST" enctype="multipart/form-data" id="signupForm" onsubmit="return validateRegisterForm();" novalidate>
+        <input class="w3-input" type="text" name="name" id="name" autocomplete="off" value="<?php echo isset($name) ? $name : ''; ?>" />
+        <label for="name" class="w3-text-gray">
+            <i class="fa-solid fa-user"></i>
+            Name <span id="name-error" class="w3-text-red"></span>
+        </label>
 
-<form action="" method="POST" enctype="multipart/form-data" id="signupForm">
-    <input type="hidden" name="submit" value="true">
-    <label>
-        Name:
-        <input type="text" name="name" id="name" placeholder="Enter your name" value="<?php echo isset($name) ? $name : ''; ?>">
-        <br>
-    </label>
+        <input class="w3-input" type="email" name="email" id="email" autocomplete="off" value="<?php echo isset($email) ? $email : ''; ?>" />
+        <label for="email" class="w3-text-gray">
+            <i class="fa-solid fa-envelope"></i>
+            Email <span id="email-error" class="w3-text-red"></span>
+        </label>
 
-    <label>
-        Email:
-        <input type="email" name="email" id="email" placeholder="Enter your email address" value="<?php echo isset($email) ? $email : ''; ?>">
-        <br>
-    </label>
+        <input class="w3-input" type="text" name="github" id="github" autocomplete="off" value="<?php echo isset($github) ? $github : ''; ?>" />
+        <label for="github" class="w3-text-gray">
+            <i class="fa-brands fa-github"></i>
+            GitHub <span id="github-error" class="w3-text-red"></span>
+        </label>
 
-    <label>
-        GitHub:
-        <input type="text" name="github" id="github" placeholder="Enter your GitHub username" value="<?php echo isset($github) ? $github : ''; ?>">
-        <br>
-    </label>
+        <input class="w3-input" type="password" name="password" id="password" autocomplete="off" />
+        <label for="password" class="w3-text-gray">
+            <i class="fa-solid fa-lock"></i>
+            Password <span id="password-error" class="w3-text-red"></span>
+        </label>
 
-    <label>
-        Password:
-        <input type="password" name="password" id="password" placeholder="Enter your password">
-        <br>
-    </label>
+        <input class="w3-input" type="file" name="avatar" id="avatar" accept="image/*" autocomplete="off" />
+        <label for="avatar" class="w3-text-gray">
+            <i class="fa-solid fa-image"></i>
+            Avatar <span id="avatar-error" class="w3-text-red"></span>
+        </label>
 
-    <label>
-        Avatar:
-        <input type="file" name="avatar" id="avatar" accept="image/*">
-        <br>
-    </label>
-
-    <input type="submit" value="Sign Up">
-</form>
-
-<hr>
-
-<div class="right">
-    <a href="../"> If you are an existing user? </a>
+        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" name="submit">
+            <i class="fa-solid fa-pen"></i>
+            Register
+        </button>
+    </form>
 </div>
+
+<div class="w3-container w3-center w3-margin">
+    <button onclick="location.href='../';" class="w3-button w3-grey w3-text-white">
+        <i class="fa-solid fa-caret-left"></i>
+        Back to Login
+    </button>
+</div>
+
+<!-- Client-side validation -->
+<script>
+    function validateRegisterForm() {
+        let errors = 0;
+
+        let name = document.getElementById("name");
+        let name_error = document.getElementById("name-error");
+        name_error.innerHTML = "";
+        if (name.value == "") {
+            name_error.innerHTML = "(name is required)";
+            errors++;
+        }
+
+        let email_pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+        let email = document.getElementById("email");
+        let email_error = document.getElementById("email-error");
+        email_error.innerHTML = "";
+        if (email.value == "") {
+            email_error.innerHTML = "(email is required)";
+            errors++;
+        } else if (!email.value.match(email_pattern)) {
+            email_error.innerHTML = "(email is invalid)";
+            errors++;
+        }
+
+        let github = document.getElementById("github");
+        let github_error = document.getElementById("github-error");
+        github_error.innerHTML = "";
+        if (github.value == "") {
+            github_error.innerHTML = "(GitHub username is required)";
+            errors++;
+        }
+
+        let password = document.getElementById("password");
+        let password_error = document.getElementById("password-error");
+        password_error.innerHTML = "";
+        if (password.value == "") {
+            password_error.innerHTML = "(password is required)";
+            errors++;
+        }
+
+        return errors === 0;
+    }
+</script>
+
+<!-- Need to Add City by default -->
