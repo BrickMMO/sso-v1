@@ -16,6 +16,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/sso-v1/assets/style/styles.css">
 
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/x-icon" href="/sso-v1/assets/images/favicon.ico">
+
     <!-- Script For Fontawsome Icons -->
     <script src="https://kit.fontawesome.com/a74f41de6e.js" crossorigin="anonymous"></script>
 </head>

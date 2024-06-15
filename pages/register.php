@@ -48,6 +48,18 @@ function emailExists($email, $connect)
     return $result['count'] > 0;
 }
 
+// Check if there are active cities
+function getActiveCities($connect)
+{
+    $query = "SELECT id FROM cities WHERE status = 'active'";
+    $result = $connect->query($query);
+    $cities = [];
+    while ($row = $result->fetch_assoc()) {
+        $cities[] = $row['id'];
+    }
+    return $cities;
+}
+
 // Database Connection and Insert Query After Submit Event
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     $name = $_POST['name'];
@@ -112,11 +124,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                         if ($stmt->execute()) {
                             // Store user data in session
+                            $user_id = $stmt->insert_id;
                             $_SESSION['user_id'] = $stmt->insert_id;
                             $_SESSION['name'] = $name;
                             $_SESSION['email'] = $email;
                             $_SESSION['github'] = $github;
                             $_SESSION['avatar'] = $avatar_name;
+
+                            // Check for active cities and insert into city_user table if found
+                            $active_cities = getActiveCities($connect);
+                            foreach ($active_cities as $city_id) {
+                                $query = "INSERT INTO city_user (user_id, city_id) VALUES (?, ?)";
+                                $stmt = $connect->prepare($query);
+                                $stmt->bind_param('ii', $user_id, $city_id);
+                                $stmt->execute();
+                                $stmt->close();
+                            }
 
                             // Redirect to dashboard after successful registration
                             header("Location: dashboard.php");

@@ -2,9 +2,11 @@
 
 include('../includes/connect.php');
 
-define('PAGE_TITLE', 'My Account');
+define('PAGE_TITLE', 'Forgot Password');
 
 include('../includes/header.php');
+
+require '../vendor/autoload.php'; // Ensure SendGrid is autoloaded
 
 $errors = [];
 $email = $password = '';
@@ -16,43 +18,59 @@ function validateEmail($email)
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-function validatePassword($password)
-{
-    // Basic validation for password (can be extended as per your requirements)
-    return !empty($password); // Just checking if password is not empty
-}
-
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     $email = $_POST['email'];
-    $password = $_POST['password'];
 
     // Validate inputs
     $errors = [];
     if (!validateEmail($email)) {
         $errors[] = "Invalid email format.";
     }
-    if (!validatePassword($password)) {
-        $errors[] = "Password is required.";
-    }
 
-    // Update password if no validation errors
+    // If no validation errors
     if (empty($errors)) {
-        // Hash the password (you should use a secure hashing method in your application)
-        $hashed_password = md5($password); // Example using MD5 (not recommended for production)
-
-        // Update password in database
-        $query = "UPDATE users SET password = ? WHERE email = ?";
+        // Check if email exists
+        $query = "SELECT id FROM users WHERE email = ?";
         $stmt = $connect->prepare($query);
-        $stmt->bind_param('ss', $hashed_password, $email);
-        if ($stmt->execute()) {
-            // Password updated successfully
-            echo "<script>alert('Password updated successfully. Please login with your new password.');</script>";
-            echo "<script>window.location.href = '../index.php';</script>";
-            exit();
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($user_id);
+            $stmt->fetch();
+
+            // Generate reset token
+            $reset_token = bin2hex(random_bytes(16));
+            $reset_token_expires_at = date('Y-m-d H:i:s', strtotime('+1 hour'));
+
+            // Store token in the database
+            $query = "UPDATE users SET reset_token = ?, reset_token_expires_at = ? WHERE id = ?";
+            $stmt = $connect->prepare($query);
+            $stmt->bind_param('ssi', $reset_token, $reset_token_expires_at, $user_id);
+            $stmt->execute();
+
+            // Send verification email using SendGrid
+            $sendgrid = new \SendGrid('SK0a71a56582e31085e9eedbe6386170ec');
+            $email = new \SendGrid\Mail\Mail();
+            $email->setFrom("maysonchris025@gmail.com", "BrickMMO");
+            $email->setSubject("Password Reset Request");
+            $email->addTo($email, "User");
+            $email->addContent(
+                "text/plain",
+                "Click the link below to reset your password:\n\n" .
+                    "http://yourdomain.com/resetpassword.php?token=$reset_token"
+            );
+
+            try {
+                $response = $sendgrid->send($email);
+                echo 'If there is an account associated to this email, you will receive a link with reset instructions.';
+            } catch (Exception $e) {
+                echo 'Caught exception: ' . $e->getMessage();
+            }
         } else {
-            // Error updating password
-            $errors[] = "Error updating password: " . $stmt->error;
+            echo 'If there is an account associated to this email, you will receive a link with reset instructions.';
         }
 
         $stmt->close();
@@ -74,12 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         <label for="email" class="w3-text-gray">
             <i class="fa-solid fa-envelope"></i> Email
             <span id="email-error" class="w3-text-red"></span>
-        </label>
-
-        <input class="w3-input" type="password" name="password" id="password" autocomplete="off" />
-        <label for="password" class="w3-text-gray">
-            <i class="fa-solid fa-lock"></i>
-            New Password <span id="password-error" class="w3-text-red"></span>
         </label>
 
         <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" name="submit">
@@ -120,16 +132,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             errors++;
         }
 
-        let password = document.getElementById("password");
-        let password_error = document.getElementById("password-error");
-        password_error.innerHTML = "";
-        if (password.value == "") {
-            password_error.innerHTML = "(password is required)";
-            errors++;
-        }
-
         if (errors) return false;
     }
 </script>
-
-<!-- Need Email Verification -->
