@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             $stmt->execute();
 
             // Send verification email using SendGrid
-            $sendgrid = new \SendGrid('SK0a71a56582e31085e9eedbe6386170ec');
+            $sendgrid = new \SendGrid('Secret Key Of Send Grid');
             $email = new \SendGrid\Mail\Mail();
             $email->setFrom("maysonchris025@gmail.com", "BrickMMO");
             $email->setSubject("Password Reset Request");
