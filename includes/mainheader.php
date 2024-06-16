@@ -111,12 +111,12 @@ if (empty($selectedCityId) && !empty($cities)) {
         </div>
     </nav>
 
-    <div class="content-area">
+    <div class="content-area" id="content-area">
         <!-- sidebar toggle -->
         <script>
             function w3_sidebar_toggle() {
                 let sidebar = document.getElementById("sidebar");
-                let mainContent = document.querySelector("main");
+                let mainContent = document.getElementById("content-area");
                 let overlay = document.getElementById("overlay");
                 let width = sidebar.getBoundingClientRect().width;
 
