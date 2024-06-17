@@ -20,6 +20,10 @@ class ComposerStaticInitaab5e7be471ef4fe06da7b29386c52d4
             'SendGrid\\Contacts\\' => 18,
             'SendGrid\\' => 9,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -46,6 +50,10 @@ class ComposerStaticInitaab5e7be471ef4fe06da7b29386c52d4
         'SendGrid\\' => 
         array (
             0 => __DIR__ . '/..' . '/sendgrid/php-http-client/lib',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
     );
 

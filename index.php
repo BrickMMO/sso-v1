@@ -8,6 +8,10 @@ include('includes/header.php');
 
 include('includes/session.php');
 
+require __DIR__ . '/vendor/autoload.php';
+
+use \Firebase\JWT\JWT;
+
 $errors = [];
 $email = $password = '';
 
@@ -54,6 +58,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             // Authentication successful, fetch user data
             $user = $result->fetch_assoc();
 
+            // Generate JWT token
+            $secret_key = "your secret key"; // secure random string
+            $issuer_claim = "sso-site-name.com"; // Issuer of the token
+            $audience_claim = "brickMMO-sub-site.com"; // Audience of the token
+            $issuedat_claim = time(); // Issued at (current timestamp)
+            $expire_claim = $issuedat_claim + 3600; // Token expiration time (1 hour)
+
+            $token = array(
+                "iss" => $issuer_claim,
+                "aud" => $audience_claim,
+                "iat" => $issuedat_claim,
+                "exp" => $expire_claim,
+                "data" => array(
+                    "user_id" => $user['id'],
+                    "name" => $user['name'],
+                    "email" => $user['email'],
+                    "avatar" => $user['avatar'],
+                )
+            );
+
             // Start session and store user data
             session_start();
             $_SESSION['user_id'] = $user['id'];
@@ -62,9 +86,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             $_SESSION['github'] = $user['github'];
             $_SESSION['avatar'] = $user['avatar'];
 
-            // Redirect to dashboard or any authenticated page
-            header("Location: ./pages/dashboard.php");
+            // Encode JWT and set cookie for main site
+            $jwt = JWT::encode($token, $secret_key, 'HS256');
+            setcookie("jwt", $jwt, $expire_claim, "/", "sso-site-name.com", true, true);
+
+            // Determine redirect URL
+            $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] . "?sub=" . urlencode($jwt) : './pages/dashboard.php';
+
+            header("Location: $redirect_url");
             exit();
+
+            // -- Old Version -- [Not For Sub Site only for main website]
+            // Redirect to dashboard or any authenticated page
+            // header("Location: ./pages/dashboard.php");
+            // exit();
         } else {
             // Authentication failed
             $errors[] = "Invalid email or password.";
@@ -100,6 +135,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             }
         }
         ?>
+
+        <input type="hidden" name="redirect_url" value="<?php echo isset($_GET['redirect_url']) ? $_GET['redirect_url'] : './pages/dashboard.php'; ?>" />
 
         <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-bottom" name="submit">
             <i class="fa-solid fa-right-to-bracket"></i>
