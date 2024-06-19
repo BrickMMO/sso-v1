@@ -10,6 +10,7 @@
  */
 function redirect($url)
 {
-    header('Location: '.$url);
+    echo 'Redirect: <a href="'.$url.'">'.$url.'</a>';
+    // header('Location: '.$url);
     exit;
 }

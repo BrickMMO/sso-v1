@@ -7,7 +7,8 @@
 // the database variables to connect to a MySQL database. 
 $env = file(__DIR__ . '/../.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-foreach ($env as $value) {
+foreach ($env as $value)
+{
     $value = explode('=', $value);
     define($value[0], $value[1]);
 }
@@ -20,8 +21,11 @@ $connect = mysqli_connect(
 );
 
 // Check Connection
-if (!$connect) {
+if (!$connect) 
+{
     die("Connection Failed:" . mysqli_connect_error());
-} else {
+}
+else 
+{
     // echo "Connection Successfully Establish !!!";
 }

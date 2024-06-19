@@ -1,90 +1,77 @@
 <?php
 
+use \Firebase\JWT\JWT;
+
 include('includes/connect.php');
 include('includes/session.php');
 include('functions/functions.php');
 
 require __DIR__ . '/vendor/autoload.php';
 
-use \Firebase\JWT\JWT;
-
-$errors = [];
-$email = $password = '';
-
 // Database Connection and User Authentication
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+{
 
     // Basic serverside validation
-    if (!validateEmail($email) || !validatePassword($password)) 
+    if (!validate_email($_POST['email']) || !validate_password($_POST['password'])) 
     {
         redirect('login.php');
     }
 
-    // Proceed with authentication if no validation errors
-    if (empty($errors)) {
-        // Hash the password (assuming your password in database is hashed)
-        $password = md5($password);
+    // Hash the password (assuming your password in database is hashed)
+    $password = md5($password);
 
-        // Query to fetch user details
-        $query = "SELECT * FROM users WHERE email = ? AND password = ?";
-        $stmt = $connect->prepare($query);
-        $stmt->bind_param('ss', $email, $password);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    // Query to fetch user details
+    $query = 'SELECT * 
+        FROM users 
+        WHERE email = "'.addslashes($_POST['email']).'"
+        LIMIT 1';
+    $result = mysqli_query($connect, $query);
 
-        if ($result->num_rows == 1) {
-            // Authentication successful, fetch user data
-            $user = $result->fetch_assoc();
-
-            // Generate JWT token
-            $secret_key = "your secret key"; // secure random string
-            $issuer_claim = "sso-site-name.com"; // Issuer of the token
-            $audience_claim = "brickMMO-sub-site.com"; // Audience of the token
-            $issuedat_claim = time(); // Issued at (current timestamp)
-            $expire_claim = $issuedat_claim + 3600; // Token expiration time (1 hour)
-
-            $token = array(
-                "iss" => $issuer_claim,
-                "aud" => $audience_claim,
-                "iat" => $issuedat_claim,
-                "exp" => $expire_claim,
-                "data" => array(
-                    "user_id" => $user['id'],
-                    "name" => $user['name'],
-                    "email" => $user['email'],
-                    "avatar" => $user['avatar'],
-                )
-            );
-
-            // Start session and store user data
-            session_start();
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['name'] = $user['name'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['github'] = $user['github'];
-            $_SESSION['avatar'] = $user['avatar'];
-
-            // Encode JWT and set cookie for main site
-            $jwt = JWT::encode($token, $secret_key, 'HS256');
-            setcookie("jwt", $jwt, $expire_claim, "/", "sso-site-name.com", true, true);
-
-            // Determine redirect URL
-            $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] . "?sub=" . urlencode($jwt) : './pages/dashboard.php';
-
-            header("Location: $redirect_url");
-            exit();
-
-            // -- Old Version -- [Not For Sub Site only for main website]
-            // Redirect to dashboard or any authenticated page
-            // header("Location: ./pages/dashboard.php");
-            // exit();
-        } else {
-            // Authentication failed
-            $errors[] = "Invalid email or password.";
-        }
-
-        $stmt->close();
+    if(mysqli_num_rows($result) == 0)
+    {
+        redirect('login.php?error');
     }
+
+    $user = mysqli_fetch_assoc($result);
+
+    /*
+    echo 'Verify: '.password_verify($_POST['password'], $user['password']);
+    echo 'Rows: '.mysqli_num_rows($result);
+    */
+
+    if (!password_verify($_POST['password'], $user['password']))
+    {
+        redirect('login.php?error');
+    }
+
+    // Generate JWT token
+    $secret_key = 'BRICKMMO-HS256';
+    $issuer_claim = 'brickmmo.com';
+    $audience_claim = '*.brickmmo.com';
+    $issuedat_claim = time();
+    $expire_claim = $issuedat_claim + 3600 * 24 * 30;
+
+    $token = array(
+        'iss' => $issuer_claim,
+        'aud' => $audience_claim,
+        'iat' => $issuedat_claim,
+        'exp' => $expire_claim,
+        'data' => $user,
+    );
+
+    // Start session and store user data
+    $_SESSION['user'] = $user;
+
+    // Encode JWT and set cookie for main site
+    $jwt = JWT::encode($token, $secret_key, 'HS256');
+    setcookie('jwt', $jwt, $expire_claim, '/', 'brickmmo.com', true, true);
+
+    // Determine redirect URL
+    $redirect_url = isset($_POST['url']) ? $_POST['url'] . '?sub=' . urlencode($jwt) : '/dashboard.php';
+
+    redirect($redirect_url);
+    
 }
 
 define('PAGE_TITLE', 'Login');
@@ -97,46 +84,65 @@ include('templates/login_header.php');
 <div>
     <form
         method="post"
-        action="welcome.html"
         onsubmit="return validateLoginForm()"
         novalidate
     >
+
+        <?php if(isset($_GET['error'])): ?>
+            <div class="w3-panel w3-green">
+                <h3><i class="fa-solid fa-triangle-exclamation"></i> Login Error!</h3>
+                <p>
+                    There was an error with your email or password.
+                </p>
+            </div>
+        <?php endif; ?>
+
         <div class="w3-margin-bottom">
-        <input
-            class="w3-input"
-            type="email"
-            id="email"
-            autocomplete="off"
-        />
-        <label for="email" class="w3-text-gray">
-            <i class="fa-solid fa-envelope"></i> Email
-            <span id="email-error" class="w3-text-red"></span>
-        </label>
+            <input
+                name="email"
+                class="w3-input"
+                type="email"
+                id="email"
+                autocomplete="off"
+            />
+            <label for="email" class="w3-text-gray">
+                <i class="fa-solid fa-envelope"></i> Email
+                <span id="email-error" class="w3-text-red"></span>
+            </label>
         </div>
 
         <div class="w3-margin-bottom">
-        <input
-            class="w3-input"
-            type="password"
-            id="password"
-            autocomplete="off"
-        />
-        <label for="password" class="w3-text-gray">
-            <i class="fa-solid fa-lock"></i> Password
-            <span id="password-error" class="w3-text-red"></span>
-        </label>
+            <input
+                name="password"
+                class="w3-input"
+                type="password"
+                id="password"
+                autocomplete="off"
+            />
+            <label for="password" class="w3-text-gray">
+                <i class="fa-solid fa-lock"></i> Password
+                <span id="password-error" class="w3-text-red"></span>
+            </label>
         </div>
 
         <button
         class="w3-block w3-btn w3-orange w3-text-white w3-margin-bottom"
         >
-        <i class="fa-solid fa-right-to-bracket"></i>
-        Login
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Login
         </button>
-    </form>
-    </div>
 
-    <div class="w3-center">
+        <?php if(isset($_GET['url'])):?>
+            <input 
+                name="url"
+                type="hidden"
+                value="<?=$_GET['url']?>" 
+            />
+        <?php endif; ?>
+    </form>
+</div>
+
+<div class="w3-center">
     <button
         onclick="location.href='/forgot.html';"
         class="w3-button w3-grey w3-text-white"
