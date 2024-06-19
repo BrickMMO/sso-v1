@@ -18,9 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         redirect('login.php');
     }
 
-    // Hash the password (assuming your password in database is hashed)
-    $password = md5($password);
-
     // Query to fetch user details
     $query = 'SELECT * 
         FROM users 
@@ -191,3 +188,5 @@ include('templates/login_header.php');
 
 include('templates/html_footer.php');
 include('templates/login_footer.php');
+
+include('includes/debug.php');

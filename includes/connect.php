@@ -1,10 +1,11 @@
 <?php
 
-// ************************************************************
-// Connect to the database
-// 
-// Load environment variables from the .env file and then use
-// the database variables to connect to a MySQL database. 
+/*
+ * Connect to the database
+ * 
+ * Load environment variables from the .env file and then use
+ * the database variables to connect to a MySQL database. 
+ */
 $env = file(__DIR__ . '/../.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
 foreach ($env as $value)
