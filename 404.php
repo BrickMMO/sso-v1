@@ -7,7 +7,7 @@ include('templates/login_header.php');
 
 ?>
 
-<h1>Dashboard</h1>
+<h1>404 Error</h1>
 
 <?php include('templates/message.php'); ?>
 

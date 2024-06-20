@@ -7,8 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 
     // Basic serverside validation
-    if (!validate_email($_POST['email']) || !validate_password($_POST['password'])) 
+    if (
+        !validate_email($_POST['email']) || 
+        !validate_password($_POST['password'])) 
     {
+        set_message('Login Error', 'There was an error with your login informaiton.', 'red');
         redirect('/login');
     }
 
@@ -76,14 +79,14 @@ include('templates/login_header.php');
 
 ?>
 
+<?php include('templates/message.php'); ?>
+
 <div>
     <form
         method="post"
         onsubmit="return validateLoginForm()"
         novalidate
     >
-
-        <?php include('templates/message.php'); ?>
 
         <div class="w3-margin-bottom">
             <input

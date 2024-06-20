@@ -21,5 +21,6 @@ else
         $_GET[$parts[$i]] = isset($parts[$i+1]) ? $parts[$i+1] : true;
     }
 
-    include(PAGE_FILE.'.php');
+    if(file_exists(PAGE_FILE.'.php')) include(PAGE_FILE.'.php');
+    else include('404.php');
 }

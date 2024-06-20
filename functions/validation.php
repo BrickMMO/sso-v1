@@ -20,3 +20,11 @@ function validate_password($password)
 {
     return !empty($password); // Just checking if password is not empty
 }
+
+/*
+ * Basic validation for blanks
+ */
+function validate_blank($value)
+{
+    return !empty($value);
+}
