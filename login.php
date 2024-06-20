@@ -2,12 +2,6 @@
 
 use \Firebase\JWT\JWT;
 
-include('includes/connect.php');
-include('includes/session.php');
-include('functions/functions.php');
-
-require __DIR__ . '/vendor/autoload.php';
-
 // Database Connection and User Authentication
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -15,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Basic serverside validation
     if (!validate_email($_POST['email']) || !validate_password($_POST['password'])) 
     {
-        redirect('login.php');
+        redirect('/login');
     }
 
     // Query to fetch user details
@@ -27,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     if(mysqli_num_rows($result) == 0)
     {
-        redirect('login.php?error');
+        set_message('Login Error', 'There was an error with your login informaiton.', 'red');
+        redirect('/login');
     }
 
     $user = mysqli_fetch_assoc($result);
@@ -35,11 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     /*
     echo 'Verify: '.password_verify($_POST['password'], $user['password']);
     echo 'Rows: '.mysqli_num_rows($result);
+    die();
     */
 
     if (!password_verify($_POST['password'], $user['password']))
     {
-        redirect('login.php?error');
+        set_message('Login Error', 'There was an error with your login informaiton.', 'red');
+        redirect('/login');
     }
 
     // Generate JWT token
@@ -62,11 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     // Encode JWT and set cookie for main site
     $jwt = JWT::encode($token, $secret_key, 'HS256');
-    setcookie('jwt', $jwt, $expire_claim, '/', 'brickmmo.com', true, true);
+    setcookie('jwt', $jwt, $expire_claim, '/', 'brickmmo.com', false, false);
 
     // Determine redirect URL
-    $redirect_url = isset($_POST['url']) ? $_POST['url'] . '?sub=' . urlencode($jwt) : '/dashboard.php';
+    $redirect_url = isset($_POST['url']) ? $_POST['url'] . '?sub=' . urlencode($jwt) : '/dashboard';
 
+    set_message('Login Success', 'You have been logged in.');
     redirect($redirect_url);
     
 }
@@ -85,14 +83,7 @@ include('templates/login_header.php');
         novalidate
     >
 
-        <?php if(isset($_GET['error'])): ?>
-            <div class="w3-panel w3-green">
-                <h3><i class="fa-solid fa-triangle-exclamation"></i> Login Error!</h3>
-                <p>
-                    There was an error with your email or password.
-                </p>
-            </div>
-        <?php endif; ?>
+        <?php include('templates/message.php'); ?>
 
         <div class="w3-margin-bottom">
             <input
