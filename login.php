@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_email($_POST['email']) || 
         !validate_password($_POST['password'])) 
     {
-        set_message('Login Error', 'There was an error with your login informaiton.', 'red');
-        redirect('/login');
+        message_set('Login Error', 'There was an error with your login informaiton.', 'red');
+        header_redirect('/login');
     }
 
     // Query to fetch user details
@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     if(mysqli_num_rows($result) == 0)
     {
-        set_message('Login Error', 'There was an error with your login informaiton.', 'red');
-        redirect('/login');
+        message_set('Login Error', 'There was an error with your login informaiton.', 'red');
+        header_redirect('/login');
     }
 
     $user = mysqli_fetch_assoc($result);
@@ -38,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     if (!password_verify($_POST['password'], $user['password']))
     {
-        set_message('Login Error', 'There was an error with your login informaiton.', 'red');
-        redirect('/login');
+        message_set('Login Error', 'There was an error with your login informaiton.', 'red');
+        header_redirect('/login');
     }
 
     // Generate JWT token
@@ -67,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Determine redirect URL
     $redirect_url = isset($_POST['url']) ? $_POST['url'] . '?sub=' . urlencode($jwt) : '/dashboard';
 
-    set_message('Login Success', 'You have been logged in.');
-    redirect($redirect_url);
+    message_set('Login Success', 'You have been logged in.');
+    header_redirect($redirect_url);
     
 }
 

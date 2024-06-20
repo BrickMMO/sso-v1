@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_blank($_POST['first']) || 
         !validate_blank($_POST['last'])) 
     {
-        set_message('Login Error', 'There was an error with your registration informaiton.', 'red');
-        redirect('/register');
+        message_set('Login Error', 'There was an error with your registration informaiton.', 'red');
+        header_redirect('/register');
     }
 
     die('reg');

@@ -8,7 +8,7 @@
 /*
  * Basic location header
  */
-function redirect($url)
+function header_redirect($url)
 {
     echo 'Redirect: <a href="'.$url.'">'.$url.'</a>';
     // header('Location: '.$url);

@@ -1,6 +1,6 @@
 <?php
 
-function set_message($title, $text, $colour = 'green', $icon = 'fa-triangle-exclamation')
+function message_set($title, $text, $colour = 'green', $icon = 'fa-triangle-exclamation')
 {
     $_SESSION['message']['title'] = $title;
     $_SESSION['message']['text'] = $text;

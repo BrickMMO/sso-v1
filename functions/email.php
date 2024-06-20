@@ -1,6 +1,6 @@
 <?php
 
-function send_email()
+function email_send()
 {
     die('SEND');
 }

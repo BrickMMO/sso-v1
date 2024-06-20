@@ -10,7 +10,7 @@ $parts = explode("/", trim( $_SERVER['REQUEST_URI'], "/" ));
 
 if(!count($parts))
 {
-    redirect('/dashboard');
+    header_redirect('/dashboard');
 }
 else
 {
