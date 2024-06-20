@@ -28,3 +28,9 @@ function validate_blank($value)
 {
     return !empty($value);
 }
+
+function validate_github($github)
+{
+    // GitHub username can contain alphanumeric characters and hyphens/underscores
+    return preg_match('/^[a-zA-Z0-9\-]{6,39}$/', $github);
+}

@@ -135,14 +135,14 @@ include('templates/login_header.php');
 
 <div class="w3-center">
     <button
-        onclick="location.href='/forgot.html';"
+        onclick="location.href='/forgot';"
         class="w3-button w3-grey w3-text-white"
     >
         <i class="fa-solid fa-question"></i>
         Forgot Password
     </button>
     <button
-        onclick="location.href='/register.html';"
+        onclick="location.href='/register';"
         class="w3-button w3-grey w3-text-white"
     >
         <i class="fa-solid fa-pen"></i>

@@ -1,5 +1,7 @@
 <?php
 
+header_not_found();
+
 define('PAGE_TITLE', 'Account Dashboard');
 
 include('templates/html_header.php');

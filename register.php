@@ -128,7 +128,26 @@ include('templates/login_header.php');
         } else if (!email.value.match(email_pattern)) {
             email_error.innerHTML = "(email is invalid)";
             errors++;
+        } else {    
+
+            
+	            const res = await fetch("/ajax/email_exists",{
+                    method: 'POST',
+                 headers: {
+                   'Content-Type': 'application/json'
+                   },
+                   body: JSON.stringify({
+                     email: "test"
+                    })
+                 });
+	            const data = await res.json();
+	        console.log(data);
+
+            email_error.innerHTML = "(email already exists)";
+            errors ++;
+
         }
+
 
         let password = document.getElementById("password");
         let password_error = document.getElementById("password-error");
@@ -137,6 +156,9 @@ include('templates/login_header.php');
             password_error.innerHTML = "(password is required)";
             errors++;
         }
+
+        console.log('errors');
+        console.log(errors);
 
         if (errors) return false;
     }
