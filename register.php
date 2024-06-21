@@ -7,9 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Basic serverside validation
     if (
         !validate_email($_POST['email']) || 
+        !validate_email_exists($_POST['email'], 'users') || 
         !validate_password($_POST['password']) || 
         !validate_blank($_POST['first']) || 
-        !validate_blank($_POST['last'])) 
+        !validate_blank($_POST['last']))
     {
         message_set('Login Error', 'There was an error with your registration informaiton.', 'red');
         header_redirect('/register');
@@ -32,7 +33,7 @@ include('templates/login_header.php');
 
     <form
         method="post"
-        onsubmit="return validateRegisterForm();"
+        id="register-form"
         novalidate
     >
         <input 
@@ -81,7 +82,7 @@ include('templates/login_header.php');
             Password <span id="password-error" class="w3-text-red"></span>
         </label>
 
-        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
+        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="validateRegisterForm(); return false;">
             <i class="fa-solid fa-pen"></i>
             Register
         </button>
@@ -99,7 +100,20 @@ include('templates/login_header.php');
 </div>
 
 <script>
-    function validateRegisterForm() {
+
+    async function validateExistingEmail(email) {
+        return fetch('/ajax/email_exists',{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({email: email})
+            })  
+            .then((response)=>response.json())
+            .then((responseJson)=>{return responseJson});
+    }
+
+    async function validateRegisterForm() {
         let errors = 0;
 
         let first = document.getElementById("first");
@@ -128,26 +142,14 @@ include('templates/login_header.php');
         } else if (!email.value.match(email_pattern)) {
             email_error.innerHTML = "(email is invalid)";
             errors++;
-        } else {    
-
-            
-	            const res = await fetch("/ajax/email_exists",{
-                    method: 'POST',
-                 headers: {
-                   'Content-Type': 'application/json'
-                   },
-                   body: JSON.stringify({
-                     email: "test"
-                    })
-                 });
-	            const data = await res.json();
-	        console.log(data);
-
-            email_error.innerHTML = "(email already exists)";
-            errors ++;
-
+        } else {
+            const json = await validateExistingEmail(email.value);
+            if(json.error == true)
+            {
+                email_error.innerHTML = "(email already exists)";
+                errors ++;
+            }
         }
-
 
         let password = document.getElementById("password");
         let password_error = document.getElementById("password-error");
@@ -161,6 +163,9 @@ include('templates/login_header.php');
         console.log(errors);
 
         if (errors) return false;
+        
+        let registerForm = document.getElementById('register-form');
+        registerForm.submit();
     }
 </script>
 

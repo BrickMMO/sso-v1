@@ -32,7 +32,11 @@ else
     }
 
     $file = PAGE_FILE.'.php';
-    if(PAGE_AJAX) $file = 'ajax/'.$file;
+    if(PAGE_AJAX) 
+    {
+        $_POST = json_decode(file_get_contents('php://input'), true);
+        $file = 'ajax/'.$file;
+    }
 
     if(file_exists($file)) include($file);
     else include('404.php');
