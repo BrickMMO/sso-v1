@@ -16,7 +16,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         header_redirect('/register');
     }
 
-    die('reg');
+    $query = 'INSERT INTO users (
+            first,
+            last,
+            email,
+            password
+        ) VALUES (
+            "'.addslashes( $_POST['first'] ).'",
+            "'.addslashes( $_POST['last'] ).'",
+            "'.addslashes( $_POST['email'] ).'",
+            "$2y$10$FAaj2VuRXAetPxgzzQP73.HBrhjtLEV1C.3ObYkoF.Lg/FI12SgbO"
+        )';
+    mysqli_query($connect, $query);
+
+    // Send email
+
+        message_set('Success', 'Your account has been created. Please confirm your email address and then login.');
+    header_redirect('/login');
     
 }
 
