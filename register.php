@@ -7,10 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Basic serverside validation
     if (
         !validate_email($_POST['email']) || 
-        !validate_email_exists($_POST['email'], 'users') || 
         !validate_password($_POST['password']) || 
         !validate_blank($_POST['first']) || 
-        !validate_blank($_POST['last']))
+        !validate_blank($_POST['last']) || 
+        validate_email_exists($_POST['email'], 'users'))
     {
         message_set('Login Error', 'There was an error with your registration informaiton.', 'red');
         header_redirect('/register');
@@ -29,9 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         )';
     mysqli_query($connect, $query);
 
+    // TODO
     // Send email
 
-        message_set('Success', 'Your account has been created. Please confirm your email address and then login.');
+    message_set('Success', 'Your account has been created. Please confirm your email address and then login.');
     header_redirect('/login');
     
 }

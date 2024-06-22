@@ -26,7 +26,7 @@ function validate_email_exists($email, $table)
         LIMIT 1';
     $result = mysqli_query($connect, $query);
 
-    return mysqli_num_rows($result) ? false : true;
+    return mysqli_num_rows($result) ? true : false;
 }
 
 /*

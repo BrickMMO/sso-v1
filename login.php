@@ -2,8 +2,14 @@
 
 use \Firebase\JWT\JWT;
 
+if(security_is_logged_in())
+{
+
+    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/dashboard');
+
+}
 // Database Connection and User Authentication
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 
     // Basic serverside validation
@@ -65,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     setcookie('jwt', $jwt, $expire_claim, '/', 'brickmmo.com', false, false);
 
     // Determine redirect URL
-    $redirect_url = isset($_POST['url']) ? $_POST['url'] . '?sub=' . urlencode($jwt) : '/dashboard';
+    $redirect_url = isset($_GET['url']) ? $_GET['url'] : '/dashboard';
 
     message_set('Login Success', 'You have been logged in.');
     header_redirect($redirect_url);

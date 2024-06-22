@@ -1,6 +1,13 @@
 <?php
 
-function email_send()
+function email_send(
+    $to_email,
+    $to_name,
+    $message
+)
 {
-    die('SEND');
+
+    echo $message;
+    die();
+    
 }
