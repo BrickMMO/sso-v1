@@ -191,6 +191,101 @@ use \Firebase\JWT\Key;
 </html>
 ```
 
+## Node.js Code Snippet for Cross-Domain Authentication
+
+```javascript
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+
+const app = express();
+const port = 3000;
+
+// Middleware setup
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Secret key for JWT (should be stored securely, not hardcoded)
+const secretKey = "t22GcFbg2NdVd10zIcPRWmJj/MN9TMnyhggtKhzFPU0=";
+
+// Mock user data
+const mockUserData = {
+  user_id: 1,
+  name: "John Doe",
+  email: "john.doe@example.com",
+  avatar: "avatar.jpg",
+};
+
+// Endpoint to generate JWT token and set cookie
+app.get("/login", (req, res) => {
+  // Generate JWT token
+  const token = jwt.sign({ data: mockUserData }, secretKey, {
+    expiresIn: "1h",
+  });
+
+  // Set JWT token as a cookie
+  res.cookie("jwt_sub", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+    maxAge: 3600000, // 1 hour expiry
+    domain: "your-sub-site-domain.com", // Replace with your sub-site domain
+  });
+
+  // Redirect to the main site after successful login
+  res.redirect("https://your-main-site.com");
+});
+
+// Middleware to verify JWT token
+function verifyToken(req, res, next) {
+  // Extract JWT token from cookies
+  const token = req.cookies.jwt_sub;
+
+  // Check if token exists
+  if (!token) {
+    return res.status(401).send("Access Denied");
+  }
+
+  try {
+    // Verify JWT token
+    const decoded = jwt.verify(token, secretKey);
+    req.user = decoded.data; // Attach user data to request object
+    next(); // Proceed to the next middleware
+  } catch (err) {
+    // Handle token verification error
+    res.status(400).send("Invalid Token");
+  }
+}
+
+// Protected endpoint - requires JWT token verification
+app.get("/profile", verifyToken, (req, res) => {
+  // Access user data from request object
+  res.send(`Welcome, ${req.user.name}!`);
+});
+
+// Endpoint to logout - clear JWT cookie
+app.get("/logout", (req, res) => {
+  // Clear JWT cookie
+  res.clearCookie("jwt_sub", {
+    domain: "your-sub-site-domain.com", // Replace with your sub-site domain
+  });
+
+  // Redirect to the main site after logout
+  res.redirect("https://your-main-site.com");
+});
+
+// Start server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+```
+
+> Replace `'your-sub-site-domain.com'` with your actual sub-site domain in the code snippet.
+
+---
+
 ## Live Demo
 
 - [SSO](https://milin-humber-brickmmo.great-site.net)
