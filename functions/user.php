@@ -9,6 +9,7 @@ function user_fetch($id)
         FROM users
         WHERE id = "'.addslashes($id).'"
         OR email = "'.addslashes($id).'"
+        OR hash = "'.addslashes($id).'"
         LIMIT 1';
     $result = mysqli_query($connect, $query);
 

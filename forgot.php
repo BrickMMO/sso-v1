@@ -22,6 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         $data['reset_hash'] = rand(100000000000, 999999999999);
 
+        $query = 'UPDATE users SET
+            hash = "'.$data['reset_hash'].'"
+            WHERE email = "'.$_POST['email'].'"
+            LIMIT 1';
+        mysqli_query($connect, $query);
+
         ob_start();
         include(__DIR__.'/templates/mail_reset.php');
         $message = ob_get_contents();
