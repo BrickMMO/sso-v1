@@ -1,0 +1,114 @@
+.parts-navbar {
+  background-color: #005f60;
+  height: 90px;
+}
+
+.parts_img {
+  width: 300px;
+  height: 90px;
+}
+
+.parts-btn {
+  background-color: #249ea0 !important;
+  color: white !important;
+}
+
+.parts-btn:hover {
+  background-color: #094142 !important;
+  color: rgb(202, 190, 104) !important;
+}
+
+.parts_home {
+  padding: 70px;
+  height: 700px;
+}
+
+.parts-card {
+  width: 300px;
+  height: 370px;
+  overflow: hidden;
+}
+
+.parts-card-img-container {
+  width: auto;
+  height: 200px;
+  overflow: hidden;
+}
+
+.parts-card-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.parts-card-body {
+  height: 50%;
+  overflow-y: auto;
+}
+
+.parts-card-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.parts-home-page-text {
+  color: #249ea0;
+  font-weight: bolder;
+  font-size: 70px;
+}
+
+.parts-px {
+  padding: 30px;
+  font-weight: bold;
+  font-size: 38px;
+}
+
+.parts-footer {
+  background-color: #005f60;
+  text-align: right;
+}
+
+.parts-text {
+  color: #f4eded;
+}
+
+.set-header {
+  color: #249ea0;
+}
+
+.parts-set-image {
+  height: 300px;
+  width: 400px;
+  object-fit: contain;
+}
+
+.parts-theme-header {
+  background-color: #faab36 !important;
+  font-size: larger;
+  font-weight: 600;
+}
+
+.parts-theme-body,
+.list-group-item {
+  background-color: #f4f0f0 !important;
+}
+
+.list-group-item {
+  display: flex !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+}
+
+.parts-theme-card {
+  width: 300px;
+  height: 440px !important;
+  overflow: hidden;
+}
+
+.parts-theme-card-title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
