@@ -20,7 +20,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     $query = 'UPDATE users SET
         password = "'.password_hash(addslashes($_POST['password']), PASSWORD_BCRYPT).'"
-        WHERE hash = "'.addslashes($_GET['hash']).'"
+        WHERE reset_hash = "'.addslashes($_GET['hash']).'"
         LIMIT 1';
     mysqli_query($connect, $query);
 

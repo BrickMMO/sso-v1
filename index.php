@@ -6,7 +6,7 @@ include('functions/functions.php');
 
 require __DIR__ . '/vendor/autoload.php';
 
-$parts = explode("/", trim( $_SERVER['REQUEST_URI'], "/" ));
+$parts = explode("/", trim($_SERVER['REQUEST_URI'], "/"));
 
 if(!count($parts))
 {

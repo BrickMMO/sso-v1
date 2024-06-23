@@ -22,15 +22,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             email,
             password
         ) VALUES (
-            "'.addslashes( $_POST['first'] ).'",
-            "'.addslashes( $_POST['last'] ).'",
-            "'.addslashes( $_POST['email'] ).'",
-            "$2y$10$FAaj2VuRXAetPxgzzQP73.HBrhjtLEV1C.3ObYkoF.Lg/FI12SgbO"
+            "'.addslashes($_POST['first']).'",
+            "'.addslashes($_POST['last']).'",
+            "'.addslashes($_POST['email']).'",
+            "'.addslashes(password_hash($_POST['password'], PASSWORD_BCRYPT)).'"
         )';
     mysqli_query($connect, $query);
 
+    $user = user_fetch($_POST['email']);
+
     // TODO
     // Send email
+
+    $data['verify_hash'] = string_hash();
+
+    $query = 'UPDATE users SET
+        verify_hash = "'.$data['verify_hash'].'"
+        WHERE email = "'.$_POST['email'].'"
+        LIMIT 1';
+    mysqli_query($connect, $query);
+
+    ob_start();
+    include(__DIR__.'/templates/email_register.php');
+    $message = ob_get_contents();
+    ob_end_clean();
+
+    email_send($user['email'], $user['first'].' '.$user['last'], $message);
+    die();
 
     message_set('Success', 'Your account has been created. Please confirm your email address and then login.');
     header_redirect('/login');

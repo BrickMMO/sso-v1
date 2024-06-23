@@ -20,16 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         // TODO
         // Send email
 
-        $data['reset_hash'] = rand(100000000000, 999999999999);
+        $data['reset_hash'] = string_hash();
 
         $query = 'UPDATE users SET
-            hash = "'.$data['reset_hash'].'"
+            reset_hash = "'.$data['reset_hash'].'"
             WHERE email = "'.$_POST['email'].'"
             LIMIT 1';
         mysqli_query($connect, $query);
 
         ob_start();
-        include(__DIR__.'/templates/mail_reset.php');
+        include(__DIR__.'/templates/email_reset.php');
         $message = ob_get_contents();
         ob_end_clean();
 
