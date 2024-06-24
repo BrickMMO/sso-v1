@@ -36,9 +36,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     $user = user_fetch($_POST['email']);
 
-    // TODO
-    // Send email
-
     $data['verify_hash'] = string_hash();
 
     $query = 'UPDATE users SET
@@ -53,7 +50,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     ob_end_clean();
 
     email_send($user['email'], $user['first'].' '.$user['last'], $message);
-    die();
 
     message_set('Success', 'Your account has been created. Please confirm your email address and then login.');
     header_redirect('/login');
