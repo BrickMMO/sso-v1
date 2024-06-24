@@ -8,7 +8,6 @@ if(security_is_logged_in())
     header_redirect(isset($_GET['url']) ? $_GET['url'] : '/dashboard');
 
 }
-// Database Connection and User Authentication
 elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 

@@ -1,7 +1,12 @@
 <?php
 
-// Database Connection and User Authentication
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+if(security_is_logged_in())
+{
+
+    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/dashboard');
+
+}
+elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 
     // Basic serverside validation

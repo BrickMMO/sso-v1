@@ -5,8 +5,6 @@ if(!isset($_GET['hash']) or !user_fetch($_GET['hash']))
     message_set('Hash Error', 'There was an error with the password reset link, please try again.', 'red');
     header_redirect('/forgot');
 }
-
-// Database Connection and User Authentication
 else
 {
 
@@ -14,8 +12,8 @@ else
     
     $query = 'UPDATE users SET
         email_verified_at = NOW()
-        WHERE reset_hash = "'.addslashes($_GET['hash']).'"
-        AND email_verified_at = NULL
+        WHERE verify_hash = "'.addslashes($_GET['hash']).'"
+        AND email_verified_at IS NULL
         LIMIT 1';
     mysqli_query($connect, $query);
     
@@ -30,7 +28,7 @@ include('templates/login_header.php');
 
 <div class="w3-panel w3-green">
     <h3><i class="fa-solid fa-triangle-exclamation"></i> Email Verified</h3>
-        <p>Your email address has been verified.</p>
+    <p>Your email address has been verified.</p>
 </div>
 
 <div class="w3-container w3-center w3-margin">
