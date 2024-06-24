@@ -1,10 +1,10 @@
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
+
 include('includes/connect.php');
 include('includes/session.php');
 include('functions/functions.php');
-
-require __DIR__ . '/vendor/autoload.php';
 
 $parts = explode("/", trim($_SERVER['REQUEST_URI'], "/"));
 

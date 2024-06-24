@@ -22,9 +22,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         $user = user_fetch($_POST['email']);
 
-        // TODO
-        // Send email
-
         $data['reset_hash'] = string_hash();
 
         $query = 'UPDATE users SET
@@ -39,8 +36,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
         ob_end_clean();
 
         email_send($user['email'], $user['first'].' '.$user['last'], $message);
-        die();
-
 
     }
 
