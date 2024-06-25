@@ -5,7 +5,9 @@ security_check();
 define('PAGE_TITLE', 'Account Dashboard');
 
 include('templates/html_header.php');
-include('templates/login_header.php');
+include('templates/nav_header.php');
+include('templates/nav_sidebar.php');
+include('templates/main_header.php');
 
 ?>
 
@@ -19,7 +21,7 @@ include('templates/login_header.php');
 
 <?php
 
+include('templates/main_footer.php');
 include('templates/html_footer.php');
-include('templates/login_footer.php');
 
 include('includes/debug.php');

@@ -94,7 +94,7 @@ include('templates/login_header.php');
 
 <?php
 
-include('templates/html_footer.php');
 include('templates/login_footer.php');
+include('templates/html_footer.php');
 
 include('includes/debug.php');
