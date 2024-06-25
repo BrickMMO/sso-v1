@@ -68,9 +68,9 @@
         </div>
         <div class="w3-col s6 w3-right-align">
             <img
-            src="/images/profile.jpg"
-            style="height: 35px"
-            class="w3-circle"
+                src="<?=$_SESSION['user']['avatar']?>"
+                style="height: 35px"
+                class="w3-circle"
             />
             <button class="w3-button" onclick="open_modal('apps')">
                 <i class="fa-solid fa-grip-vertical"></i>

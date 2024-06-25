@@ -7,7 +7,7 @@ if(!isset($_GET['code']) || isset($_GET['error']))
 }
 
 $token = github_access_token($_GET['code']);
-debug_pre($token);
+// debug_pre($token);
 
 if(!is_array($token) or !isset($token['access_token']))
 {
@@ -16,7 +16,7 @@ if(!is_array($token) or !isset($token['access_token']))
 }
 
 $emails = github_emails($token['access_token']);
-debug_pre($emails);
+// debug_pre($emails);
 
 if(!is_array($emails) or !count($emails))
 {
@@ -25,16 +25,12 @@ if(!is_array($emails) or !count($emails))
 }
 
 $user = github_user($token['access_token']);
-debug_pre($user);
+// debug_pre($user);
 
 $names = string_split_name($user['name']);
-
-
 $avatar = image_to_bas64($user['avatar_url']);
 
-$user = user_fetch($emails[0]['email']);
-
-if(is_array($user) && isset($user['id']))
+if(user_fetch($emails[0]['email']))
 {
 
     $query = 'UPDATE users SET 
@@ -42,7 +38,7 @@ if(is_array($user) && isset($user['id']))
         github_access_token = "'.addslashes($token['access_token']).'",
         verify_hash = "'.string_hash().'",
         avatar = "'.addslashes($avatar).'"
-        WHERE id = "'.$user['id'].'"
+        WHERE email = "'.$emails[0]['email'].'"
         LIMIT 1';
     mysqli_query($connect, $query);
 

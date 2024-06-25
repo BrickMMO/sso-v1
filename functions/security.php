@@ -42,6 +42,7 @@ function security_set_user_session($id)
     $_SESSION['user']['first'] = $user['first'];
     $_SESSION['user']['last'] = $user['last'];
     $_SESSION['user']['session_id'] = password_hash($user['session_id'], PASSWORD_BCRYPT);
+    $_SESSION['user']['avatar'] = $user['avatar'];
 
     // $_SESSION['user']['session_id_tmp'] = $user['session_id'];
 
