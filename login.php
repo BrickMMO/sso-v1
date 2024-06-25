@@ -5,6 +5,7 @@ use \Firebase\JWT\JWT;
 if(security_is_logged_in())
 {
 
+    message_set('Already Logged In', 'You are currently logged in.');
     header_redirect(isset($_GET['url']) ? $_GET['url'] : '/dashboard');
 
 }
@@ -63,11 +64,11 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     );
 
     // Start session and store user data
-    $_SESSION['user'] = $user;
+    security_set_user_session($user['id']);
 
     // Encode JWT and set cookie for main site
-    $jwt = JWT::encode($token, $secret_key, 'HS256');
-    setcookie('jwt', $jwt, $expire_claim, '/', 'brickmmo.com', false, false);
+    // $jwt = JWT::encode($token, $secret_key, 'HS256');
+    // setcookie('jwt', $jwt, $expire_claim, '/', 'brickmmo.com', false, false);
 
     // Determine redirect URL
     $redirect_url = isset($_GET['url']) ? $_GET['url'] : '/dashboard';

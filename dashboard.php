@@ -1,5 +1,7 @@
 <?php
 
+security_check();
+
 define('PAGE_TITLE', 'Account Dashboard');
 
 include('templates/html_header.php');

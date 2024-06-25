@@ -1,12 +1,19 @@
 <?php
 
-if(!user_fetch($_GET['hash']))
+if(security_is_logged_in())
 {
+
+    message_set('Already Logged In', 'You are currently logged in.');
+    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/dashboard');
+
+}
+elseif(!user_fetch($_GET['hash']))
+{
+
     message_set('Hash Error', 'There was an error with the password reset link, please try again.', 'red');
     header_redirect('/forgot');
+    
 }
-
-// Database Connection and User Authentication
 elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 

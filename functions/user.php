@@ -5,7 +5,7 @@ function user_fetch($id)
 
     global $connect;
 
-    $query = 'SELECT * 
+    $query = 'SELECT *
         FROM users
         WHERE id = "'.addslashes($id).'"
         OR email = "'.addslashes($id).'"

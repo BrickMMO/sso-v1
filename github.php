@@ -29,28 +29,51 @@ debug_pre($user);
 
 $names = string_split_name($user['name']);
 
-// $avatar 
 
-die();
+$avatar = image_to_bas64($user['avatar_url']);
 
-$query = 'INSERT INTO users (
+$user = user_fetch($emails[0]['email']);
+
+if(is_array($user) && isset($user['id']))
+{
+
+    $query = 'UPDATE users SET 
+        github_username = "'.addslashes($user['login']).'",
+        github_access_token = "'.addslashes($token['access_token']).'",
+        verify_hash = "'.string_hash().'",
+        avatar = "'.addslashes($avatar).'"
+        WHERE id = "'.$user['id'].'"
+        LIMIT 1';
+    mysqli_query($connect, $query);
+
+}
+else
+{
+
+    $query = 'INSERT INTO users (
         first,
         last,
         email,
         github_username,
         github_access_token,
-        verify_hash
+        verify_hash,
+        avatar,
+        session_id
     ) VALUES (
         "'.addslashes($names['first']).'",
         "'.addslashes($names['last']).'",
         "'.addslashes($emails[0]['email']).'",
         "'.addslashes($user['login']).'",
         "'.addslashes($token['access_token']).'",
+        "'.string_hash().'",
+        "'.addslashes($avatar).'",
         "'.string_hash().'"
     )';
-mysqli_query($connect, $query);
+    mysqli_query($connect, $query);
 
-$user = user_fetch($emails[0]['email']);
+}
+
+$user = user_fetch($emails[0]['email'], true);
 
 ob_start();
 include(__DIR__.'/templates/email_register.php');
@@ -60,7 +83,7 @@ ob_end_clean();
 email_send($user['email'], $user['first'].' '.$user['last'], $message);
 
 // Start session and store user data
-$_SESSION['user'] = $user;
+security_set_user_session($user['id']);
 
 message_set('Success', 'Your account has been created nad you have been logged in. Please confirm your email address.');
 header_redirect('/dashboard');
