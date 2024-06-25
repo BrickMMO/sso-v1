@@ -1,0 +1,213 @@
+<?php
+
+function navigation_array()
+{
+
+    $navigation = [
+        [
+            'title' => 'City Portal',
+            'protected' => false,
+            'sections' => [
+                [
+                    'title' => 'Control',
+                    'id' => 'control',
+                    'pages' => [
+                        [
+                            'icon' => 'control-panel',
+                            'url' => '/control-panel',
+                            'title' => 'Control Panel',
+                        ],[
+                            'icon' => 'control-brix',
+                            'url' => '/clock/dashboard',
+                            'title' => 'Clock',
+                        ]
+                    ],
+                ],[
+                    'title' => 'Transportation',
+                    'id' => 'transportation',
+                    'pages' => [
+                        [
+                            'icon' => 'navigation',
+                            'url' => '/navigation/dashboard',
+                            'title' => 'Navigation',
+                        ],[
+                            'icon' => 'roadview',
+                            'url' => '/roadview/dashboard',
+                            'title' => 'Roadview',
+                        ],[
+                            'icon' => 'tracks',
+                            'url' => '/tracks/dashboard',
+                            'title' => 'Tracks',
+                        ],[
+                            'icon' => 'train',
+                            'url' => '/train/dashboard',
+                            'title' => 'Train',
+                        ],
+                    ],
+                ],[
+                    'title' => 'Students',
+                    'id' => 'students',
+                    'pages' => [
+                        [
+                            'icon' => 'brick-overflow',
+                            'url' => '/brick-overflow/dashboard',
+                            'title' => 'Brick Overflow',
+                        ],[
+                            'icon' => 'flow',
+                            'url' => '/flow/dashboard',
+                            'title' => 'Flow',
+                        ],[
+                            'icon' => 'timesheets',
+                            'url' => '/timesheets/dashboard',
+                            'title' => 'Timesheets',
+                        ],
+                    ],
+                ],[
+                    'title' => 'Community',
+                    'id' => 'community',
+                    'pages' => [
+                        [
+                            'icon' => 'radio',
+                            'url' => '/radio/dashboard',
+                            'title' => 'Radio',
+                        ],[
+                            'icon' => 'events',
+                            'url' => '/events/dashboard',
+                            'title' => 'Events',
+                        ],[
+                            'icon' => 'qr-codes',
+                            'url' => '/qr-codes/dashboard',
+                            'title' => 'Qr Codes',
+                        ],
+                    ],
+                ],[
+                    'title' => 'Social',
+                    'id' => 'social',
+                    'pages' => [
+                        [
+                            'icon' => 'brix',
+                            'url' => '/brix/dashboard',
+                            'title' => 'Brix',
+                        ],[
+                            'icon' => 'timeline',
+                            'url' => '/timeline/dashboard',
+                            'title' => 'Timeline',
+                        ],
+                    ],
+                ],[
+                    'title' => 'Finances',
+                    'id' => 'finances',
+                    'pages' => [
+                        [
+                            'icon' => 'crypto',
+                            'url' => '/crypto/dashboard',
+                            'title' => 'Crypto',
+                        ],
+                    ],
+                ],
+            ],
+        ],[
+            'title' => 'Administration',
+            'protected' => false,
+            'sections' => [
+                [
+                    'title' => 'Content',
+                    'id' => 'admin-content',
+                    'pages' => [
+                        [
+                            'icon' => 'bricksum',
+                            'url' => '/admin/bricksum/dashboard',
+                            'title' => 'Bricksum',
+                            'sub-pages' => [
+                                [
+                                    'title' => 'Dashboard',
+                                    'url' => '/admin/bricksum/dashboard'
+                                ],[
+                                    'title' => 'Modify Word List',
+                                    'url' => '/admin/bricksum/word-list'
+                                ],[
+                                    '---'
+                                ],[
+                                    'title' => 'Visit Bricksum App',
+                                    'url' => '/admin/https://bricksum.brickmmo.com'
+                                ],[
+                                    '---'
+                                ],[
+                                    'title' => 'Uptime Report',
+                                    'url' => '/admin/uptime/bricksum'
+                                ],[
+                                    'title' => 'Stats Report',
+                                    'url' => '/admin/uptime/stats'
+                                ]
+                            ]
+                        ],[
+                            'icon' => 'colours',
+                            'url' => '/admin/colours/dashboard',
+                            'title' => 'Colours',
+                        ],[
+                            'icon' => 'parts',
+                            'url' => '/admin/parts/dashboard',
+                            'title' => 'Parts',
+                        ],[
+                            'icon' => 'stores',
+                            'url' => '/admin/stores/dashboard',
+                            'title' => 'Stores',
+                        ],[
+                            'icon' => 'media',
+                            'url' => '/admin/media/dashboard',
+                            'title' => 'Media',
+                        ]
+                    ],
+                ],[
+                    'title' => 'Finances',
+                    'id' => 'admin-finances',
+                    'pages' => [
+                        [
+                            'icon' => 'crypto',
+                            'url' => '/admin/crypto/dashboard',
+                            'title' => 'Crypto',
+                        ],
+                    ],
+                ],[
+                    'title' => 'Tools',
+                    'id' => 'admin-tools',
+                    'pages' => [
+                        [
+                            'icon' => 'github',
+                            'url' => '/admin/github/dashboard',
+                            'title' => 'GitHub Scanner', 
+                            'sub-pages' => [
+                                [
+                                    'title' => 'Dashboard',
+                                    'url' => '/admin/github/dashboard'
+                                ],[
+                                    'title' => 'Scan Results',
+                                    'url' => '/admin/github/results'
+                                ],[
+                                    'title' => 'Rescan GitHub',
+                                    'url' => '/admin/github/rescan'
+                                ],[
+                                    '---'
+                                ],[
+                                    'title' => 'Stats Report',
+                                    'url' => '/admin/stats/github'
+                                ]
+                            ],[
+                                'icon' => 'uptime',
+                                'url' => '/admin/uptime/dashboard',
+                                'title' => 'Up Time',
+                            ],[
+                                'icon' => 'stats',
+                                'url' => '/admin/stats/dashboard',
+                                'title' => 'Stats',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ];
+
+    return $navigation;
+
+}

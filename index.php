@@ -31,6 +31,27 @@ else
         define('PAGE_AJAX', false);
     }
     
+    $file = array_shift($parts).'php';
+    if(!file_exists($file))
+    {
+        die('here');
+    }
+    else
+    {
+        die('more');
+    }
+    $counter = 0;
+
+    if(file_exists($parts[1].'.php'))
+    {
+        define('PAGE_FILE', array_shift($parts));    
+    }
+    else
+    {
+        die('here');
+    }
+    die($parts[0]);
+
     define('PAGE_FILE', array_shift($parts));
 
     for($i = 0; $i < count($parts); $i += 2)
@@ -44,6 +65,8 @@ else
         $_POST = json_decode(file_get_contents('php://input'), true);
         $file = 'ajax/'.$file;
     }
+
+
 
     if(file_exists($file)) include($file);
     else include('404.php');
