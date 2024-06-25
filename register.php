@@ -125,6 +125,13 @@ include('templates/login_header.php');
     </form>
 </div>
 
+<div class="w3-center w3-margin-top">
+    <a class="w3-btn w3-white w3-text-orange w3-border" href="<?=github_url()?>">
+        <i class="fa-brands fa-github"></i>
+        Login using GitHub
+    </a>
+</div>
+
 <div class="w3-container w3-center w3-margin">
     <button
         onclick="location.href='/login';"

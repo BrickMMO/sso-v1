@@ -6,6 +6,13 @@ include('includes/connect.php');
 include('includes/session.php');
 include('functions/functions.php');
 
+if(strpos($_SERVER['REQUEST_URI'], '?'))
+{
+    $url = $_SERVER['REQUEST_URI'];
+    $url = str_replace(array('?','='), '/', $url);
+    header_redirect($url);
+}
+
 $parts = explode("/", trim($_SERVER['REQUEST_URI'], "/"));
 
 if(!count($parts))
