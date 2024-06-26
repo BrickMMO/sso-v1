@@ -131,7 +131,7 @@ function navigation_array($selected = false)
                                     'br' => '---'
                                 ],[
                                     'title' => 'Visit Bricksum App',
-                                    'url' => '/admin/https://bricksum.brickmmo.com',
+                                    'url' => 'https://bricksum.brickmmo.com',
                                     'colour' => 'orange'
                                 ],[
                                     'br' => '---'
