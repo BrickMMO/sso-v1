@@ -1,6 +1,6 @@
 <?php
 
-function navigation_array()
+function navigation_array($selected = false)
 {
 
     $navigation = [
@@ -121,23 +121,28 @@ function navigation_array()
                             'sub-pages' => [
                                 [
                                     'title' => 'Dashboard',
-                                    'url' => '/admin/bricksum/dashboard'
+                                    'url' => '/admin/bricksum/dashboard',
+                                    'colour' => 'red'
                                 ],[
                                     'title' => 'Modify Word List',
-                                    'url' => '/admin/bricksum/word-list'
+                                    'url' => '/admin/bricksum/word-list',
+                                    'colour' => 'red'
                                 ],[
-                                    '---'
+                                    'br' => '---'
                                 ],[
                                     'title' => 'Visit Bricksum App',
-                                    'url' => '/admin/https://bricksum.brickmmo.com'
+                                    'url' => '/admin/https://bricksum.brickmmo.com',
+                                    'colour' => 'orange'
                                 ],[
-                                    '---'
+                                    'br' => '---'
                                 ],[
                                     'title' => 'Uptime Report',
-                                    'url' => '/admin/uptime/bricksum'
+                                    'url' => '/admin/uptime/bricksum',
+                                    'colour' => 'orange'
                                 ],[
                                     'title' => 'Stats Report',
-                                    'url' => '/admin/uptime/stats'
+                                    'url' => '/admin/uptime/stats',
+                                    'colour' => 'orange'
                                 ]
                             ]
                         ],[
@@ -179,18 +184,22 @@ function navigation_array()
                             'sub-pages' => [
                                 [
                                     'title' => 'Dashboard',
-                                    'url' => '/admin/github/dashboard'
+                                    'url' => '/admin/github/dashboard',
+                                    'colour' => 'red'
                                 ],[
                                     'title' => 'Scan Results',
-                                    'url' => '/admin/github/results'
+                                    'url' => '/admin/github/results',
+                                    'colour' => 'red'
                                 ],[
                                     'title' => 'Rescan GitHub',
-                                    'url' => '/admin/github/rescan'
+                                    'url' => '/admin/github/rescan',
+                                    'colour' => 'red'
                                 ],[
-                                    '---'
+                                    'br' => '---'
                                 ],[
                                     'title' => 'Stats Report',
-                                    'url' => '/admin/stats/github'
+                                    'url' => '/admin/stats/github',
+                                    'colour' => 'orange'
                                 ]
                             ],[
                                 'icon' => 'uptime',
@@ -207,6 +216,32 @@ function navigation_array()
             ],
         ],
     ];
+
+    if($selected)
+    {
+        $selected = '/'.$selected;
+        $selected = str_replace('.php', '', $selected);
+        $selected = str_replace('.', '/', $selected);
+        $selected = substr($selected, 0, strrpos($selected, '/'));
+
+        foreach($navigation as $levels)
+        {
+            foreach($levels['sections'] as $section)
+            {
+                foreach($section['pages'] as $page)
+                {
+
+                    if(strpos($page['url'], $selected) === 0)
+                    {
+                        return $page;
+                    }
+
+                }
+            }
+
+        }
+        die();
+    }
 
     return $navigation;
 

@@ -2,11 +2,13 @@
 
 security_check();
 
-define('PAGE_TITLE', 'Account Dashboard');
+define('PAGE_TITLE', 'My Account | Dashboard');
+define('PAGE_SELECTED_SECTION', '');
+define('PAGE_SELECTED_SUB_PAGE', '');
 
 include('templates/html_header.php');
 include('templates/nav_header.php');
-include('templates/nav_sidebar.php');
+include('templates/nav_slideout.php');
 include('templates/main_header.php');
 
 ?>
@@ -21,7 +23,7 @@ include('templates/main_header.php');
 
 <?php
 
+include('includes/debug.php');
+
 include('templates/main_footer.php');
 include('templates/html_footer.php');
-
-include('includes/debug.php');

@@ -1,93 +1,50 @@
 <?php
 
-$navigation = navigation_array();
+$navigation = navigation_array(PAGE_FILE);
 
 ?>
 
-<!-- SIDE NAVIGATION -->
-
-<script>
-
-    function w3_toggle_sub(id) {
-        let target = document.getElementById(id);
-        let link = target.previousElementSibling;
-        let icon = link.getElementsByTagName("i")[0];
-
-        if (target.style.display == "block") {
-            icon.classList.remove("fa-caret-down");
-            icon.classList.add("fa-caret-right");
-            target.style.display = "none";
-        } else {
-            w3_sidebar_close_all();
-            icon.classList.remove("fa-caret-right");
-            icon.classList.add("fa-caret-down");
-            target.style.display = "block";
-        }
-
-        return false;
-    }
-
-    function w3_sidebar_close_all() {
-        let down = document.querySelectorAll("#sidebar .fa-caret-down");
-        for (let i = 0; i < down.length; i++) {
-            down[i].classList.add("fa-caret-right");
-            down[i].classList.remove("fa-caret-down");
-            down[i].parentElement.nextElementSibling.style.display = "none";
-        }
-    }
-</script>
+<!-- SUB NAV -->
 
 <nav
     class="w3-sidebar w3-bar-block w3-border-right"
-    id="sidebar"
+    id="sidebar-sub"
     style="
-      width: 100%;
-      max-width: 250px;
-      left: -250px;
-      z-index: 109;
-      top: 0px;
-      padding-top: 58px;
+    width: 100%;
+    max-width: 240px;
+    z-index: 108;
+    top: 0px;
+    padding-top: 58px;
     "
 >
-  <div class="w3-padding-16 w3-border-bottom">
-    <a href="/dashboard" class="w3-bar-item w3-button bm-selected">
-      <i class="fa-solid fa-gauge"></i>
-      Dashboard
-    </a>
-  </div>
-
-  <div class="w3-padding-16 w3-border-bottom">
-
-    <?php foreach($navigation as $level): ?>
-        
-      <div class="w3-bar-item w3-text-gray bm-caps"><?=$level['title']?></div>
-
-      <?php foreach($level['sections'] as $section): ?>
-        <a
-          class="w3-bar-item w3-button w3-text-red"
-          href="#"
-          onclick="return w3_toggle_sub('<?=$section['id']?>')"
-        >
-          <?=$section['title']?>
-          <i class="fa-solid fa-caret-right"></i>
-        </a>
-        <div id="<?=$section['id']?>" style="display: none">
-          <?php foreach($section['pages'] as $page): ?>
-            <a href="<?=$page['url']?>" class="w3-bar-item w3-button">
-              <i class="bm-<?=$page['icon']?>"></i>
-              <?=$page['title']?>
-            </a>
-          <?php endforeach; ?>
+    <div class="w3-padding-16 w3-border-bottom">
+        <div class="w3-bar-item w3-text-gray bm-caps">
+            <i class="bm-bricksum"></i> <?=$navigation['title']?>
         </div>
-      <?php endforeach; ?>
+    </div>
 
-    <?php endforeach; ?>
+    <div class="w3-padding-16 w3-border-bottom">
+
+    
+        <?php foreach($navigation['sub-pages'] as $page): ?>
+
+            <?php if(isset($page['title'])): ?>
+                <a
+                    class="w3-bar-item w3-button w3-text-<?=$page['colour']?> <?php if($page['url'] == PAGE_SELECTED_SUB_PAGE): ?>bm-selected<?php endif; ?>"
+                    href="<?=$page['url']?>"
+                >
+                    <!--<i class="fa-solid fa-gauge"></i>-->
+                    <?=$page['title']?>
+                </a>
+
+            <?php else: ?>    
+
+                </div>
+                <div class="w3-padding-16 w3-border-bottom">
+
+            <?php endif; ?>
+
+        <?php endforeach; ?>
         
-  </div>
+    </div>
 </nav>
-
-<div
-    class="w3-overlay"
-    style="z-index: 100; display: none; background: rgba(0, 0, 0, 0.4)"
-    id="sidebarOverlay"
-></div>
