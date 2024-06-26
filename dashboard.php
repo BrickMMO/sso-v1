@@ -23,7 +23,7 @@ include('templates/main_header.php');
 
 <?php
 
-include('includes/debug.php');
+include('templates/debug.php');
 
 include('templates/main_footer.php');
 include('templates/html_footer.php');
