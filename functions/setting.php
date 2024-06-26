@@ -15,7 +15,8 @@ function setting_fetch($name, $format = 'plain')
     switch($format)
     {
         case 'comma': 
-            return explode(', ', $record['value']);
+            $record['value'] = str_replace(array(', ', ','), ',', $record['value']);
+            return explode(',', $record['value']);
         default:
             return $record['value'];
     }
