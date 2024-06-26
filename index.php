@@ -1,5 +1,7 @@
 <?php
 
+define('DEBUG', true);
+
 require __DIR__ . '/vendor/autoload.php';
 
 include('includes/connect.php');

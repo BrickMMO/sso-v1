@@ -10,9 +10,12 @@
  */
 function header_redirect($url)
 {
-    // echo 'Redirect: <a href="'.$url.'">'.$url.'</a>';
-    header('Location: '.$url);
+
+    if(DEBUG) echo 'Redirect: <a href="'.$url.'">'.$url.'</a>';
+    else header('Location: '.$url);
+
     exit;
+
 }
 
 function header_bad_request()
