@@ -125,7 +125,7 @@ function navigation_array($selected = false)
                                     'colour' => 'red'
                                 ],[
                                     'title' => 'Modify Word List',
-                                    'url' => '/admin/bricksum/word-list',
+                                    'url' => '/admin/bricksum/wordlist',
                                     'colour' => 'red'
                                 ],[
                                     'br' => '---'

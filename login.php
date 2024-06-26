@@ -83,9 +83,9 @@ define('PAGE_TITLE', 'Login');
 include('templates/html_header.php');
 include('templates/login_header.php');
 
-?>
+include('templates/message.php'); 
 
-<?php include('templates/message.php'); ?>
+?>
 
 <div>
     <form
