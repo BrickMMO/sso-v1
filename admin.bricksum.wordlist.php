@@ -33,6 +33,7 @@ include('templates/main_header.php');
 include('templates/message.php');
 
 $bricksum_wordlist = setting_fetch('BRICKSUM_WORDLIST', 'comma');
+$bricksum_stopwords = setting_fetch('BRICKSUM_STOPWORDS', 'comma');
 
 ?>
 
@@ -55,7 +56,8 @@ $bricksum_wordlist = setting_fetch('BRICKSUM_WORDLIST', 'comma');
     onsubmit="return validateLoginForm()"
     novalidate
 >
-    <textarea name="bricksum_wordlist" class="w3-input w3-border"><?=$bricksum_wordlist?> </textarea>
+    <textarea name="bricksum_wordlist" class="w3-input w3-border w3-margin-bottom" rows="10"><?=$bricksum_wordlist?></textarea>
+    <textarea name="bricksum_stopwords" class="w3-input w3-border" rows="4"><?=$bricksum_stopwords?></textarea>
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-bottom w3-margin-top">
         <i class="fa-solid fa-save"></i>
         Save Word List
