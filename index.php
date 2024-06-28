@@ -15,7 +15,7 @@ if(strpos($_SERVER['REQUEST_URI'], '?'))
     header_redirect($url);
 }
 
-$parts = explode("/", trim($_SERVER['REQUEST_URI'], "/"));
+$parts = array_filter(explode("/", trim($_SERVER['REQUEST_URI'], "/")));
 
 if(!count($parts))
 {
@@ -25,14 +25,21 @@ else
 {
     if($parts[0] == 'ajax')
     {
-        define('PAGE_AJAX', true);
+        define('PAGE_TYPE', 'ajax');
+        array_shift($parts);
+
+        $file = array_shift($parts).'.php';
+    }
+    if($parts[0] == 'api')
+    {
+        define('PAGE_TYPE', 'api');
         array_shift($parts);
 
         $file = array_shift($parts).'.php';
     }
     else
     {
-        define('PAGE_AJAX', false);
+        define('PAGE_TYPE', 'web');
 
         $file = '';
 
@@ -57,10 +64,15 @@ else
         $_GET[$parts[$i]] = isset($parts[$i+1]) ? $parts[$i+1] : true;
     }
 
-    if(PAGE_AJAX) 
+    if(PAGE_TYPE == 'ajax') 
     {
         $_POST = json_decode(file_get_contents('php://input'), true);
         include('ajax/'.$file);
+    }
+    elseif(PAGE_TYPE == 'api') 
+    {
+        include('api/'.$file);
+        echo json_encode($data);
     }
     elseif(file_exists($file)) 
     {

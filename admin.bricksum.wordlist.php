@@ -7,13 +7,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     // Basic serverside validation
     if (
-        !validate_blank($_POST['bricksum_words']))
+        !validate_blank($_POST['bricksum_wordlist']))
     {
         message_set('Word List Error', 'There was an error with your word list.', 'red');
         header_redirect('/admin/bricksum/wordlist');
     }
 
-    setting_update('BRICKSUM_WORDS', $_POST['bricksum_words']);
+    setting_update('BRICKSUM_WORDLIST', $_POST['bricksum_wordlist']);
 
     message_set('Success', 'Word list has been updated.');
     header_redirect('/admin/bricksum/wordlist');
@@ -32,7 +32,7 @@ include('templates/main_header.php');
 
 include('templates/message.php');
 
-$bricksum_words = setting_fetch('BRICKSUM_WORDS');
+$bricksum_wordlist = setting_fetch('BRICKSUM_WORDLIST', 'comma');
 
 ?>
 
@@ -55,7 +55,7 @@ $bricksum_words = setting_fetch('BRICKSUM_WORDS');
     onsubmit="return validateLoginForm()"
     novalidate
 >
-    <textarea name="bricksum_words" class="w3-input w3-border"><?=$bricksum_words?> </textarea>
+    <textarea name="bricksum_wordlist" class="w3-input w3-border"><?=$bricksum_wordlist?> </textarea>
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-bottom w3-margin-top">
         <i class="fa-solid fa-save"></i>
         Save Word List

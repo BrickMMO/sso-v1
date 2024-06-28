@@ -14,7 +14,7 @@ include('templates/main_header.php');
 
 include('templates/message.php');
 
-$bricksum_words = setting_fetch('BRICKSUM_WORDS', 'comma');
+$bricksum_wordlist = setting_fetch('BRICKSUM_WORDLIST', 'comma_2_array');
 $bricksum_paragraphs_generated = setting_fetch('BRICKSUM_PARAGRAPHS_GENERATED');
 $bricksum_sentences_generated = setting_fetch('BRICKSUM_SENTENCES_GENERATED');
 $bricksum_words_generated = setting_fetch('BRICKSUM_WORDS_GENERATED');
@@ -41,7 +41,7 @@ $bricksum_words_generated = setting_fetch('BRICKSUM_WORDS_GENERATED');
 <h2>Bricksum Word List</h2>
 <div class="w3-container w3-border w3-padding-16 w3-margin-bottom">
 
-    <?php foreach($bricksum_words as $word): ?>
+    <?php foreach($bricksum_wordlist as $word): ?>
         <span class="w3-tag w3-green w3-round w3-margin-bottom w3-padding">
             <?=$word?>
         </span>

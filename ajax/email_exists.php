@@ -15,10 +15,10 @@ $result = mysqli_query($connect, $query);
 
 if(mysqli_num_rows($result))
 {
-    $data = array('message' => 'Email Exists', 'error' => true);
+    $data = array('message' => 'Email exists', 'error' => true);
 }
 else
 {
-    $data = array('message' => 'Email Does Not Exists', 'error' => false);
+    $data = array('message' => 'Email does not exists', 'error' => false);
 }
 die(json_encode($data));
