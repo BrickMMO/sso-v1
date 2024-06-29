@@ -148,7 +148,7 @@ include('templates/login_header.php');
 <script>
 
     async function validateExistingEmail(email) {
-        return fetch('/ajax/email_exists',{
+        return fetch('/ajax/email/exists',{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

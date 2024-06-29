@@ -2,10 +2,10 @@
 
 header_not_found();
 
-define('PAGE_TITLE', 'Account Dashboard');
+define('PAGE_TITLE', 'Page Not Found');
 
 include('templates/html_header.php');
-include('templates/login_header.php');
+include('templates/login_header.php');  
 
 ?>
 
