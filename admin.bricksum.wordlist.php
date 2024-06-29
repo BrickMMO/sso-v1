@@ -20,7 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     
 }
 
-define('PAGE_TITLE', 'GitHub Scanner | Dashboard');
+define('APP_NAM', 'Bricksum');
+
+define('PAGE_TITLE', 'Modify Word List');
 define('PAGE_SELECTED_SECTION', 'admin-tools');
 define('PAGE_SELECTED_SUB_PAGE', '/admin/github/dashboard');
 

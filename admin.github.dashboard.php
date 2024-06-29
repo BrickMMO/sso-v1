@@ -2,7 +2,9 @@
 
 security_check();
 
-define('PAGE_TITLE', 'GitHub Scanner | Dashboard');
+define('APP_NAM', 'GitHub Scanner');
+
+define('PAGE_TITLE', 'Dashboard');
 define('PAGE_SELECTED_SECTION', 'admin-tools');
 define('PAGE_SELECTED_SUB_PAGE', '/admin/github/dashboard');
 

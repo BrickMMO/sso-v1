@@ -45,7 +45,9 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     
 }
 
-define('PAGE_TITLE', 'Login');
+define('APP_NAM', 'My Account');
+
+define('PAGE_TITLE', 'Forgot Password');
 
 include('templates/html_header.php');
 include('templates/login_header.php');

@@ -78,6 +78,8 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     
 }
 
+define('APP_NAM', 'My Account');
+
 define('PAGE_TITLE', 'Login');
 
 include('templates/html_header.php');

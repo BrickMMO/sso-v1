@@ -2,7 +2,9 @@
 
 security_check();
 
-define('PAGE_TITLE', 'My Account | Dashboard');
+define('APP_NAM', 'My Account');
+
+define('PAGE_TITLE', 'Dashboard');
 define('PAGE_SELECTED_SECTION', '');
 define('PAGE_SELECTED_SUB_PAGE', '');
 
