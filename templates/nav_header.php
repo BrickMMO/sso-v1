@@ -68,7 +68,7 @@
         </div>
         <div class="w3-col s6 w3-right-align">
             <img
-                src="<?=$_SESSION['user']['avatar']?>"
+                src="<?=$_SESSION['user']['avatar'] ? $_SESSION['user']['avatar'] : '/images/no_avatar.png'?>"
                 style="height: 35px"
                 class="w3-circle"
             />

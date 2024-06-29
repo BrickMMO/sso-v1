@@ -45,6 +45,10 @@ if(user_fetch($emails[0]['email']))
 
     $user = user_fetch($emails[0]['email']);
 
+    security_set_user_session($user['id']);
+
+    message_set('Login Success', 'You have been logged in.');
+
 }
 else
 {
@@ -79,10 +83,10 @@ else
 
     email_send($user['email'], $user['first'].' '.$user['last'], $message);
 
+    security_set_user_session($user['id']);
+
+    message_set('Success', 'Your account has been created and you have been logged in. You will receive an email with a link to confirm your email address.');
+
 }
 
-// Start session and store user data
-security_set_user_session($user['id']);
-
-message_set('Success', 'Your account has been created and you have been logged in. Please confirm your email address.');
 header_redirect('/dashboard');
