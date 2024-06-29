@@ -116,16 +116,16 @@ function navigation_array($selected = false)
                     'pages' => [
                         [
                             'icon' => 'bricksum',
-                            'url' => '/admin/bricksum/dashboard',
+                            'url' => '/bricksum/dashboard',
                             'title' => 'Bricksum',
                             'sub-pages' => [
                                 [
                                     'title' => 'Dashboard',
-                                    'url' => '/admin/bricksum/dashboard',
+                                    'url' => '/bricksum/dashboard',
                                     'colour' => 'red'
                                 ],[
                                     'title' => 'Modify Word List',
-                                    'url' => '/admin/bricksum/wordlist',
+                                    'url' => '/bricksum/wordlist',
                                     'colour' => 'red'
                                 ],[
                                     'br' => '---'
@@ -137,29 +137,29 @@ function navigation_array($selected = false)
                                     'br' => '---'
                                 ],[
                                     'title' => 'Uptime Report',
-                                    'url' => '/admin/uptime/bricksum',
+                                    'url' => '/uptime/bricksum',
                                     'colour' => 'orange'
                                 ],[
                                     'title' => 'Stats Report',
-                                    'url' => '/admin/uptime/stats',
+                                    'url' => '/uptime/stats',
                                     'colour' => 'orange'
                                 ]
                             ]
                         ],[
                             'icon' => 'colours',
-                            'url' => '/admin/colours/dashboard',
+                            'url' => '/colours/dashboard',
                             'title' => 'Colours',
                         ],[
                             'icon' => 'parts',
-                            'url' => '/admin/parts/dashboard',
+                            'url' => '/parts/dashboard',
                             'title' => 'Parts',
                         ],[
                             'icon' => 'stores',
-                            'url' => '/admin/stores/dashboard',
+                            'url' => '/stores/dashboard',
                             'title' => 'Stores',
                         ],[
                             'icon' => 'media',
-                            'url' => '/admin/media/dashboard',
+                            'url' => '/media/dashboard',
                             'title' => 'Media',
                         ]
                     ],
@@ -169,7 +169,7 @@ function navigation_array($selected = false)
                     'pages' => [
                         [
                             'icon' => 'crypto',
-                            'url' => '/admin/crypto/dashboard',
+                            'url' => '/crypto/dashboard',
                             'title' => 'Crypto',
                         ],
                     ],
@@ -179,35 +179,35 @@ function navigation_array($selected = false)
                     'pages' => [
                         [
                             'icon' => 'github',
-                            'url' => '/admin/github/dashboard',
+                            'url' => '/github/dashboard',
                             'title' => 'GitHub Scanner', 
                             'sub-pages' => [
                                 [
                                     'title' => 'Dashboard',
-                                    'url' => '/admin/github/dashboard',
+                                    'url' => '/github/dashboard',
                                     'colour' => 'red'
                                 ],[
                                     'title' => 'Scan Results',
-                                    'url' => '/admin/github/results',
+                                    'url' => '/github/results',
                                     'colour' => 'red'
                                 ],[
                                     'title' => 'Rescan GitHub',
-                                    'url' => '/admin/github/rescan',
+                                    'url' => '/github/rescan',
                                     'colour' => 'red'
                                 ],[
                                     'br' => '---'
                                 ],[
                                     'title' => 'Stats Report',
-                                    'url' => '/admin/stats/github',
+                                    'url' => '/stats/github',
                                     'colour' => 'orange'
                                 ]
                             ],[
                                 'icon' => 'uptime',
-                                'url' => '/admin/uptime/dashboard',
+                                'url' => '/uptime/dashboard',
                                 'title' => 'Up Time',
                             ],[
                                 'icon' => 'stats',
-                                'url' => '/admin/stats/dashboard',
+                                'url' => '/stats/dashboard',
                                 'title' => 'Stats',
                             ],
                         ],

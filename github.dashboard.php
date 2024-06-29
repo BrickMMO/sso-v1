@@ -6,7 +6,7 @@ define('APP_NAME', 'GitHub Scanner');
 
 define('PAGE_TITLE', 'Dashboard');
 define('PAGE_SELECTED_SECTION', 'admin-tools');
-define('PAGE_SELECTED_SUB_PAGE', '/admin/github/dashboard');
+define('PAGE_SELECTED_SUB_PAGE', '/github/dashboard');
 
 include('templates/html_header.php');
 include('templates/nav_header.php');

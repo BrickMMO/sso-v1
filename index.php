@@ -68,6 +68,18 @@ elseif($parts[0] == 'api')
 }
 
 /**
+ * If the request is a script request. 
+ */
+elseif($parts[0] == 'script')
+{
+
+    define('PAGE_TYPE', 'script');
+    array_shift($parts);
+    $folder = 'script/';
+
+}
+
+/**
  * If the request is a standard web request. 
  */
 else
@@ -132,6 +144,15 @@ elseif(PAGE_TYPE == 'api')
 {
     include('api/'.$file);
     echo json_encode($data);
+    exit;
+}
+
+/**
+ * If the request is an script request. 
+ */
+elseif(PAGE_TYPE == 'script') 
+{
+    include('script/'.$file);
     exit;
 }
 

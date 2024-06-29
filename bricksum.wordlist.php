@@ -10,13 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_blank($_POST['bricksum_wordlist']))
     {
         message_set('Word List Error', 'There was an error with your word list.', 'red');
-        header_redirect('/admin/bricksum/wordlist');
+        header_redirect('/bricksum/wordlist');
     }
 
     setting_update('BRICKSUM_WORDLIST', $_POST['bricksum_wordlist']);
 
     message_set('Success', 'Word list has been updated.');
-    header_redirect('/admin/bricksum/wordlist');
+    header_redirect('/bricksum/wordlist');
     
 }
 
@@ -24,7 +24,7 @@ define('APP_NAME', 'Bricksum');
 
 define('PAGE_TITLE', 'Modify Word List');
 define('PAGE_SELECTED_SECTION', 'admin-tools');
-define('PAGE_SELECTED_SUB_PAGE', '/admin/github/dashboard');
+define('PAGE_SELECTED_SUB_PAGE', '/github/dashboard');
 
 include('templates/html_header.php');
 include('templates/nav_header.php');
@@ -49,7 +49,7 @@ $bricksum_stopwords = setting_fetch('BRICKSUM_STOPWORDS', 'comma');
     />
     Bricksum
 </h1>
-<p><a href="/admin/bricksum/dashboard">Dashboard</a> / Modify Word List</p>
+<p><a href="/bricksum/dashboard">Dashboard</a> / Modify Word List</p>
 <hr />
 <h2>Modify Word List</h2>
 
