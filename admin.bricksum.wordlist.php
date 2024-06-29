@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     
 }
 
-define('APP_NAM', 'Bricksum');
+define('APP_NAME', 'Bricksum');
 
 define('PAGE_TITLE', 'Modify Word List');
 define('PAGE_SELECTED_SECTION', 'admin-tools');

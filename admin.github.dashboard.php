@@ -2,7 +2,7 @@
 
 security_check();
 
-define('APP_NAM', 'GitHub Scanner');
+define('APP_NAME', 'GitHub Scanner');
 
 define('PAGE_TITLE', 'Dashboard');
 define('PAGE_SELECTED_SECTION', 'admin-tools');

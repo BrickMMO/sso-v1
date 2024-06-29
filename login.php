@@ -78,7 +78,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     
 }
 
-define('APP_NAM', 'My Account');
+define('APP_NAME', 'My Account');
 
 define('PAGE_TITLE', 'Login');
 

@@ -2,7 +2,7 @@
 
 security_check();
 
-define('APP_NAM', 'Bricksum');
+define('APP_NAME', 'Bricksum');
 
 define('PAGE_TITLE', 'Dashboard');
 define('PAGE_SELECTED_SECTION', 'admin-tools');
