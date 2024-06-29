@@ -48,26 +48,28 @@ include('templates/login_header.php');
 <?php include('templates/message.php'); ?>
 
 
-    <div>
-        <form
-            method="post"
-            onsubmit="return validateResetForm();"
-            novalidate
-        >
-            <input name="password" class="w3-input" type="password" id="password" autocomplete="off" />
-            <label for="password" class="w3-text-gray">
-                <i class="fa-solid fa-lock"></i> New Password
-                <span id="password-error" class="w3-text-red"></span>
-            </label>
+<div>
+    <form
+        method="post"
+        onsubmit="return validateResetForm();"
+        novalidate
+    >
 
-            <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
-                <i class="fa-solid fa-question"></i>
-                Reset Password
-            </button>
-        </form>
-    </div>
+        <input name="password" class="w3-input" type="password" id="password" autocomplete="off" />
+        <label for="password" class="w3-text-gray">
+            <i class="fa-solid fa-lock"></i> New Password
+            <span id="password-error" class="w3-text-red"></span>
+        </label>
 
-    <div class="w3-container w3-center w3-margin">
+        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
+            <i class="fa-solid fa-question"></i>
+            Reset Password
+        </button>
+
+    </form>
+</div>
+
+<div class="w3-container w3-center w3-margin">
     <button
         onclick="location.href='/reset/hash/<?=$_GET['hash']?>';"
         class="w3-button w3-grey w3-text-white"

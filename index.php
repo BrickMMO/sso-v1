@@ -68,14 +68,14 @@ elseif($parts[0] == 'api')
 }
 
 /**
- * If the request is a script request. 
+ * If the request is a action request. 
  */
-elseif($parts[0] == 'script')
+elseif($parts[0] == 'action')
 {
 
-    define('PAGE_TYPE', 'script');
+    define('PAGE_TYPE', 'action');
     array_shift($parts);
-    $folder = 'script/';
+    $folder = 'action/';
 
 }
 
@@ -148,11 +148,11 @@ elseif(PAGE_TYPE == 'api')
 }
 
 /**
- * If the request is an script request. 
+ * If the request is an action request. 
  */
-elseif(PAGE_TYPE == 'script') 
+elseif(PAGE_TYPE == 'action') 
 {
-    include('script/'.$file);
+    include('action/'.$file);
     exit;
 }
 

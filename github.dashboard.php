@@ -20,7 +20,7 @@ include('templates/main_header.php');
 
 <?php include('templates/message.php'); ?>
 
-<a href="/logout">Logout</a> | 
+<a href="/action/logout">Logout</a> | 
 <a href="/login">Login</a> | 
 <a href="/dashboard">Dashboard</a>
 

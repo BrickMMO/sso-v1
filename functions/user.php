@@ -1,16 +1,16 @@
 <?php
 
-function user_fetch($id)
+function user_fetch($identifier)
 {
 
     global $connect;
 
     $query = 'SELECT *
         FROM users
-        WHERE id = "'.addslashes($id).'"
-        OR email = "'.addslashes($id).'"
-        OR (reset_hash = "'.addslashes($id).'" AND reset_hash != "")
-        OR (verify_hash = "'.addslashes($id).'" AND verify_hash != "")
+        WHERE id = "'.addslashes($identifier).'"
+        OR email = "'.addslashes($identifier).'"
+        OR (reset_hash = "'.addslashes($identifier).'" AND reset_hash != "")
+        OR (verify_hash = "'.addslashes($identifier).'" AND verify_hash != "")
         LIMIT 1';
     $result = mysqli_query($connect, $query);
 

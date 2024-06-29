@@ -96,37 +96,32 @@ include('templates/message.php');
         novalidate
     >
 
-        <div class="w3-margin-bottom">
-            <input
-                name="email"
-                class="w3-input"
-                type="email"
-                id="email"
-                autocomplete="off"
-            />
-            <label for="email" class="w3-text-gray">
-                <i class="fa-solid fa-envelope"></i> Email
-                <span id="email-error" class="w3-text-red"></span>
-            </label>
-        </div>
+        <input
+            name="email"
+            class="w3-input"
+            type="email"
+            id="email"
+            autocomplete="off"
+        />
+        <label for="email" class="w3-text-gray">
+            <i class="fa-solid fa-envelope"></i> Email
+            <span id="email-error" class="w3-text-red"></span>
+        </label>
+    
+        <input
+            name="password"
+            class="w3-input"
+            type="password"
+            id="password"
+            autocomplete="off"
+        />
+        <label for="password" class="w3-text-gray">
+            <i class="fa-solid fa-lock"></i> Password
+            <span id="password-error" class="w3-text-red"></span>
+        </label>
+        
 
-        <div class="w3-margin-bottom">
-            <input
-                name="password"
-                class="w3-input"
-                type="password"
-                id="password"
-                autocomplete="off"
-            />
-            <label for="password" class="w3-text-gray">
-                <i class="fa-solid fa-lock"></i> Password
-                <span id="password-error" class="w3-text-red"></span>
-            </label>
-        </div>
-
-        <button
-        class="w3-block w3-btn w3-orange w3-text-white w3-margin-bottom"
-        >
+        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
             <i class="fa-solid fa-right-to-bracket"></i>
             Login
         </button>
@@ -138,10 +133,18 @@ include('templates/message.php');
                 value="<?=$_GET['url']?>" 
             />
         <?php endif; ?>
+        
     </form>
 </div>
 
-<div class="w3-center">
+<div class="w3-center w3-margin-top">
+    <a class="w3-btn w3-white w3-text-orange w3-border" href="<?=github_url()?>">
+        <i class="fa-brands fa-github"></i>
+        Login using GitHub
+    </a>
+</div>
+
+<div class="w3-center w3-margin-top">
     <button
         onclick="location.href='/forgot';"
         class="w3-button w3-grey w3-text-white"
@@ -154,7 +157,7 @@ include('templates/message.php');
         class="w3-button w3-grey w3-text-white"
     >
         <i class="fa-solid fa-pen"></i>
-        Create Account
+        Register
     </button>
 </div>
 

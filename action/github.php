@@ -39,8 +39,11 @@ if(user_fetch($emails[0]['email']))
         verify_hash = "'.string_hash().'",
         avatar = "'.addslashes($avatar).'"
         WHERE email = "'.$emails[0]['email'].'"
+        AND github_username != "'.addslashes($user['login']).'"
         LIMIT 1';
     mysqli_query($connect, $query);
+
+    $user = user_fetch($emails[0]['email']);
 
 }
 else
@@ -67,19 +70,19 @@ else
     )';
     mysqli_query($connect, $query);
 
+    $user = user_fetch($emails[0]['email']);
+
+    ob_start();
+    include(__DIR__.'/templates/email_register.php');
+    $message = ob_get_contents();
+    ob_end_clean();
+
+    email_send($user['email'], $user['first'].' '.$user['last'], $message);
+
 }
-
-$user = user_fetch($emails[0]['email'], true);
-
-ob_start();
-include(__DIR__.'/templates/email_register.php');
-$message = ob_get_contents();
-ob_end_clean();
-
-email_send($user['email'], $user['first'].' '.$user['last'], $message);
 
 // Start session and store user data
 security_set_user_session($user['id']);
 
-message_set('Success', 'Your account has been created nad you have been logged in. Please confirm your email address.');
+message_set('Success', 'Your account has been created and you have been logged in. Please confirm your email address.');
 header_redirect('/dashboard');

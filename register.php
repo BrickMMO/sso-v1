@@ -71,12 +71,12 @@ include('templates/login_header.php');
 <?php include('templates/message.php'); ?>
 
 <div>
-
     <form
         method="post"
         id="register-form"
         novalidate
     >
+
         <input 
             name="first" 
             class="w3-input" 
@@ -127,6 +127,7 @@ include('templates/login_header.php');
             <i class="fa-solid fa-pen"></i>
             Register
         </button>
+        
     </form>
 </div>
 

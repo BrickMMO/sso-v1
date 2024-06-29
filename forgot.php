@@ -56,27 +56,28 @@ include('templates/login_header.php');
 
 <?php include('templates/message.php'); ?>
 
+<div>
+    <form
+        method="post"
+        onsubmit="return validateForgotForm();"
+        novalidate
+    >
+    
+        <input name="email" class="w3-input" type="email" id="email" autocomplete="off" />
+        <label for="email" class="w3-text-gray">
+            <i class="fa-solid fa-envelope"></i> Email
+            <span id="email-error" class="w3-text-red"></span>
+        </label>
 
-    <div>
-        <form
-            method="post"
-            onsubmit="return validateForgotForm();"
-            novalidate
-        >
-            <input name="email" class="w3-input" type="email" id="email" autocomplete="off" />
-            <label for="email" class="w3-text-gray">
-                <i class="fa-solid fa-envelope"></i> Email
-                <span id="email-error" class="w3-text-red"></span>
-            </label>
+        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
+            <i class="fa-solid fa-question"></i>
+            Reset Password
+        </button>
+        
+    </form>
+</div>
 
-            <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
-                <i class="fa-solid fa-question"></i>
-                Reset Password
-            </button>
-        </form>
-    </div>
-
-    <div class="w3-container w3-center w3-margin">
+<div class="w3-container w3-center w3-margin-top">
     <button
         onclick="location.href='/login';"
         class="w3-button w3-grey w3-text-white"
