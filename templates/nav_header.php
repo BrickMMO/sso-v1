@@ -45,8 +45,9 @@
 
 <nav
     class="w3-bar w3-border-bottom w3-padding w3-white w3-top"
-    style="position: sticky; z-index: 110; height: 58px"
+    style="position: sticky; z-index: 110; height: 58px; overflow: visible"
 >
+    <div style="height: 100vh; position: absolute; top: -100vh; left: 0; width: 100vw; background: white"></div>
     <div class="w3-row">
         <div class="w3-col s6">
             <button class="w3-button" onclick="w3_sidebar_toggle()">
