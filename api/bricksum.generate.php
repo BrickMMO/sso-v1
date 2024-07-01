@@ -1,8 +1,14 @@
 <?php
 
+/*
+ * Fetch the current word list and stop words.
+ */
 $bricksum_wordlist = setting_fetch('BRICKSUM_WORDLIST', 'comma_2_array');
 $bricksum_stopwords = setting_fetch('BRICKSUM_STOPWORDS', 'comma_2_array');
 
+/* 
+ * Set default length ranges for sentences and paragraphs.
+ */
 $sentence_minimum = 3;
 $sentence_maximum = 9;
 $sentence_length = rand($sentence_minimum, $sentence_maximum);
@@ -11,14 +17,57 @@ $paragraph_minimum = 2;
 $paragraph_maximum = 5;
 $paragraph_length = rand($paragraph_minimum, $paragraph_maximum);
 
+/*
+ * Create counters for paragraphs, sentences, and words. 
+ */
 $paragraph = 0;
 $sentence = 0;
 $word = 0;
 
+/*
+ * Create a variable to store the last word used, to prevent having the same word
+ * twice in a row.
+ */
 $last_word = -1;
 
+/*
+ * Create an array to store the parapgraph, sentence, and word structure.
+ */
 $word_array = [];
 
+/*
+ * A function that will provide a random word from the Bricksum settings.
+ */
+function bricksum_random_word($last_word = false)
+{
+
+    global $bricksum_stopwords, $bricksum_wordlist;
+
+    if(rand(0,4) == 0)
+    {
+        do
+        {
+            $next_word = rand(0, count($bricksum_stopwords) - 1);
+        }
+        while($bricksum_stopwords[$next_word] == $last_word);
+
+        return $bricksum_stopwords[$next_word];
+    }
+    else
+    {
+        do
+        {
+            $next_word = rand(0, count($bricksum_wordlist) - 1);
+        }
+        while($bricksum_wordlist[$next_word] == $last_word);
+
+        return $bricksum_wordlist[$next_word];
+    }
+}
+
+/*
+ * Generate bricksum based on word count.
+ */
 if(isset($_GET['words']))
 {
 
@@ -50,30 +99,10 @@ if(isset($_GET['words']))
                 $paragraph_length = rand($paragraph_minimum, $paragraph_maximum);
             }
         }
-
-        if(rand(0,4) == 0)
-        {
-            do
-            {
-                $next_word = rand(0, count($bricksum_stopwords) - 1);
-            }
-            while($next_word == $last_word);
-
-            $word_array[$paragraph][$sentence][$word] = $bricksum_stopwords[$next_word];
-        }
-        else
-        {
-            do
-            {
-                $next_word = rand(0, count($bricksum_wordlist) - 1);
-            }
-            while($next_word == $last_word);
-
-            $word_array[$paragraph][$sentence][$word] = $bricksum_wordlist[$next_word];
-        }
-
         
-        $last_word = $next_word;
+        $word_array[$paragraph][$sentence][$word] = bricksum_random_word($last_word);
+
+        $last_word = $word_array[$paragraph][$sentence][$word];
     
         $word ++;
 
@@ -82,6 +111,10 @@ if(isset($_GET['words']))
     $message = $_GET['words'].' words of Bricksum content has been generated.';
 
 }
+
+/*
+ * Generate bricksum based on sentence count.
+ */
 elseif(isset($_GET['sentences']))
 {
 
@@ -142,6 +175,10 @@ elseif(isset($_GET['sentences']))
     $message = $_GET['sentences'].' sentences of Bricksum content has been generated.';
 
 }
+
+/*
+ * Generate bricksum based on paragraph count.
+ */
 elseif(isset($_GET['paragraphs']))
 {
 
@@ -184,7 +221,7 @@ elseif(isset($_GET['paragraphs']))
                     $word_array[$paragraph][$sentence][$word] = $bricksum_wordlist[$next_word];
                 }
 
-                $last_word = $next_word;
+                $last_word = strtolower($next_word);
         
             }
 
@@ -216,6 +253,7 @@ foreach($word_array as $key => $paragraph)
         {
             if($key == array_keys($sentence)[0]) $text .= ucfirst($word).' ';
             elseif($key == array_key_last($sentence)) $text .= $word.'. ';
+            elseif(array_search($key, array_keys($sentence)) == 3 && array_key_last($sentence) > 6 && rand(1,2) == 2) $text .= $word.', ';
             else $text .= $word.' ';
 
             $word_count ++;
