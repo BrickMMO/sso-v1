@@ -1,5 +1,17 @@
 <?php
 
+function user_avatar()
+{
+    return (
+        isset($_SESSION['user']['avatar']) &&
+        $_SESSION['user']['avatar']) ? $_SESSION['user']['avatar'] : '/images/no_avatar.png';
+}
+
+function user_name()
+{
+    return $_SESSION['user']['first'].' '.$_SESSION['user']['last'];
+}
+
 function user_fetch($identifier)
 {
 

@@ -35,6 +35,7 @@ $navigation = navigation_array();
             down[i].parentElement.nextElementSibling.style.display = "none";
         }
     }
+    
 </script>
 
 <nav
