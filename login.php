@@ -48,27 +48,13 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
         header_redirect('/login');
     }
 
-    // Generate JWT token
-    $secret_key = 'BRICKMMO-HS256';
-    $issuer_claim = 'brickmmo.com';
-    $audience_claim = '*.brickmmo.com';
-    $issuedat_claim = time();
-    $expire_claim = $issuedat_claim + 3600 * 24 * 30;
-
-    $token = array(
-        'iss' => $issuer_claim,
-        'aud' => $audience_claim,
-        'iat' => $issuedat_claim,
-        'exp' => $expire_claim,
-        'data' => $user,
-    );
-
     // Start session and store user data
     security_set_user_session($user['id']);
 
-    // Encode JWT and set cookie for main site
-    // $jwt = JWT::encode($token, $secret_key, 'HS256');
-    // setcookie('jwt', $jwt, $expire_claim, '/', 'brickmmo.com', false, false);
+    // Set cookie
+    $hash = password_hash($user['password'], PASSWORD_DEFAULT);
+    setcookie('hash_id', security_encrypt($user['id']), time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
+    setcookie('hash_string', security_encrypt($user['password']), time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
 
     // Determine redirect URL
     $redirect_url = isset($_GET['url']) ? $_GET['url'] : '/dashboard';
