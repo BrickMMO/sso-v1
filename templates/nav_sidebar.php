@@ -24,14 +24,13 @@ $navigation = navigation_array(PAGE_FILE);
     </div>
 
     <div class="w3-padding-16 w3-border-bottom">
-
     
         <?php foreach($navigation['sub-pages'] as $page): ?>
 
             <?php if(isset($page['title'])): ?>
                 <a
                     class="w3-bar-item w3-button w3-text-<?=$page['colour']?> <?php if($page['url'] == PAGE_SELECTED_SUB_PAGE): ?>bm-selected<?php endif; ?>"
-                    href="<?=$page['url']?>"
+                    href="<?=ENV_CONSOLE_DOMAIN?>/<?=$page['url']?>"
                 >
                     <!--<i class="fa-solid fa-gauge"></i>-->
                     <?=$page['title']?>

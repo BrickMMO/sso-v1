@@ -14,6 +14,8 @@ function security_is_logged_in()
 
         if(!isset($_SESSION['user'])) security_set_user_session($user['id']);
 
+        security_extend_cookie();
+
     }
     else
     {
@@ -51,6 +53,14 @@ function security_is_logged_in()
 
 }
 
+function security_extend_cookie()
+{
+
+    setcookie('hash_id', $_COOKIE['hash_id'], time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
+    setcookie('hash_string', $_COOKIE['hash_string'], time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
+
+}
+
 function security_set_user_cookie($id)
 {
     
@@ -73,6 +83,18 @@ function security_set_user_session($id)
     $_SESSION['user']['session_id'] = password_hash($user['session_id'], PASSWORD_BCRYPT);
     $_SESSION['user']['github_username'] = $user['github_username'];
     $_SESSION['user']['avatar'] = $user['avatar'];
+    $_SESSION['user']['city_id'] = $user['city_id'];
+
+    if($city = city_fetch($user['city_id']))
+    {
+
+        $_SESSION['city']['id'] = $city['id'];
+        $_SESSION['city']['name'] = $city['name'];
+        $_SESSION['city']['width'] = $city['width'];
+        $_SESSION['city']['length'] = $city['length'];
+        $_SESSION['city']['image'] = $city['image'];
+
+    }
 
 }
 

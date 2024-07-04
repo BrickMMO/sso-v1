@@ -16,6 +16,10 @@
       rel="stylesheet"
       href="https://cdn.brickmmo.com/fonticons@1.0.0/fonticons.css"
     />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
   </head>
   <body>
 

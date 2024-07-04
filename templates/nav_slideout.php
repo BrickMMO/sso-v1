@@ -8,7 +8,12 @@ $navigation = navigation_array();
 
 <script>
 
-    function w3_toggle_sub(id) {
+    function prevent(event)
+    {
+        event.stopPropagation();
+    }
+
+    function w3_toggle_sub(event, id) {
         let target = document.getElementById(id);
         let link = target.previousElementSibling;
         let icon = link.getElementsByTagName("i")[0];
@@ -24,6 +29,7 @@ $navigation = navigation_array();
             target.style.display = "block";
         }
 
+        prevent(event);
         return false;
     }
 
@@ -51,7 +57,7 @@ $navigation = navigation_array();
     "
 >
   <div class="w3-padding-16 w3-border-bottom">
-    <a href="/dashboard" class="w3-bar-item w3-button bm-selected">
+    <a href="<?=ENV_CONSOLE_DOMAIN?>/dashboard" class="w3-bar-item w3-button bm-selected">
       <i class="fa-solid fa-gauge"></i>
       Dashboard
     </a>
@@ -67,14 +73,14 @@ $navigation = navigation_array();
         <a
           class="w3-bar-item w3-button w3-text-red"
           href="#"
-          onclick="return w3_toggle_sub('<?=$section['id']?>')"
+          onclick="w3_toggle_sub(event, '<?=$section['id']?>')"
         >
           <?=$section['title']?>
           <i class="fa-solid fa-caret-<?php if(PAGE_SELECTED_SECTION == $section['id']): ?>down<?php else: ?>right<?php endif; ?>"></i>
         </a>
         <div id="<?=$section['id']?>" style="display: <?php if(PAGE_SELECTED_SECTION == $section['id']): ?>block<?php else: ?>none<?php endif; ?>">
           <?php foreach($section['pages'] as $page): ?>
-            <a href="<?=$page['url']?>" class="w3-bar-item w3-button<?php if(PAGE_SELECTED_SUB_PAGE == $page['url']): ?> bm-selected<?php endif; ?>">               
+            <a href="<?=ENV_CONSOLE_DOMAIN?>/<?=$page['url']?>" class="w3-bar-item w3-button<?php if(PAGE_SELECTED_SUB_PAGE == $page['url']): ?> bm-selected<?php endif; ?>" onclick="prevent(event);">
               <i class="bm-<?=$page['icon']?>"></i>
               <?=$page['title']?>
             </a>

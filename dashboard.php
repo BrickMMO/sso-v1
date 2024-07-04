@@ -15,9 +15,9 @@ include('templates/main_header.php');
 
 ?>
 
-<h1>Dashboard</h1>
-
 <?php include('templates/message.php'); ?>
+
+<h1>Dashboard</h1>
 
 <a href="/action/logout">Logout</a> | 
 <a href="/login">Login</a> | 
@@ -25,7 +25,10 @@ include('templates/main_header.php');
 
 <br><br>
 
-<a href="<?=github_url()?>">Connect your GitHub account</a>
+<a href="<?=github_url()?>">
+    <i class="fa-brands fa-github"></i>
+    Connect your GitHub account
+</a>
 
 <?php
 
