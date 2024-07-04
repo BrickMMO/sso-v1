@@ -15,6 +15,10 @@ function security_is_logged_in()
         if(!isset($_SESSION['user'])) security_set_user_session($user['id']);
 
     }
+    else
+    {
+        return false;
+    }
 
     if(isset($_SESSION['user']) and isset($_SESSION['user']['id']))
     {
@@ -47,6 +51,17 @@ function security_is_logged_in()
 
 }
 
+function security_set_user_cookie($id)
+{
+    
+    $user = user_fetch($id);
+
+    $hash = password_hash($user['password'], PASSWORD_DEFAULT);
+    setcookie('hash_id', security_encrypt($user['id']), time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
+    setcookie('hash_string', security_encrypt($user['password']), time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
+
+}
+
 function security_set_user_session($id)
 {
 
@@ -56,9 +71,8 @@ function security_set_user_session($id)
     $_SESSION['user']['first'] = $user['first'];
     $_SESSION['user']['last'] = $user['last'];
     $_SESSION['user']['session_id'] = password_hash($user['session_id'], PASSWORD_BCRYPT);
+    $_SESSION['user']['github_username'] = $user['github_username'];
     $_SESSION['user']['avatar'] = $user['avatar'];
-
-    // $_SESSION['user']['session_id_tmp'] = $user['session_id'];
 
 }
 

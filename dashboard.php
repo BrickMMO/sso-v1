@@ -23,6 +23,10 @@ include('templates/main_header.php');
 <a href="/login">Login</a> | 
 <a href="/dashboard">Dashboard</a>
 
+<br><br>
+
+<a href="<?=github_url()?>">Connect your GitHub account</a>
+
 <?php
 
 include('templates/debug.php');

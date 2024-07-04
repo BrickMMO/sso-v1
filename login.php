@@ -52,9 +52,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     security_set_user_session($user['id']);
 
     // Set cookie
-    $hash = password_hash($user['password'], PASSWORD_DEFAULT);
-    setcookie('hash_id', security_encrypt($user['id']), time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
-    setcookie('hash_string', security_encrypt($user['password']), time() + (60 * 60 * 24 * 30), '/', 'brickmmo.com');
+    security_set_user_cookie($user['id']);
 
     // Determine redirect URL
     $redirect_url = isset($_GET['url']) ? $_GET['url'] : '/dashboard';

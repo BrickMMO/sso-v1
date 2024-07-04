@@ -24,69 +24,116 @@ if(!is_array($emails) or !count($emails))
     header_redirect('/login');
 }
 
-$user = github_user($token['access_token']);
-// debug_pre($user);
+$github_user = github_user($token['access_token']);
+// debug_pre($github_user);
 
-$names = string_split_name($user['name']);
-$avatar = image_to_bas64($user['avatar_url']);
+$names = string_split_name($github_user['name']);
+$avatar = image_to_bas64($github_user['avatar_url']);
 
-if(user_fetch($emails[0]['email']))
+/*
+ * Check if logged in user matches GitHub email
+ */
+if(isset($_SESSION['user']))
 {
 
+    $user = user_fetch($_SESSION['user']['id']);
+
+    foreach($emails as $key => $email)
+    {
+        if($user['email'] == $email['email'])
+        {
+            $email = $email['email'];
+            break;
+        }
+    }
+
+    if(!isset($email))
+    {
+        message_set('GitHub Error', 'The account you are currently logged in as and the GitHub account do not have matching emails.');
+        header_redirect('/dashboard');
+    }
+
     $query = 'UPDATE users SET 
-        github_username = "'.addslashes($user['login']).'",
+        github_username = "'.addslashes($github_user['login']).'",
         github_access_token = "'.addslashes($token['access_token']).'",
-        verify_hash = "'.string_hash().'",
         avatar = "'.addslashes($avatar).'"
-        WHERE email = "'.$emails[0]['email'].'"
-        AND github_username != "'.addslashes($user['login']).'"
+        WHERE email = "'.$email.'"
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    $user = user_fetch($emails[0]['email']);
-
     security_set_user_session($user['id']);
+    security_set_user_cookie($user['id']);
 
-    message_set('Login Success', 'You have been logged in.');
+    message_set('GitHub Success', 'Your GitHub account has been connected.');
+    header_redirect('/dashboard');
 
 }
-else
+
+/*
+ * Check if an existing user has an email associated to this GitHub account.
+ */
+foreach($emails as $key => $email)
+{
+    if($user = user_fetch($email['email']))
+    {
+        break;
+    }
+}
+
+if($user)
 {
 
-    $query = 'INSERT INTO users (
-        first,
-        last,
-        email,
-        github_username,
-        github_access_token,
-        verify_hash,
-        avatar,
-        session_id
-    ) VALUES (
-        "'.addslashes($names['first']).'",
-        "'.addslashes($names['last']).'",
-        "'.addslashes($emails[0]['email']).'",
-        "'.addslashes($user['login']).'",
-        "'.addslashes($token['access_token']).'",
-        "'.string_hash().'",
-        "'.addslashes($avatar).'",
-        "'.string_hash().'"
-    )';
+    $query = 'UPDATE users SET 
+        github_username = "'.addslashes($github_user['login']).'",
+        github_access_token = "'.addslashes($token['access_token']).'",
+        avatar = "'.addslashes($avatar).'"
+        WHERE email = "'.$user['email'].'"
+        LIMIT 1';
     mysqli_query($connect, $query);
 
-    $user = user_fetch($emails[0]['email']);
-
-    ob_start();
-    include(__DIR__.'/templates/email_register.php');
-    $message = ob_get_contents();
-    ob_end_clean();
-
-    email_send($user['email'], $user['first'].' '.$user['last'], $message);
-
     security_set_user_session($user['id']);
+    security_set_user_cookie($user['id']);
 
-    message_set('Success', 'Your account has been created and you have been logged in. You will receive an email with a link to confirm your email address.');
+    message_set('Login Success', 'You have been logged in.');
+    header_redirect('/dashboard');
 
 }
 
+/*
+ * Add a new user.
+ */
+$query = 'INSERT INTO users (
+    first,
+    last,
+    email,
+    github_username,
+    github_access_token,
+    verify_hash,
+    avatar,
+    session_id
+) VALUES (
+    "'.addslashes($names['first']).'",
+    "'.addslashes($names['last']).'",
+    "'.addslashes($emails[0]['email']).'",
+    "'.addslashes($github_user['login']).'",
+    "'.addslashes($token['access_token']).'",
+    "'.string_hash().'",
+    "'.addslashes($avatar).'",
+    "'.string_hash().'"
+)';
+mysqli_query($connect, $query);
+
+$user = user_fetch($emails[0]['email']);
+
+ob_start();
+include(__DIR__.'/templates/email_register.php');
+$message = ob_get_contents();
+ob_end_clean();
+
+email_send($user['email'], $user['first'].' '.$user['last'], $message);
+
+security_set_user_session($user['id']);
+security_set_user_cookie($user['id']);
+
+message_set('Success', 'Your account has been created and you have been logged in. You will receive an email with a link to confirm your email address.');
 header_redirect('/dashboard');
