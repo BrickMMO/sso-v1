@@ -3,7 +3,7 @@
 /*
  * Dump data
  */
-if(DEBUG)
+if(ENV_DEBUG)
 {
     debug_pre($_GET);
     debug_pre($_POST);

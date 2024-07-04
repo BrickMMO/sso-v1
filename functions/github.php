@@ -1,8 +1,11 @@
 <?php
 
-function github_url()
+function github_url($redirect_uri = '/action/github')
 {
-    return 'https://github.com/login/oauth/authorize?scope=read:user,user:email&client_id='.GITHUB_CLIENT_ID;
+
+    return 'https://github.com/login/oauth/authorize?scope=read:user,user:email&client_id='.GITHUB_CLIENT_ID.
+        '&redirect_uri='.urlencode(ENV_DOMAIN.$redirect_uri);
+
 }
 
 function github_access_token($code)

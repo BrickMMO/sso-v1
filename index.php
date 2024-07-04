@@ -1,13 +1,6 @@
 <?php
 
 /**
- * Easily toggle debugging on and off. True will cause redirects
- * to act as alinks and dump URL, form, session, and cookie data
- * tot he footer. 
- */ 
-define('DEBUG', true);
-
-/**
  * Load libraries through composer.
  */ 
 require __DIR__ . '/vendor/autoload.php';

@@ -51,6 +51,9 @@ function security_set_user_session($id)
 function security_check()
 {
 
-    security_is_logged_in();
+    if(!security_is_logged_in())
+    {
+        header_redirect('/login');
+    }
 
 }
