@@ -5,7 +5,7 @@
 </p>
 
 <p>
-    <a href="<?=ENV_DOMAIN?>/reset/hash/<?=$data['reset_hash']?>">
-        <?=ENV_DOMAIN?>/reset/hash/<?=$data['reset_hash']?>
+    <a href="<?=ENV_ACCOUNT_DOMAIN?>/reset/hash/<?=$data['reset_hash']?>">
+        <?=ENV_ACCOUNT_DOMAIN?>/reset/hash/<?=$data['reset_hash']?>
     </a>
 </p>

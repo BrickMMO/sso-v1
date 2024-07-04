@@ -4,7 +4,7 @@ function github_url($redirect_uri = '/action/github')
 {
 
     return 'https://github.com/login/oauth/authorize?scope=read:user,user:email&client_id='.GITHUB_CLIENT_ID.
-        '&redirect_uri='.urlencode(ENV_DOMAIN.$redirect_uri);
+        '&redirect_uri='.urlencode(ENV_ACCOUNT_DOMAIN.$redirect_uri);
 
 }
 

@@ -68,11 +68,13 @@
             </button>
         </div>
         <div class="w3-col s6 w3-right-align">
-            <img
-                src="<?=$_SESSION['user']['avatar'] ? $_SESSION['user']['avatar'] : '/images/no_avatar.png'?>"
-                style="height: 35px"
-                class="w3-circle"
-            />
+            <a href="">
+                <img
+                    src="<?=$_SESSION['user']['avatar'] ? $_SESSION['user']['avatar'] : '/images/no_avatar.png'?>"
+                    style="height: 35px"
+                    class="w3-circle"
+                />
+            </a>
             <button class="w3-button" onclick="open_modal('apps')">
                 <i class="fa-solid fa-grip-vertical"></i>
             </button>
