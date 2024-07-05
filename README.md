@@ -4,16 +4,21 @@ The single sign-on application used for all BrickMMO assets.
 
 Change MAMP to listen on two ports:
 
+'''
 Listen 8888
 Listen 7777
+'''
 
 To get this working setup some local domains in your /etc/hosts file:
 
+'''
 127.0.0.1       local.account.brickmmo.com
 127.0.0.1       local.console.brickmmo.com
+'''
 
 And virtual servers in yur MAMP configuraiton: 
 
+'''
 # Virtual hosts
 #Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf
 NameVirtualHost *:7777
@@ -27,6 +32,7 @@ ServerName local.account.brickmmo.com
 DocumentRoot "/Users/thomasa/Desktop/BrickMMO/console-v3"
 ServerName local.console.brickmmo.com
 </VirtualHost>
+'''
 
 ---
 
