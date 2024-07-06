@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 define('APP_NAME', 'Bricksum');
 
 define('PAGE_TITLE', 'Modify Word List');
-define('PAGE_SELECTED_SECTION', 'admin-tools');
-define('PAGE_SELECTED_SUB_PAGE', '/github/dashboard');
+define('PAGE_SELECTED_SECTION', 'admin-content');
+define('PAGE_SELECTED_SUB_PAGE', '/bricksum/wordlist');
 
 include('templates/html_header.php');
 include('templates/nav_header.php');
@@ -49,7 +49,11 @@ $bricksum_stopwords = setting_fetch('BRICKSUM_STOPWORDS', 'comma');
     />
     Bricksum
 </h1>
-<p><a href="/bricksum/dashboard">Dashboard</a> / Modify Word List</p>
+<p>
+    <a href="/dashboard">Dashboard</a> / 
+    <a href="/bricksum/dashboard">Bricksum</a> / 
+    Modify Word List
+</p>
 <hr />
 <h2>Modify Word List</h2>
 

@@ -63,7 +63,7 @@
             <button class="w3-button" onclick="w3_sidebar_toggle(event)">
                 <i class="fa-solid fa-bars"></i>
             </button>
-            <a href="<?=ENV_CONSOLE_DOMAIN?>/" class="w3-margin-left" onclick="prevent(event)"
+            <a href="<?=ENV_CONSOLE_DOMAIN?>/dashboard" class="w3-margin-left" onclick="prevent(event)"
             ><img
                 src="https://cdn.brickmmo.com/images@1.0.0/brickmmo-logo-coloured-horizontal.png"
                 style="height: 35px"
@@ -113,7 +113,7 @@
     </div>
     <footer class="w3-container w3-center w3-light-grey w3-padding w3-border-top">
         <a class="w3-button w3-border w3-white" href="<?=ENV_ACCOUNT_DOMAIN?>/dashboard">
-            Dashboard
+            My Account
         </a>
         <a class="w3-button w3-border w3-white" href="<?=ENV_ACCOUNT_DOMAIN?>/action/logout">
             Logout

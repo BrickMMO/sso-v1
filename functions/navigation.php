@@ -13,11 +13,11 @@ function navigation_array($selected = false)
                     'id' => 'control',
                     'pages' => [
                         [
-                            'icon' => 'control-panel',
+                            'icon' => 'bm-control-panel',
                             'url' => '/control-panel',
                             'title' => 'Control Panel',
                         ],[
-                            'icon' => 'control-brix',
+                            'icon' => 'bm-control-brix',
                             'url' => '/clock/dashboard',
                             'title' => 'Clock',
                         ]
@@ -27,19 +27,19 @@ function navigation_array($selected = false)
                     'id' => 'transportation',
                     'pages' => [
                         [
-                            'icon' => 'navigation',
+                            'icon' => 'bm-navigation',
                             'url' => '/navigation/dashboard',
                             'title' => 'Navigation',
                         ],[
-                            'icon' => 'roadview',
+                            'icon' => 'bm-roadview',
                             'url' => '/roadview/dashboard',
                             'title' => 'Roadview',
                         ],[
-                            'icon' => 'tracks',
+                            'icon' => 'bm-tracks',
                             'url' => '/tracks/dashboard',
                             'title' => 'Tracks',
                         ],[
-                            'icon' => 'train',
+                            'icon' => 'bm-train',
                             'url' => '/train/dashboard',
                             'title' => 'Train',
                         ],
@@ -49,15 +49,15 @@ function navigation_array($selected = false)
                     'id' => 'students',
                     'pages' => [
                         [
-                            'icon' => 'brick-overflow',
+                            'icon' => 'bm-brick-overflow',
                             'url' => '/brick-overflow/dashboard',
                             'title' => 'Brick Overflow',
                         ],[
-                            'icon' => 'flow',
+                            'icon' => 'bm-flow',
                             'url' => '/flow/dashboard',
                             'title' => 'Flow',
                         ],[
-                            'icon' => 'timesheets',
+                            'icon' => 'bm-timesheets',
                             'url' => '/timesheets/dashboard',
                             'title' => 'Timesheets',
                         ],
@@ -67,15 +67,15 @@ function navigation_array($selected = false)
                     'id' => 'community',
                     'pages' => [
                         [
-                            'icon' => 'radio',
+                            'icon' => 'bm-radio',
                             'url' => '/radio/dashboard',
                             'title' => 'Radio',
                         ],[
-                            'icon' => 'events',
+                            'icon' => 'bm-events',
                             'url' => '/events/dashboard',
                             'title' => 'Events',
                         ],[
-                            'icon' => 'qr-codes',
+                            'icon' => 'bm-qr-codes',
                             'url' => '/qr-codes/dashboard',
                             'title' => 'Qr Codes',
                         ],
@@ -85,11 +85,11 @@ function navigation_array($selected = false)
                     'id' => 'social',
                     'pages' => [
                         [
-                            'icon' => 'brix',
+                            'icon' => 'bm-brix',
                             'url' => '/brix/dashboard',
                             'title' => 'Brix',
                         ],[
-                            'icon' => 'timeline',
+                            'icon' => 'bm-timeline',
                             'url' => '/timeline/dashboard',
                             'title' => 'Timeline',
                         ],
@@ -99,7 +99,7 @@ function navigation_array($selected = false)
                     'id' => 'finances',
                     'pages' => [
                         [
-                            'icon' => 'crypto',
+                            'icon' => 'bm-crypto',
                             'url' => '/crypto/dashboard',
                             'title' => 'Crypto',
                         ],
@@ -115,7 +115,7 @@ function navigation_array($selected = false)
                     'id' => 'admin-content',
                     'pages' => [
                         [
-                            'icon' => 'bricksum',
+                            'icon' => 'bm-bricksum',
                             'url' => '/bricksum/dashboard',
                             'title' => 'Bricksum',
                             'sub-pages' => [
@@ -146,19 +146,19 @@ function navigation_array($selected = false)
                                 ]
                             ]
                         ],[
-                            'icon' => 'colours',
+                            'icon' => 'bm-colours',
                             'url' => '/colours/dashboard',
                             'title' => 'Colours',
                         ],[
-                            'icon' => 'parts',
+                            'icon' => 'bm-parts',
                             'url' => '/parts/dashboard',
                             'title' => 'Parts',
                         ],[
-                            'icon' => 'stores',
+                            'icon' => 'bm-stores',
                             'url' => '/stores/dashboard',
                             'title' => 'Stores',
                         ],[
-                            'icon' => 'media',
+                            'icon' => 'bm-media',
                             'url' => '/media/dashboard',
                             'title' => 'Media',
                         ]
@@ -168,7 +168,7 @@ function navigation_array($selected = false)
                     'id' => 'admin-finances',
                     'pages' => [
                         [
-                            'icon' => 'crypto',
+                            'icon' => 'bm-crypto',
                             'url' => '/crypto/dashboard',
                             'title' => 'Crypto',
                         ],
@@ -178,7 +178,7 @@ function navigation_array($selected = false)
                     'id' => 'admin-tools',
                     'pages' => [
                         [
-                            'icon' => 'github',
+                            'icon' => 'bm-github',
                             'url' => '/github/dashboard',
                             'title' => 'GitHub Scanner', 
                             'sub-pages' => [
@@ -202,11 +202,11 @@ function navigation_array($selected = false)
                                     'colour' => 'orange'
                                 ]
                             ],[
-                                'icon' => 'uptime',
+                                'icon' => 'bm-uptime',
                                 'url' => '/uptime/dashboard',
                                 'title' => 'Up Time',
                             ],[
-                                'icon' => 'stats',
+                                'icon' => 'bm-stats',
                                 'url' => '/stats/dashboard',
                                 'title' => 'Stats',
                             ],
@@ -219,6 +219,7 @@ function navigation_array($selected = false)
 
     if($selected)
     {
+        
         $selected = '/'.$selected;
         $selected = str_replace('.php', '', $selected);
         $selected = str_replace('.', '/', $selected);
@@ -226,8 +227,10 @@ function navigation_array($selected = false)
 
         foreach($navigation as $levels)
         {
+
             foreach($levels['sections'] as $section)
             {
+
                 foreach($section['pages'] as $page)
                 {
 
@@ -237,10 +240,11 @@ function navigation_array($selected = false)
                     }
 
                 }
+
             }
 
         }
-        die();
+
     }
 
     return $navigation;

@@ -5,8 +5,8 @@ security_check();
 define('APP_NAME', 'Bricksum');
 
 define('PAGE_TITLE', 'Dashboard');
-define('PAGE_SELECTED_SECTION', 'admin-tools');
-define('PAGE_SELECTED_SUB_PAGE', '/github/dashboard');
+define('PAGE_SELECTED_SECTION', 'admin-content');
+define('PAGE_SELECTED_SUB_PAGE', '/bricksum/dashboard');
 
 include('templates/html_header.php');
 include('templates/nav_header.php');
@@ -34,6 +34,11 @@ $bricksum_words_generated = setting_fetch('BRICKSUM_WORDS_GENERATED');
     />
     Bricksum
 </h1>
+<p>
+    <a href="/dashboard">Dashboard</a> / 
+    Bricksum
+</p>
+<hr>
 <p>
     Paragraphs Generated: <span class="w3-tag w3-blue"><?=$bricksum_paragraphs_generated?></span> 
     Sentences Generated: <span class="w3-tag w3-blue"><?=$bricksum_sentences_generated?></span> 
