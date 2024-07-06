@@ -6,7 +6,7 @@ if(security_is_logged_in())
 {
 
     message_set('Already Logged In', 'You are currently logged in.');
-    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/dashboard');
+    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/account/dashboard');
 
 }
 elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -17,7 +17,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_email($_POST['email']) || 
         !validate_password($_POST['password'])) 
     {
-        message_set('Login Error', 'There was an error with your login informaiton.', 'red');
+        message_set('Login Error', 'There was an error with your login information.', 'red');
         header_redirect('/login');
     }
 
@@ -30,7 +30,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     if(mysqli_num_rows($result) == 0)
     {
-        message_set('Login Error', 'There was an error with your login informaiton.', 'red');
+        message_set('Login Error', 'There was an error with your login information.', 'red');
         header_redirect('/login');
     }
 
@@ -44,7 +44,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     if (!password_verify($_POST['password'], $user['password']))
     {
-        message_set('Login Error', 'There was an error with your login informaiton.', 'red');
+        message_set('Login Error', 'There was an error with your login information.', 'red');
         header_redirect('/login');
     }
 
@@ -55,7 +55,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     security_set_user_cookie($user['id']);
 
     // Determine redirect URL
-    $redirect_url = isset($_GET['url']) ? $_GET['url'] : '/dashboard';
+    $redirect_url = isset($_GET['url']) ? $_GET['url'] : '/account/dashboard';
 
     message_set('Login Success', 'You have been logged in.');
     header_redirect($redirect_url);

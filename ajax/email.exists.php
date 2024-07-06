@@ -9,8 +9,9 @@ if(!isset($_POST['email']))
 
 $query = 'SELECT *
     FROM users
-    WHERE email = "'.addslashes($_POST['email']).'"
-    LIMIT 1';
+    WHERE email = "'.addslashes($_POST['email']).'" ';
+if(isset($_POST['id'])) $query .= 'AND id != '.addslashes($_POST['id']).' ';
+$query .= 'LIMIT 1';
 $result = mysqli_query($connect, $query);
 
 if(mysqli_num_rows($result))

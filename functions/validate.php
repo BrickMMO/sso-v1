@@ -16,14 +16,15 @@ function validate_email($email)
 /*
  * Basic email validation
  */
-function validate_email_exists($email, $table)
+function validate_email_exists($email, $table, $id = false)
 {
     global $connect;
 
     $query = 'SELECT email
         FROM '.$table.'
-        WHERE email = "'.addslashes($email).'"
-        LIMIT 1';
+        WHERE email = "'.addslashes($email).'" ';
+    if($id) $query .= 'AND id != '.$id.' ';
+    $query .= 'LIMIT 1';
     $result = mysqli_query($connect, $query);
 
     return mysqli_num_rows($result) ? true : false;

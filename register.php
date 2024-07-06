@@ -4,7 +4,7 @@ if(security_is_logged_in())
 {
 
     message_set('Already Logged In', 'You are currently logged in.');
-    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/dashboard');
+    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/account/dashboard');
 
 }
 elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -18,7 +18,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_blank($_POST['last']) || 
         validate_email_exists($_POST['email'], 'users'))
     {
-        message_set('Login Error', 'There was an error with your registration informaiton.', 'red');
+        message_set('Login Error', 'There was an error with your registration information.', 'red');
         header_redirect('/register');
     }
 
@@ -207,9 +207,6 @@ include('templates/login_header.php');
             password_error.innerHTML = "(password is required)";
             errors++;
         }
-
-        console.log('errors');
-        console.log(errors);
 
         if (errors) return false;
         

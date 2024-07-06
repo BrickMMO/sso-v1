@@ -57,7 +57,7 @@ $navigation = navigation_array();
     "
 >
   <div class="w3-padding-16 w3-border-bottom">
-    <a href="<?=ENV_CONSOLE_DOMAIN?>/dashboard" class="w3-bar-item w3-button">
+    <a href="<?=ENV_CONSOLE_DOMAIN?>/console/dashboard" class="w3-bar-item w3-button">
       <i class="fa-solid fa-gauge"></i>
       Dashboard
     </a>

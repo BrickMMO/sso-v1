@@ -4,7 +4,7 @@ if(security_is_logged_in())
 {
 
     message_set('Already Logged In', 'You are currently logged in.');
-    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/dashboard');
+    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/account/dashboard');
 
 }
 elseif(!user_fetch($_GET['hash']))

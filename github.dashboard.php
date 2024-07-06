@@ -22,7 +22,7 @@ include('templates/main_header.php');
 
 <a href="/action/logout">Logout</a> | 
 <a href="/login">Login</a> | 
-<a href="/dashboard">Dashboard</a>
+<a href="/console/dashboard">Dashboard</a>
 
 <?php
 

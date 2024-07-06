@@ -4,7 +4,7 @@ if(security_is_logged_in())
 {
 
     message_set('Already Logged In', 'You are currently logged in.');
-    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/dashboard');
+    header_redirect(isset($_GET['url']) ? $_GET['url'] : '/account/dashboard');
 
 }
 elseif ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -57,6 +57,7 @@ include('templates/login_header.php');
 <?php include('templates/message.php'); ?>
 
 <div>
+
     <form
         method="post"
         onsubmit="return validateForgotForm();"
@@ -75,6 +76,7 @@ include('templates/login_header.php');
         </button>
         
     </form>
+    
 </div>
 
 <div class="w3-container w3-center w3-margin-top">

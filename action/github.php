@@ -50,7 +50,7 @@ if(isset($_SESSION['user']))
     if(!isset($email))
     {
         message_set('GitHub Error', 'The account you are currently logged in as and the GitHub account do not have matching emails.');
-        header_redirect('/dashboard');
+        header_redirect('/account/dashboard');
     }
 
     $query = 'UPDATE users SET 
@@ -65,7 +65,7 @@ if(isset($_SESSION['user']))
     security_set_user_cookie($user['id']);
 
     message_set('GitHub Success', 'Your GitHub account has been connected.');
-    header_redirect('/dashboard');
+    header_redirect('/account/dashboard');
 
 }
 
@@ -95,7 +95,7 @@ if($user)
     security_set_user_cookie($user['id']);
 
     message_set('Login Success', 'You have been logged in.');
-    header_redirect('/dashboard');
+    header_redirect('/account/dashboard');
 
 }
 
@@ -136,4 +136,4 @@ security_set_user_session($user['id']);
 security_set_user_cookie($user['id']);
 
 message_set('Success', 'Your account has been created and you have been logged in. You will receive an email with a link to confirm your email address.');
-header_redirect('/dashboard');
+header_redirect('/account/dashboard');
