@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     mysqli_query($connect, $query);
 
     message_set('Success', 'Your profile has been updated.');
-    header_redirect('/account/profile');
+    header_redirect('/account/dashboard');
     
 }
 
@@ -54,13 +54,15 @@ $user = user_fetch($_SESSION['user']['id']);
         height="50"
         style="vertical-align: top"
     />
-    My Profile
+    My Account
 </h1>
 <p>
     <a href="/account/dashboard">Dashboard</a> / 
     My Profile
 </p>
 <hr />
+
+<h2>My Profile</h2>
 
 <form
     method="post"
@@ -70,7 +72,7 @@ $user = user_fetch($_SESSION['user']['id']);
 
     <input  
         name="first" 
-        class="w3-input w3-border w3-margin-bottom" 
+        class="w3-input w3-border" 
         type="text" 
         id="first" 
         autocomplete="off"
@@ -82,7 +84,7 @@ $user = user_fetch($_SESSION['user']['id']);
 
     <input 
         name="last" 
-        class="w3-input w3-margin-bottom w3-border" 
+        class="w3-input w3-margin-top w3-border" 
         type="text" 
         id="last" 
         autocomplete="off"
@@ -94,7 +96,7 @@ $user = user_fetch($_SESSION['user']['id']);
 
     <input 
         name="email" 
-        class="w3-input w3-border" 
+        class="w3-input w3-border w3-margin-top" 
         type="email" 
         id="email" 
         autocomplete="off" 

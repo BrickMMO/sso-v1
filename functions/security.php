@@ -106,6 +106,10 @@ function security_check()
         header_redirect('/login');
     }
 
+    $id = security_decrypt($_COOKIE['hash_id']);
+
+    security_set_user_session($id);
+
 }
 
 function security_encrypt($data)
