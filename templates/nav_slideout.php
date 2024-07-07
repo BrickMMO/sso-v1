@@ -55,6 +55,7 @@ $navigation = navigation_array();
       top: 0px;
       padding-top: 58px;
     "
+    onclick="prevent(event);"
 >
   <div class="w3-padding-16 w3-border-bottom">
     <a href="<?=ENV_CONSOLE_DOMAIN?>/console/dashboard" class="w3-bar-item w3-button">

@@ -1,6 +1,6 @@
 <?php
 
-function github_url($redirect_uri = '/action/github')
+function github_url($redirect_uri = '/action/github/token')
 {
 
     return 'https://github.com/login/oauth/authorize?scope=read:user,user:email&client_id='.GITHUB_CLIENT_ID.
