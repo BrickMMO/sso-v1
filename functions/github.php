@@ -8,6 +8,33 @@ function github_url($redirect_uri = '/action/github/token')
 
 }
 
+function github_revoke($access_token)
+{
+
+    $url = 'https://api.github.com/applications/'.GITHUB_CLIENT_ID.'/grant';
+
+    $headers = [
+        'Accept: application/vnd.github+json',
+        "Authorization: Basic ". base64_encode(GITHUB_CLIENT_ID.':'.GITHUB_CLIENT_SECRET),
+        'User-Agent: BrickMMO',
+    ];
+
+    $data = [
+        'access_token' => $access_token,
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+    $result = curl_exec($ch);
+
+}
+
 function github_access_token($code)
 {
     $url = 'https://github.com/login/oauth/access_token';

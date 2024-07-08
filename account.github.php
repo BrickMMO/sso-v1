@@ -2,33 +2,6 @@
 
 security_check();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-{
-
-    // Basic serverside validation
-    if (
-        !validate_email($_POST['email']) || 
-        !validate_blank($_POST['first']) || 
-        !validate_blank($_POST['last']) || 
-        validate_email_exists($_POST['email'], 'users', $_SESSION['user']['id']))
-    {
-        message_set('Login Error', 'There was an error with your profile information.', 'red');
-        header_redirect('/account/profile');
-    }
-
-    $query = 'UPDATE users SET
-        first = "'.addslashes($_POST['first']).'",
-        last = "'.addslashes($_POST['last']).'",
-        email = "'.addslashes($_POST['email']).'"
-        WHERE id = '.$_SESSION['user']['id'].'
-        LIMIT 1';
-    mysqli_query($connect, $query);
-
-    message_set('Success', 'Your profile has been updated.');
-    header_redirect('/account/profile');
-    
-}
-
 define('APP_NAME', 'My Account');
 
 define('PAGE_TITLE', 'GitHub Account');
@@ -62,6 +35,16 @@ $user = user_fetch($_SESSION['user']['id']);
 </p>
 <hr />
 <h2>GitHub Account</h2>
+
+<?php if($user['github_username']): ?>
+
+    <a href="<?=ENV_ACCOUNT_DOMAIN?>/action/github/revoke">Revoke GitHub Account Access</a>
+
+<?php else: ?>
+    
+    <a href="<?=github_url()?>">Connect my GitHub Account</a>
+
+<?php endif; ?>
 
 
     
