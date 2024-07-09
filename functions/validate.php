@@ -46,17 +46,20 @@ function validate_blank($value)
     return !empty($value);
 }
 
+/*
+ * Basic validation for a GitHub username
+ */
 function validate_github($github)
 {
-    // GitHub username can contain alphanumeric characters and hyphens/underscores
     return preg_match('/^[a-zA-Z0-9\-]{6,39}$/', $github);
 }
 
+/*
+ * Basic validation for images uploads
+ */
 function validate_image($value)
 {
-
     if($value['error'] != '0') return false;
     elseif(!in_array($value['type'], array('image/jpeg', 'image/jpg', 'image/png', 'image/gif'))) return false;
-    else return true;
-    
+    else return true;   
 }
