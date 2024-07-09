@@ -52,7 +52,10 @@ $user = user_fetch($_SESSION['user']['id']);
     <p>Revoking GitHub acccess from your BrickMMO account will:</p>
     <ul>
         <li>Remove all GitHub access from your BrickMMO account.</li>
-        <li>Disable your BrickMMO public profile.</li>
+        <li>
+            Disable your BrickMMO 
+            <a href="<?=ENV_ACCOUNT_DOMAIN?>/profile/<?=$_SESSION['user']['github_username']?>/">public profile</a>.
+        </li>
         <li>Prevent retrieving of BrickMMO contribution stats.</li>
         <li>Not remove your GitHub avatar from your BrickMMO account.</li>
     </ul>
@@ -62,14 +65,33 @@ $user = user_fetch($_SESSION['user']['id']);
     </a>
 
 <?php else: ?>
-    
-    <a href="<?=github_url()?>">Connect my GitHub Account</a>
+
+    <p>
+        Your BrickMMO account is currently <strong>NOT</strong> connected to your GitHub account.
+    </p>
+
+    <hr>
+
+    <p>Providing GitHub acccess from your BrickMMO account will:</p>
+    <ul>
+        <li>
+            Enable your BrickMMO public profile.
+        </li>
+        <li>Permit retrieving of BrickMMO contribution stats.</li>
+        <li>Apply your GitHub avatar to your BrickMMO account.</li>
+    </ul>
+    <a href="<?=github_url()?>" class="w3-button w3-white w3-border">
+        <i class="fa-solid fa-plus fa-padding-right"></i>
+        Connect my GitHub Account
+    </a>
 
 <?php endif; ?>
 
 
     
 <?php
+
+include('templates/modal_city.php');
 
 include('templates/debug.php');
 

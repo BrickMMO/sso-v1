@@ -26,6 +26,8 @@ include('templates/main_header.php');
 
 <?php
 
+include('templates/modal_city.php');
+
 include('templates/debug.php');
 
 include('templates/main_footer.php');

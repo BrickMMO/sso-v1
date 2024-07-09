@@ -105,6 +105,8 @@ $bricksum_words_generated = setting_fetch('BRICKSUM_WORDS_GENERATED');
 
 <?php
 
+include('templates/modal_city.php');
+
 include('templates/debug.php');
 
 include('templates/main_footer.php');

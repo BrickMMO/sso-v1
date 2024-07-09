@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'b62bb9a714a409193ce54c269f5c5816e6eb9864',
+        'reference' => '8410806373bd67fea19be507c90150ac0913a9ca',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'b62bb9a714a409193ce54c269f5c5816e6eb9864',
+            'reference' => '8410806373bd67fea19be507c90150ac0913a9ca',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -51,6 +51,15 @@
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'smottt/wideimage' => array(
+            'pretty_version' => '1.1.4',
+            'version' => '1.1.4.0',
+            'reference' => '755d1b2b474ce9c32092aa6ac0357ebf857545f5',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../smottt/wideimage',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'starkbank/ecdsa' => array(
             'pretty_version' => '0.0.5',

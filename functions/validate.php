@@ -51,3 +51,12 @@ function validate_github($github)
     // GitHub username can contain alphanumeric characters and hyphens/underscores
     return preg_match('/^[a-zA-Z0-9\-]{6,39}$/', $github);
 }
+
+function validate_image($value)
+{
+
+    if($value['error'] != '0') return false;
+    elseif(!in_array($value['type'], array('image/jpeg', 'image/jpg', 'image/png', 'image/gif'))) return false;
+    else return true;
+    
+}

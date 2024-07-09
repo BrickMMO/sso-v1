@@ -57,6 +57,16 @@ class ComposerStaticInitaab5e7be471ef4fe06da7b29386c52d4
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'W' => 
+        array (
+            'WideImage' => 
+            array (
+                0 => __DIR__ . '/..' . '/smottt/wideimage/lib',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'BaseSendGridClientInterface' => __DIR__ . '/..' . '/sendgrid/sendgrid/lib/BaseSendGridClientInterface.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -69,6 +79,7 @@ class ComposerStaticInitaab5e7be471ef4fe06da7b29386c52d4
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitaab5e7be471ef4fe06da7b29386c52d4::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitaab5e7be471ef4fe06da7b29386c52d4::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitaab5e7be471ef4fe06da7b29386c52d4::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitaab5e7be471ef4fe06da7b29386c52d4::$classMap;
 
         }, null, ClassLoader::class);

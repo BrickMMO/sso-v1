@@ -175,6 +175,8 @@ $user = user_fetch($_SESSION['user']['id']);
     
 <?php
 
+include('templates/modal_city.php');
+
 include('templates/debug.php');
 
 include('templates/main_footer.php');

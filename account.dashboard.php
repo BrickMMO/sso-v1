@@ -10,7 +10,6 @@ define('PAGE_SELECTED_SUB_PAGE', '');
 
 include('templates/html_header.php');
 include('templates/nav_header.php');
-include('templates/modal_city.php');
 include('templates/nav_slideout.php');
 include('templates/main_header.php');
 
@@ -62,12 +61,15 @@ include('templates/main_header.php');
         <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/github" class="w3-block">
             <i class="fa-brands fa-github fa-padding-right w3-text-dark-grey"></i>
             GitHub Account
+            <?php if($_SESSION['user']['github_username']): ?>(<?=$_SESSION['user']['github_username']?>)<?php endif; ?>
             <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey" class="w3-display-right"></i>
         </a>
     </div>
 </div>
 
 <?php
+
+include('templates/modal_city.php');
 
 include('templates/debug.php');
 
