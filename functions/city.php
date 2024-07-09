@@ -10,6 +10,7 @@ function city_fetch($identifier)
     $query = 'SELECT *
         FROM cities
         WHERE id = "'.addslashes($identifier).'"
+        AND deleted_at IS NULL
         LIMIT 1';
     $result = mysqli_query($connect, $query);
 

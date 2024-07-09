@@ -27,13 +27,17 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
             last,
             email,
             password,
-            session_id
+            session_id,
+            created_at,
+            updated_at
         ) VALUES (
             "'.addslashes($_POST['first']).'",
             "'.addslashes($_POST['last']).'",
             "'.addslashes($_POST['email']).'",
             "'.addslashes(password_hash($_POST['password'], PASSWORD_BCRYPT)).'",
-            "'.string_hash().'"
+            "'.string_hash().'",
+            NOW(),
+            NOW(),
         )';
     mysqli_query($connect, $query);
 

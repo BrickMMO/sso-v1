@@ -4,6 +4,7 @@ $query = 'SELECT cities.*
     FROM cities
     INNER JOIN city_user ON cities.id = city_user.city_id
     WHERE city_user.user_id = '.$_SESSION['user']['id'].'
+    AND deleted_at IS NULL
     ORDER BY name';
 $result = mysqli_query($connect, $query);
 

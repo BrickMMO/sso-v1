@@ -147,7 +147,9 @@ $query = 'INSERT INTO users (
     github_access_token,
     verify_hash,
     avatar,
-    session_id
+    session_id,
+    created_at,
+    updated_at
 ) VALUES (
     "'.addslashes($names['first']).'",
     "'.addslashes($names['last']).'",
@@ -156,7 +158,9 @@ $query = 'INSERT INTO users (
     "'.addslashes($token['access_token']).'",
     "'.string_hash().'",
     "'.addslashes($avatar).'",
-    "'.string_hash().'"
+    "'.string_hash().'",
+    NOW(),
+    NOW()
 )';
 mysqli_query($connect, $query);
 

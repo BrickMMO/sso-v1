@@ -7,25 +7,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     // Basic serverside validation
     if (
-        !validate_email($_POST['email']) || 
-        !validate_blank($_POST['first']) || 
-        !validate_blank($_POST['last']) || 
-        validate_email_exists($_POST['email'], 'users', $_SESSION['user']['id']))
+        !validate_blank($_POST['name']) || 
+        !validate_blank($_POST['width']) || 
+        !validate_blank($_POST['length']))
     {
-        message_set('Login Error', 'There was an error with your profile information.', 'red');
-        header_redirect('/account/profile');
+        message_set('Login Error', 'There was an error with your city information.', 'red');
+        header_redirect('/city/create');
     }
 
+    $query = 'INSERT INTO cities (
+        name,
+        width,
+        length,
+        user_id,
+        date_multiplier,
+        date_at,
+        created_at,
+        updated_at
+        ) VALUES (
+         "'.addslashes($_POST['name']).'",
+         "'.addslashes($_POST['width']).'",
+         "'.addslashes($_POST['length']).'",
+         '.$_SESSION['user']['id'].',
+         1,
+         NOW(),
+         NOW(),
+         NOW()
+        )';
+    $result = mysqli_query($connect, $query);
+
+    $city_id = mysqli_insert_id($connect);
+
+    $query = 'INSERT INTO city_user (
+            city_id, 
+            user_id
+        ) VALUES (
+            '.$city_id.',
+            '.$_SESSION['user']['id'].'
+        )';
+    mysqli_query($connect, $query);
+
     $query = 'UPDATE users SET
-        first = "'.addslashes($_POST['first']).'",
-        last = "'.addslashes($_POST['last']).'",
-        email = "'.addslashes($_POST['email']).'"
+        city_id = '.$city_id.'
         WHERE id = '.$_SESSION['user']['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    message_set('Success', 'Your profile has been updated.');
-    header_redirect('/account/dashboard');
+
+    message_set('Congratulations', 'A new city has been created.');
+    header_redirect('/console/dashboard');
     
 }
 
@@ -72,7 +102,7 @@ include('templates/message.php');
         name="name" 
         class="w3-input w3-border" 
         type="text" 
-        id="city" 
+        id="name" 
         autocomplete="off"
     />
     <label for="name" class="w3-text-gray">
@@ -111,30 +141,30 @@ include('templates/message.php');
 
 <script>
 
-    async function validateCityForm() {
+    function validateCityForm() {
         let errors = 0;
 
-        let first = document.getElementById("first");
-        let first_error = document.getElementById("first-error");
-        first_error.innerHTML = "";
-        if (first.value == "") {
-            first_error.innerHTML = "(first name is required)";
+        let name = document.getElementById("name");
+        let name_error = document.getElementById("name-error");
+        name_error.innerHTML = "";
+        if (name.value == "") {
+            name_error.innerHTML = "(name is required)";
             errors++;
         }
 
-        let last = document.getElementById("last");
-        let last_error = document.getElementById("last-error");
-        last_error.innerHTML = "";
-        if (last.value == "") {
-            last_error.innerHTML = "(last name is required)";
+        let width = document.getElementById("width");
+        let width_error = document.getElementById("width-error");
+        width_error.innerHTML = "";
+        if (width.value == "") {
+            width_error.innerHTML = "(width is required)";
             errors++;
         }
 
-        let email = document.getElementById("email");
-        let email_error = document.getElementById("email-error");
-        email_error.innerHTML = "";
-        if (email.value == "") {
-            email_error.innerHTML = "(email is required)";
+        let length = document.getElementById("length");
+        let length_error = document.getElementById("length-error");
+        length_error.innerHTML = "";
+        if (length.value == "") {
+            length_error.innerHTML = "(length is required)";
             errors++;
         }
 
