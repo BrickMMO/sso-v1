@@ -120,7 +120,7 @@ if($user)
     security_set_user_cookie($user['id']);
 
     message_set('Login Success', 'You have been logged in.');
-    header_redirect('/register');
+    header_redirect('/account/dashboard');
 
 }
 

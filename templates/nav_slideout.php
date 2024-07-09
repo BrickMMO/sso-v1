@@ -67,27 +67,44 @@ $navigation = navigation_array();
   <div class="w3-padding-16 w3-border-bottom">
 
     <?php foreach($navigation as $level): ?>
-        
-      <div class="w3-bar-item w3-text-gray bm-caps"><?=$level['title']?></div>
 
-      <?php foreach($level['sections'] as $section): ?>
-        <a
-          class="w3-bar-item w3-button w3-text-red"
-          href="#"
-          onclick="w3_toggle_sub(event, '<?=$section['id']?>')"
+      <?php if($level['title'] == 'Administration' && $_SESSION['user']['admin'] != 1): ?>
+
+      <?php elseif($level['title'] == 'City Portal' && !isset($_SESSION['city'])): ?>
+
+        <div class="w3-bar-item w3-text-gray bm-caps"><?=$level['title']?></div>
+        <button
+            onclick="location.href='/city/create';"
+            class="w3-border w3-border-gray w3-button w3-margin-left"
         >
-          <?=$section['title']?>
-          <i class="fa-solid fa-caret-<?php if(PAGE_SELECTED_SECTION == $section['id']): ?>down<?php else: ?>right<?php endif; ?> w3-text-dark-grey fa-padding-left"></i>
-        </a>
-        <div id="<?=$section['id']?>" style="display: <?php if(PAGE_SELECTED_SECTION == $section['id']): ?>block<?php else: ?>none<?php endif; ?>">
-          <?php foreach($section['pages'] as $page): ?>
-            <a href="<?=ENV_CONSOLE_DOMAIN?><?=$page['url']?>" class="w3-bar-item w3-button<?php if(PAGE_SELECTED_SUB_PAGE == $page['url']): ?> bm-selected<?php endif; ?>" onclick="prevent(event);">
-              <i class="<?=$page['icon']?> fa-padding-right w3-text-dark-grey"></i>
-              <?=$page['title']?>
-            </a>
-          <?php endforeach; ?>
-        </div>
-      <?php endforeach; ?>
+            <i class="fa-solid fa-plus fa-padding-right"></i>
+            Create City
+        </button>
+
+      <?php else: ?>
+
+        <div class="w3-bar-item w3-text-gray bm-caps"><?=$level['title']?></div>
+          
+        <?php foreach($level['sections'] as $section): ?>
+          <a
+            class="w3-bar-item w3-button w3-text-red"
+            href="#"
+            onclick="w3_toggle_sub(event, '<?=$section['id']?>')"
+          >
+            <?=$section['title']?>
+            <i class="fa-solid fa-caret-<?php if(PAGE_SELECTED_SECTION == $section['id']): ?>down<?php else: ?>right<?php endif; ?> w3-text-dark-grey fa-padding-left"></i>
+          </a>
+          <div id="<?=$section['id']?>" style="display: <?php if(PAGE_SELECTED_SECTION == $section['id']): ?>block<?php else: ?>none<?php endif; ?>">
+            <?php foreach($section['pages'] as $page): ?>
+              <a href="<?=ENV_CONSOLE_DOMAIN?><?=$page['url']?>" class="w3-bar-item w3-button<?php if(PAGE_SELECTED_SUB_PAGE == $page['url']): ?> bm-selected<?php endif; ?>" onclick="prevent(event);">
+                <i class="<?=$page['icon']?> fa-padding-right w3-text-dark-grey"></i>
+                <?=$page['title']?>
+              </a>
+            <?php endforeach; ?>
+          </div>
+        <?php endforeach; ?>
+
+      <?php endif; ?>
 
     <?php endforeach; ?>
         

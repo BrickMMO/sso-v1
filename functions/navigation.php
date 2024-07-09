@@ -6,7 +6,6 @@ function navigation_array($selected = false)
     $navigation = [
         [
             'title' => 'City Portal',
-            'protected' => false,
             'sections' => [
                 [
                     'title' => 'Control',
@@ -108,7 +107,6 @@ function navigation_array($selected = false)
             ],
         ],[
             'title' => 'Administration',
-            'protected' => false,
             'sections' => [
                 [
                     'title' => 'Content',
