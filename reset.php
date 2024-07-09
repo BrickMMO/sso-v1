@@ -62,7 +62,7 @@ include('templates/login_header.php');
         </label>
 
         <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
-            <i class="fa-solid fa-question"></i>
+            <i class="fa-solid fa-question fa-padding-right"></i>
             Reset Password
         </button>
 
@@ -74,7 +74,7 @@ include('templates/login_header.php');
         onclick="location.href='/reset/hash/<?=$_GET['hash']?>';"
         class="w3-button w3-grey w3-text-white"
     >
-        <i class="fa-solid fa-caret-left"></i>
+        <i class="fa-solid fa-caret-left fa-padding-right"></i>
         Back to Login
     </button>
 </div>

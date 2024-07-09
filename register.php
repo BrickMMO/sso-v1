@@ -124,7 +124,7 @@ include('templates/login_header.php');
         </label>
 
         <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="validateRegisterForm(); return false;">
-            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-pen fa-padding-right"></i>
             Register
         </button>
         
@@ -133,7 +133,7 @@ include('templates/login_header.php');
 
 <div class="w3-center w3-margin-top">
     <a class="w3-btn w3-white w3-text-orange w3-border" href="<?=github_url()?>">
-        <i class="fa-brands fa-github"></i>
+        <i class="fa-brands fa-github fa-padding-right"></i>
         Login using GitHub
     </a>
 </div>
@@ -143,7 +143,7 @@ include('templates/login_header.php');
         onclick="location.href='/login';"
         class="w3-button w3-grey w3-text-white"
     >
-        <i class="fa-solid fa-caret-left"></i>
+        <i class="fa-solid fa-caret-left fa-padding-right"></i>
         Back to Login
     </button>
 </div>

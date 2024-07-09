@@ -59,7 +59,7 @@ $bricksum_words_generated = setting_fetch('BRICKSUM_WORDS_GENERATED');
     href="/bricksum/wordlist"
     class="w3-button w3-white w3-border"
 >
-    <i class="fa-solid fa-pen-to-square"></i> Modify Word List
+    <i class="fa-solid fa-pen-to-square fa-padding-right"></i> Modify Word List
 </a>
 
 <hr />
@@ -79,7 +79,7 @@ $bricksum_words_generated = setting_fetch('BRICKSUM_WORDS_GENERATED');
                     href="/uptime/bricksum"
                     class="w3-button w3-border w3-white"
                 >
-                    <i class="fa-regular fa-file-lines"></i>
+                    <i class="fa-regular fa-file-lines fa-padding-right"></i>
                     Full Report
                 </a>
             </footer>
@@ -96,7 +96,7 @@ $bricksum_words_generated = setting_fetch('BRICKSUM_WORDS_GENERATED');
                     href="/stats/bricksum"
                     class="w3-button w3-border w3-white"
                 >
-                    <i class="fa-regular fa-chart-bar"></i> Full Report
+                    <i class="fa-regular fa-chart-bar fa-padding-right"></i> Full Report
                 </a>
             </footer>
         </div>

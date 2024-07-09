@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 define('APP_NAME', 'My Account');
 
-define('PAGE_TITLE', 'My Profile');
+define('PAGE_TITLE', 'Create City');
 define('PAGE_SELECTED_SECTION', '');
 define('PAGE_SELECTED_SUB_PAGE', '');
 
@@ -41,8 +41,6 @@ include('templates/nav_slideout.php');
 include('templates/main_header.php');
 
 include('templates/message.php');
-
-$user = user_fetch($_SESSION['user']['id']);
 
 ?>
 
@@ -58,76 +56,62 @@ $user = user_fetch($_SESSION['user']['id']);
 </h1>
 <p>
     <a href="/account/dashboard">Dashboard</a> / 
-    My Profile
+    Create City
 </p>
 <hr />
 
-<h2>My Profile</h2>
+<h2>Create City</h2>
 
 <form
     method="post"
     novalidate
-    id="profile-form"
+    id="city-form"
 >
 
     <input  
-        name="first" 
+        name="name" 
         class="w3-input w3-border" 
         type="text" 
-        id="first" 
+        id="city" 
         autocomplete="off"
-        value="<?=$user['first']?>"
     />
-    <label for="first" class="w3-text-gray">
-        First Name <span id="first-error" class="w3-text-red"></span>
+    <label for="name" class="w3-text-gray">
+        Name <span id="name-error" class="w3-text-red"></span>
     </label>
 
     <input 
-        name="last" 
+        name="width" 
         class="w3-input w3-margin-top w3-border" 
-        type="text" 
-        id="last" 
+        type="number" 
+        id="width" 
         autocomplete="off"
-        value="<?=$user['last']?>"
     />
-    <label for="last" class="w3-text-gray">
-        Last Name <span id="last-error" class="w3-text-red"></span>
+    <label for="width" class="w3-text-gray">
+        <i class="fa-solid fa-ruler"></i>
+        Width <span id="width-error" class="w3-text-red"></span>
     </label>
 
     <input 
-        name="email" 
+        name="length" 
         class="w3-input w3-border w3-margin-top" 
-        type="email" 
-        id="email" 
+        type="number" 
+        id="length" 
         autocomplete="off" 
-        value="<?=$user['email']?>"
     />  
-    <label for="email" class="w3-text-gray">
-        <i class="fa-solid fa-envelope"></i>
-        Email <span id="email-error" class="w3-text-red"></span>
+    <label for="length" class="w3-text-gray">
+        <i class="fa-solid fa-ruler"></i>
+        Length <span id="length-error" class="w3-text-red"></span>
     </label>
 
-    <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="validateProfileForm(); return false;">
-        <i class="fa-solid fa-pen fa-padding-right"></i>
-        Update Profile
+    <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateCityForm();">
+        <i class="fa-solid fa-plus fa-padding-right"></i>
+        Create City
     </button>
 </form>
 
 <script>
 
-    async function validateExistingEmail(email) {
-        return fetch('/ajax/email/exists',{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({email: email, id: <?=$_SESSION['user']['id']?>})
-            })  
-            .then((response)=>response.json())
-            .then((responseJson)=>{return responseJson});
-    }
-
-    async function validateProfileForm() {
+    async function validateCityForm() {
         let errors = 0;
 
         let first = document.getElementById("first");
@@ -146,29 +130,18 @@ $user = user_fetch($_SESSION['user']['id']);
             errors++;
         }
 
-        let email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$";
         let email = document.getElementById("email");
         let email_error = document.getElementById("email-error");
         email_error.innerHTML = "";
         if (email.value == "") {
             email_error.innerHTML = "(email is required)";
             errors++;
-        } else if (!email.value.match(email_pattern)) {
-            email_error.innerHTML = "(email is invalid)";
-            errors++;
-        } else {
-            const json = await validateExistingEmail(email.value);
-            if(json.error == true)
-            {
-                email_error.innerHTML = "(email already exists)";
-                errors ++;
-            }
         }
 
         if (errors) return false;
         
-        let registerForm = document.getElementById('profile-form');
-        registerForm.submit();
+        let form = document.getElementById('city-form');
+        form.submit();
     }
 
 </script>

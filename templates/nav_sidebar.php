@@ -19,7 +19,7 @@ $navigation = navigation_array(PAGE_FILE);
 >
     <div class="w3-padding-16 w3-border-bottom">
         <div class="w3-bar-item w3-text-gray bm-caps">
-            <i class="<?=$navigation['icon']?>"></i> 
+            <i class="<?=$navigation['icon']?> fa-padding-right"></i> 
             <?=$navigation['title']?>
         </div>
     </div>

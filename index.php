@@ -114,6 +114,11 @@ if(!defined('PAGE_FILE'))
 /**
  * Parse remaining URL data into a $_GET array. 
  */
+
+if(count($parts) == 1)
+{
+    $_GET['key'] = array_shift($parts);
+}
 for($i = 0; $i < count($parts); $i += 2)
 {
     $_GET[$parts[$i]] = isset($parts[$i+1]) ? $parts[$i+1] : true;

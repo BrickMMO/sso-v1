@@ -21,6 +21,7 @@ function user_fetch($identifier)
         FROM users
         WHERE id = "'.addslashes($identifier).'"
         OR email = "'.addslashes($identifier).'"
+        OR github_username = "'.addslashes($identifier).'"
         OR (reset_hash = "'.addslashes($identifier).'" AND reset_hash != "")
         OR (verify_hash = "'.addslashes($identifier).'" AND verify_hash != "")
         LIMIT 1';

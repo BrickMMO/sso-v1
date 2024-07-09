@@ -79,6 +79,7 @@ include('templates/message.php');
         autocomplete="off"
     />
     <label for="password" class="w3-text-gray">
+        <i class="fa-solid fa-lock"></i>
         Password <span id="password-error" class="w3-text-red"></span>
     </label>
 
@@ -90,11 +91,12 @@ include('templates/message.php');
         autocomplete="off"
     />
     <label for="password-confirm" class="w3-text-gray">
+        <i class="fa-solid fa-lock"></i>
         Confirm Password <span id="password-confirm-error" class="w3-text-red"></span>
     </label>
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validatePasswordForm();">
-        <i class="fa-solid fa-pen"></i>
+        <i class="fa-solid fa-pen fa-padding-right"></i>
         Update Password
     </button>
 </form>

@@ -38,7 +38,28 @@ $user = user_fetch($_SESSION['user']['id']);
 
 <?php if($user['github_username']): ?>
 
-    <a href="<?=ENV_ACCOUNT_DOMAIN?>/action/github/revoke">Revoke GitHub Account Access</a>
+    <p>
+        Your BrickMMO account is currently connected to your 
+        <a href="https://github.com/<?=$_SESSION['user']['github_username']?>">
+            <i class="fa-brands fa-github"></i>
+            <?=$_SESSION['user']['github_username']?>
+        </a> 
+        GitHub account.
+    </p>
+
+    <hr>
+
+    <p>Revoking GitHub acccess from your BrickMMO account will:</p>
+    <ul>
+        <li>Remove all GitHub access from your BrickMMO account.</li>
+        <li>Disable your BrickMMO public profile.</li>
+        <li>Prevent retrieving of BrickMMO contribution stats.</li>
+        <li>Not remove your GitHub avatar from your BrickMMO account.</li>
+    </ul>
+    <a href="<?=ENV_ACCOUNT_DOMAIN?>/action/github/revoke" class="w3-button w3-white w3-border">
+        <i class="fa-solid fa-xmark fa-padding-right"></i>
+        Revoke GitHub Account Access
+    </a>
 
 <?php else: ?>
     

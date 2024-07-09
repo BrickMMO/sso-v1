@@ -77,7 +77,7 @@ $navigation = navigation_array();
           onclick="w3_toggle_sub(event, '<?=$section['id']?>')"
         >
           <?=$section['title']?>
-          <i class="fa-solid fa-caret-<?php if(PAGE_SELECTED_SECTION == $section['id']): ?>down<?php else: ?>right<?php endif; ?> w3-text-dark-grey"></i>
+          <i class="fa-solid fa-caret-<?php if(PAGE_SELECTED_SECTION == $section['id']): ?>down<?php else: ?>right<?php endif; ?> w3-text-dark-grey fa-padding-left"></i>
         </a>
         <div id="<?=$section['id']?>" style="display: <?php if(PAGE_SELECTED_SECTION == $section['id']): ?>block<?php else: ?>none<?php endif; ?>">
           <?php foreach($section['pages'] as $page): ?>

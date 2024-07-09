@@ -16,19 +16,19 @@ To get this working setup some local domains in your /etc/hosts file:
 127.0.0.1       local.console.brickmmo.com
 ```
 
-And virtual servers in yur MAMP configuraiton: 
+And virtual servers in yur MAMP configuraiton:
 
 ```
 # Virtual hosts
 #Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf
 NameVirtualHost *:7777
 
-<VirtualHost *:7777> 
-DocumentRoot "/Users/thomasa/Desktop/BrickMMO/sso-v1" 
+<VirtualHost *:7777>
+DocumentRoot "/Users/thomasa/Desktop/BrickMMO/sso-v1"
 ServerName local.account.brickmmo.com
 </VirtualHost>
 
-<VirtualHost *:7777> 
+<VirtualHost *:7777>
 DocumentRoot "/Users/thomasa/Desktop/BrickMMO/console-v3"
 ServerName local.console.brickmmo.com
 </VirtualHost>
@@ -170,7 +170,7 @@ use \Firebase\JWT\Key;
                         <img src="<?php echo "https://milin-humber-brickmmo.great-site.net/assets/uploads/" . $_SESSION['avatar']; ?>" style="height: 35px" class="w3-circle" />
                         <div class="w3-dropdown-hover">
                             <button class="w3-button">
-                                <i class="fa-solid fa-grip-vertical"></i>
+                                <i class="fa-solid fa-grip-vertical fa-padding-right"></i>
                             </button>
                             <div class="w3-dropdown-content w3-bar-block w3-border">
                                 <a href="https://milin-humber-brickmmo.great-site.net/pages/profile.php" class="w3-bar-item w3-button">My Account</a>

@@ -72,7 +72,7 @@
             class="w3-border w3-border-gray w3-button w3-margin-left"
             onclick="open_modal('city')"
             >
-                <i class="fa-solid fa-city"></i>
+                <i class="fa-solid fa-city fa-padding-right"></i>
                 <?=$_SESSION['city']['name']?>
                 <i class="fa-solid fa-caret-down"></i>
             </button>
@@ -93,7 +93,7 @@
     </div>
 </nav>
 
-<div class="w3-card-4 w3-border" style="max-width: 250px; position: fixed; top: 68px; right: 10px; display: none; z-index: 120;" id="avatar-options">
+<div class="w3-card-4 w3-border" style="max-width: 300px; position: fixed; top: 68px; right: 10px; display: none; z-index: 120;" id="avatar-options">
     
     <img src="<?=user_avatar();?>" alt="Alps" style="max-width: 100%;">
 
@@ -105,7 +105,7 @@
         <?php if($_SESSION['user']['avatar']): ?>
             <p>
                 <a href="https://github.com/<?=$_SESSION['user']['github_username']?>">
-                    <i class="fa-brands fa-github"></i>
+                    <i class="fa-brands fa-github fa-padding-right"></i>
                     <?=$_SESSION['user']['github_username']?>
                 </a>
             </p>
@@ -113,9 +113,11 @@
     </div>
     <footer class="w3-container w3-center w3-light-grey w3-padding w3-border-top">
         <a class="w3-button w3-border w3-white" href="<?=ENV_ACCOUNT_DOMAIN?>/account/dashboard">
+            <i class="fa-solid fa-user fa-padding-right "></i>
             My Account
         </a>
         <a class="w3-button w3-border w3-white" href="<?=ENV_ACCOUNT_DOMAIN?>/action/logout">
+            <i class="fa-solid fa-lock-open fa-padding-right "></i>
             Logout
         </a>
     </footer>
