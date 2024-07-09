@@ -68,14 +68,28 @@
                 src="https://cdn.brickmmo.com/images@1.0.0/brickmmo-logo-coloured-horizontal.png"
                 style="height: 35px"
             /></a>
-            <button
-            class="w3-border w3-border-gray w3-button w3-margin-left"
-            onclick="open_modal('city')"
-            >
-                <i class="fa-solid fa-city fa-padding-right"></i>
-                <?=$_SESSION['city']['name']?>
-                <i class="fa-solid fa-caret-down"></i>
+
+            <?php if(isset($_SESSION['city'])): ?>
+                <button
+                    class="w3-border w3-border-gray w3-button w3-margin-left"
+                    onclick="open_modal('city')"
+                >
+                    <i class="fa-solid fa-city fa-padding-right"></i>
+                    <?=$_SESSION['city']['name']?>
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+            <?php else: ?>
+                <button
+        onclick="location.href='/city/create';"
+        class="w3-border w3-border-gray w3-button w3-margin-left"
+    >
+
+                
+                    <i class="fa-solid fa-plus fa-padding-right"></i>
+                    Create City
             </button>
+            <?php endif; ?>
+
         </div>
         <div class="w3-col s6 w3-right-align">
             
@@ -102,7 +116,7 @@
             You are logged in as 
             <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/dashboard"><?=user_name()?></a>
         </p>
-        <?php if($_SESSION['user']['avatar']): ?>
+        <?php if($_SESSION['user']['github_username']): ?>
             <p>
                 <a href="https://github.com/<?=$_SESSION['user']['github_username']?>">
                     <i class="fa-brands fa-github fa-padding-right"></i>

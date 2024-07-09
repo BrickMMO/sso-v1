@@ -25,7 +25,6 @@ if(!is_array($emails) or !count($emails))
 }
 
 $github_user = github_user($token['access_token']);
-// debug_pre($github_user);
 
 $names = string_split_name($github_user['name']);
 $avatar = image_to_bas64($github_user['avatar_url']);
@@ -37,6 +36,19 @@ if(isset($_SESSION['user']))
 {
 
     $user = user_fetch($_SESSION['user']['id']);
+
+    $query = 'SELECT *
+        FROM users
+        WHERE github_username = "'.addslashes($github_user['login']).'"
+        AND id != '.$user['id'].'
+        LIMIT 1';
+    $result = mysqli_query($connect, $query);
+
+    if(mysqli_num_rows($result))
+    {
+        message_set('GitHub Error', 'There was an error authenticating your GitHub account. The GitHub account '.$github_user['login'].' is already associated to another BrickMMO account.', 'red');
+        header_redirect('/account/dashboard');
+    }
 
     foreach($emails as $key => $email)
     {
@@ -83,6 +95,19 @@ foreach($emails as $key => $email)
 if($user)
 {
 
+    $query = 'SELECT *
+        FROM users
+        WHERE github_username = "'.addslashes($github_user['login']).'"
+        AND id != '.$user['id'].'
+        LIMIT 1';
+    $result = mysqli_query($connect, $query);
+
+    if(mysqli_num_rows($result))
+    {
+        message_set('GitHub Error', 'There was an error authenticating your GitHub account. The GitHub account '.$github_user['login'].' is already associated to another BrickMMO account.', 'red');
+        header_redirect('/register');
+    }
+
     $query = 'UPDATE users SET 
         github_username = "'.addslashes($github_user['login']).'",
         github_access_token = "'.addslashes($token['access_token']).'",
@@ -95,8 +120,20 @@ if($user)
     security_set_user_cookie($user['id']);
 
     message_set('Login Success', 'You have been logged in.');
-    header_redirect('/account/dashboard');
+    header_redirect('/register');
 
+}
+
+$query = 'SELECT *
+    FROM users
+    WHERE github_username = "'.addslashes($github_user['login']).'"
+    LIMIT 1';
+$result = mysqli_query($connect, $query);
+
+if(mysqli_num_rows($result))
+{
+    message_set('GitHub Error', 'There was an error authenticating your GitHub account. The GitHub account '.$github_user['login'].' is already associated to another BrickMMO account.', 'red');
+    header_redirect('/register');
 }
 
 /*

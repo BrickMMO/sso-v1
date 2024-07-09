@@ -3,6 +3,8 @@
 function city_fetch($identifier)
 {
 
+    if(!$identifier) return false;
+
     global $connect;
 
     $query = 'SELECT *

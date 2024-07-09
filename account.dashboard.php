@@ -19,7 +19,7 @@ include('templates/main_header.php');
 
 <div class="w3-center">
 
-    <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/avatar" class="w3-block">
+    <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/avatar">
         <img
             src="<?=user_avatar();?>"
             style="height: 100px"
