@@ -52,6 +52,7 @@ include('templates/login_header.php');
     <form
         method="post"
         novalidate
+        id="main-form"
     >
 
         <input name="password" class="w3-input" type="password" id="password" autocomplete="off" />

@@ -77,8 +77,8 @@ include('templates/login_header.php');
 <div>
     <form
         method="post"
-        id="register-form"
         novalidate
+        id="main-form"
     >
 
         <input 
@@ -214,8 +214,8 @@ include('templates/login_header.php');
 
         if (errors) return false;
         
-        let registerForm = document.getElementById('register-form');
-        registerForm.submit();
+        let mainForm = document.getElementById('main-form');
+        mainForm.submit();
     }
 </script>
 

@@ -76,8 +76,8 @@ include('templates/message.php');
 <div>
     <form
         method="post"
-        onsubmit="return validateLoginForm()"
         novalidate
+        id="main-form"
     >
 
         <input
@@ -105,7 +105,7 @@ include('templates/message.php');
         </label>
         
 
-        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
+        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateLoginForm()">
             <i class="fa-solid fa-right-to-bracket fa-padding-right"></i>
             Login
         </button>

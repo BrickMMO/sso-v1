@@ -96,7 +96,7 @@ include('templates/message.php');
 <form
     method="post"
     novalidate
-    id="city-form"
+    id="main-form"
 >
 
     <input  

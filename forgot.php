@@ -61,6 +61,7 @@ include('templates/login_header.php');
     <form
         method="post"
         novalidate
+        id="main-form"
     >
     
         <input name="email" class="w3-input" type="email" id="email" autocomplete="off" />

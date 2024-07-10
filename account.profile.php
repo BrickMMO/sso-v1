@@ -67,7 +67,7 @@ $user = user_fetch($_SESSION['user']['id']);
 <form
     method="post"
     novalidate
-    id="profile-form"
+    id="main-form"
 >
 
     <input  
@@ -167,8 +167,8 @@ $user = user_fetch($_SESSION['user']['id']);
 
         if (errors) return false;
         
-        let registerForm = document.getElementById('profile-form');
-        registerForm.submit();
+        let mainForm = document.getElementById('main-form');
+        mainForm.submit();
     }
 
 </script>

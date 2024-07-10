@@ -70,7 +70,7 @@ include('templates/message.php');
     enctype="multipart/form-data"
     method="post"
     novalidate
-    id="avatar-form"
+    id="main-form"
 >
 
     <input  

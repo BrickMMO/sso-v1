@@ -68,7 +68,7 @@ include('templates/message.php');
 <form
     method="post"
     novalidate
-    id="password-form"
+    id="main-form"
 >
 
     <input  
