@@ -15,8 +15,6 @@ include('templates/main_header.php');
 
 include('templates/message.php');
 
-$user = user_fetch($_SESSION['user']['id']);
-
 ?>
 
 <!-- CONTENT -->
@@ -36,13 +34,13 @@ $user = user_fetch($_SESSION['user']['id']);
 <hr />
 <h2>GitHub Account</h2>
 
-<?php if($user['github_username']): ?>
+<?php if($_user['github_username']): ?>
 
     <p>
         Your BrickMMO account is currently connected to your 
-        <a href="https://github.com/<?=$_SESSION['user']['github_username']?>">
+        <a href="https://github.com/<?=$_user['github_username']?>">
             <i class="fa-brands fa-github"></i>
-            <?=$_SESSION['user']['github_username']?>
+            <?=$_user['github_username']?>
         </a> 
         GitHub account.
     </p>
@@ -54,7 +52,7 @@ $user = user_fetch($_SESSION['user']['id']);
         <li>Remove all GitHub access from your BrickMMO account.</li>
         <li>
             Disable your BrickMMO 
-            <a href="<?=ENV_ACCOUNT_DOMAIN?>/profile/<?=$_SESSION['user']['github_username']?>/">public profile</a>.
+            <a href="<?=ENV_ACCOUNT_DOMAIN?>/profile/<?=$_user['github_username']?>/">public profile</a>.
         </li>
         <li>Prevent retrieving of BrickMMO contribution stats.</li>
         <li>Not remove your GitHub avatar from your BrickMMO account.</li>

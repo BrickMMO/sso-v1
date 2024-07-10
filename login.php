@@ -36,12 +36,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     $user = mysqli_fetch_assoc($result);
 
-    /*
-    echo 'Verify: '.password_verify($_POST['password'], $user['password']);
-    echo 'Rows: '.mysqli_num_rows($result);
-    die();
-    */
-
     if (!password_verify($_POST['password'], $user['password']))
     {
         message_set('Login Error', 'There was an error with your login information.', 'red');

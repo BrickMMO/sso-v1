@@ -56,7 +56,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     $message = ob_get_contents();
     ob_end_clean();
 
-    email_send($user['email'], $user['first'].' '.$user['last'], $message, 'Email Verification');
+    email_send($user['email'], user_name($user['id']), $message, 'Email Verification');
 
     message_set('Success', 'Your account has been created. Please confirm your email address and then login.');
     header_redirect('/login');

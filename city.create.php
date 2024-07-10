@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
          "'.addslashes($_POST['name']).'",
          "'.addslashes($_POST['width']).'",
          "'.addslashes($_POST['length']).'",
-         '.$_SESSION['user']['id'].',
+         '.$_user['id'].',
          1,
          NOW(),
          NOW(),
@@ -43,17 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             user_id
         ) VALUES (
             '.$city_id.',
-            '.$_SESSION['user']['id'].'
+            '.$_user['id'].'
         )';
     mysqli_query($connect, $query);
 
     $query = 'UPDATE users SET
         city_id = '.$city_id.'
-        WHERE id = '.$_SESSION['user']['id'].'
+        WHERE id = '.$_user['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    security_set_user_session($user['id']);
+    security_set_user_session($_user['id']);
 
     message_set('Congratulations', 'A new city has been created.');
     header_redirect('/city/dashboard');

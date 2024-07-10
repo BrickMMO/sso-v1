@@ -36,7 +36,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
         $message = ob_get_contents();
         ob_end_clean();
 
-        email_send($user['email'], $user['first'].' '.$user['last'], $message, 'Password Reset');
+        email_send($user['email'], user_name($user['id']), $message, 'Password Reset');
 
     }
 

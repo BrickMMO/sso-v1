@@ -17,15 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     $query = 'UPDATE users SET
         password = "'.addslashes(password_hash($_POST['password'], PASSWORD_BCRYPT)).'"
-        WHERE id = '.$_SESSION['user']['id'].'
+        WHERE id = '.$_user['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
     // Start session and store user data
-    security_set_user_session($_SESSION['user']['id']);
+    security_set_user_session($_user['id']);
 
     // Set cookie
-    security_set_user_cookie($_SESSION['user']['id']);
+    security_set_user_cookie($_user['id']);
     
     message_set('Success', 'Your password has been updated.');
     header_redirect('/account/dashboard');

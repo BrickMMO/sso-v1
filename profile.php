@@ -16,7 +16,7 @@ $user = user_fetch($_GET['key']);
     <h1>PUBLIC PROFILE</h1>
 
     <h2>    
-        <?=$user['first']?> <?=$user['last']?>
+        <?=user_name($_user['id'])?>
         <br>
         <a href="https://github.com/<?=$user['github_username']?>">
             <i class="fa-brands fa-github"></i>

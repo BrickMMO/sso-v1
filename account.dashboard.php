@@ -2,6 +2,29 @@
 
 security_check();
 
+if(isset($_GET['key']) && $_GET['key'] == 'verify')
+{
+
+    $data['verify_hash'] = string_hash();
+
+    $query = 'UPDATE users SET
+        verify_hash = "'.$data['verify_hash'].'"
+        WHERE id = "'.$_user['id'].'"
+        LIMIT 1';
+    mysqli_query($connect, $query);
+
+    ob_start();
+    include(__DIR__.'/templates/email_register.php');
+    $message = ob_get_contents();
+    ob_end_clean(); 
+
+    email_send($_user['email'], user_name($_user['id']), $message, 'Email Verification');
+
+    message_set('Success', 'A verification email has been resent.');
+    header_redirect('/account/dashboard');
+
+}
+
 define('APP_NAME', 'My Account');
 
 define('PAGE_TITLE', 'Dashboard');
@@ -21,7 +44,7 @@ include('templates/main_header.php');
 
     <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/avatar">
         <img
-            src="<?=user_avatar();?>"
+            src="<?=user_avatar($_user['id']);?>"
             style="height: 100px"
             class="w3-circle w3-margin-top"
         />
@@ -29,13 +52,25 @@ include('templates/main_header.php');
     
     <h1 class="w3-margin-top w3-margin-bottom">
         Welcome, 
-        <?=$_SESSION['user']['first']?>
-        <?=$_SESSION['user']['last']?>
+        <?=user_name($_user['id'])?>
     </h1>
 
     <p>Manage your BrickMMO profile, avatar, and GitHub connection.</p>
 
 </div>
+
+<?php if(!$_user['email_verified_at']): ?>
+    <div class="w3-border w3-padding w3-margin-top w3-margin-bottom w3-light-grey">
+        <h3>
+            <i class="fa-solid fa-envelope"></i>
+            Email Unverified
+        </h3>
+        <p>Verify your email address to unlock all BrickMMO console features.</p>
+        <a href="/account/dashboard/verify" class="w3-button w3-white w3-border">
+            <i class="fa-solid fa-arrow-rotate-right fa-padding-right"></i> Resend Verification Email
+        </a>
+    </div>
+<?php endif; ?>
 
 <div class="w3-border w3-padding w3-margin-top w3-margin-bottom">
 
@@ -61,7 +96,7 @@ include('templates/main_header.php');
         <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/github" class="w3-block">
             <i class="fa-brands fa-github fa-padding-right w3-text-dark-grey"></i>
             GitHub Account
-            <?php if($_SESSION['user']['github_username']): ?>(<?=$_SESSION['user']['github_username']?>)<?php endif; ?>
+            <?php if($_user['github_username']): ?>(<?=$_user['github_username']?>)<?php endif; ?>
             <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey" class="w3-display-right"></i>
         </a>
     </div>

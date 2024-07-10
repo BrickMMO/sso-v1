@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     $query = 'UPDATE users SET
         avatar = "'.addslashes($image).'"
-        WHERE id = '.$_SESSION['user']['id'].'
+        WHERE id = '.$_user['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
     

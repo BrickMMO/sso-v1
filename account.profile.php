@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_email($_POST['email']) || 
         !validate_blank($_POST['first']) || 
         !validate_blank($_POST['last']) || 
-        validate_email_exists($_POST['email'], 'users', $_SESSION['user']['id']))
+        validate_email_exists($_POST['email'], 'users', $_user['id']))
     {
         message_set('Login Error', 'There was an error with your profile information.', 'red');
         header_redirect('/account/profile');
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         first = "'.addslashes($_POST['first']).'",
         last = "'.addslashes($_POST['last']).'",
         email = "'.addslashes($_POST['email']).'"
-        WHERE id = '.$_SESSION['user']['id'].'
+        WHERE id = '.$_user['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
 
@@ -41,8 +41,6 @@ include('templates/nav_slideout.php');
 include('templates/main_header.php');
 
 include('templates/message.php');
-
-$user = user_fetch($_SESSION['user']['id']);
 
 ?>
 
@@ -76,7 +74,7 @@ $user = user_fetch($_SESSION['user']['id']);
         type="text" 
         id="first" 
         autocomplete="off"
-        value="<?=$user['first']?>"
+        value="<?=$_user['first']?>"
     />
     <label for="first" class="w3-text-gray">
         First Name <span id="first-error" class="w3-text-red"></span>
@@ -88,7 +86,7 @@ $user = user_fetch($_SESSION['user']['id']);
         type="text" 
         id="last" 
         autocomplete="off"
-        value="<?=$user['last']?>"
+        value="<?=$_user['last']?>"
     />
     <label for="last" class="w3-text-gray">
         Last Name <span id="last-error" class="w3-text-red"></span>
@@ -100,7 +98,7 @@ $user = user_fetch($_SESSION['user']['id']);
         type="email" 
         id="email" 
         autocomplete="off" 
-        value="<?=$user['email']?>"
+        value="<?=$_user['email']?>"
     />  
     <label for="email" class="w3-text-gray">
         <i class="fa-solid fa-envelope"></i>
@@ -121,7 +119,7 @@ $user = user_fetch($_SESSION['user']['id']);
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({email: email, id: <?=$_SESSION['user']['id']?>})
+                body: JSON.stringify({email: email, id: <?=$_user['id']?>})
             })  
             .then((response)=>response.json())
             .then((responseJson)=>{return responseJson});
