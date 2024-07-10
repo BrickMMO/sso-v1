@@ -1,5 +1,12 @@
 <?php
 
+function user_avatar()
+{
+    return (
+        isset($_SESSION['user']['avatar']) &&
+        $_SESSION['user']['avatar']) ? $_SESSION['user']['avatar'] : '/images/no_avatar.png';
+}
+
 function city_fetch($identifier)
 {
 
