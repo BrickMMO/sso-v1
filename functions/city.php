@@ -1,10 +1,10 @@
 <?php
 
-function user_avatar()
+function city_avatar()
 {
     return (
-        isset($_SESSION['user']['avatar']) &&
-        $_SESSION['user']['avatar']) ? $_SESSION['user']['avatar'] : '/images/no_avatar.png';
+        isset($_SESSION['city']['image']) &&
+        $_SESSION['city']['image']) ? $_SESSION['city']['image'] : '/images/no_city.png';
 }
 
 function city_fetch($identifier)
