@@ -28,7 +28,6 @@ $user = user_fetch($_GET['key']);
 
 <?php
 
-include('templates/debug.php');
-
 include('templates/login_footer.php');
+include('templates/debug.php');
 include('templates/html_footer.php');

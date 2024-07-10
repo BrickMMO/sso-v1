@@ -91,7 +91,6 @@ include('templates/message.php');
 
 include('templates/modal_city.php');
 
-include('templates/debug.php');
-
 include('templates/main_footer.php');
+include('templates/debug.php');
 include('templates/html_footer.php');

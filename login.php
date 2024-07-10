@@ -175,7 +175,6 @@ include('templates/message.php');
 
 <?php
 
-include('templates/debug.php');
-
 include('templates/login_footer.php');
+include('templates/debug.php');
 include('templates/html_footer.php');
