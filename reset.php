@@ -51,7 +51,6 @@ include('templates/login_header.php');
 <div>
     <form
         method="post"
-        onsubmit="return validateResetForm();"
         novalidate
     >
 
@@ -61,7 +60,7 @@ include('templates/login_header.php');
             <span id="password-error" class="w3-text-red"></span>
         </label>
 
-        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
+        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">
             <i class="fa-solid fa-question fa-padding-right"></i>
             Reset Password
         </button>
@@ -80,7 +79,7 @@ include('templates/login_header.php');
 </div>
 
 <script>
-    function validateResetForm() {
+    function validateMainForm() {
         let errors = 0;
 
         let password = document.getElementById("password");

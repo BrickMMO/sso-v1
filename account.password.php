@@ -95,7 +95,7 @@ include('templates/message.php');
         Confirm Password <span id="password-confirm-error" class="w3-text-red"></span>
     </label>
 
-    <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validatePasswordForm();">
+    <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">
         <i class="fa-solid fa-pen fa-padding-right"></i>
         Update Password
     </button>
@@ -103,7 +103,7 @@ include('templates/message.php');
 
 <script>
 
-    function validatePasswordForm() {
+    function validateMainForm() {
         let errors = 0;
 
         let password = document.getElementById("password");
@@ -131,7 +131,6 @@ include('templates/message.php');
         }
 
         if (errors) return false;
-
     }
 
 </script>

@@ -60,7 +60,6 @@ include('templates/login_header.php');
 
     <form
         method="post"
-        onsubmit="return validateForgotForm();"
         novalidate
     >
     
@@ -70,7 +69,7 @@ include('templates/login_header.php');
             <span id="email-error" class="w3-text-red"></span>
         </label>
 
-        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
+        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">
             <i class="fa-solid fa-question fa-padding-right"></i>
             Reset Password
         </button>
@@ -90,7 +89,7 @@ include('templates/login_header.php');
 </div>
 
 <script>
-    function validateForgotForm() {
+    function validateMainForm() {
         let errors = 0;
 
         let email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$";

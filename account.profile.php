@@ -107,7 +107,7 @@ $user = user_fetch($_SESSION['user']['id']);
         Email <span id="email-error" class="w3-text-red"></span>
     </label>
 
-    <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="validateProfileForm(); return false;">
+    <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="validateMainForm(); return false;">
         <i class="fa-solid fa-pen fa-padding-right"></i>
         Update Profile
     </button>
@@ -127,7 +127,7 @@ $user = user_fetch($_SESSION['user']['id']);
             .then((responseJson)=>{return responseJson});
     }
 
-    async function validateProfileForm() {
+    async function validateMainForm() {
         let errors = 0;
 
         let first = document.getElementById("first");

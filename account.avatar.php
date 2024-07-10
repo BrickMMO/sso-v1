@@ -81,7 +81,7 @@ include('templates/message.php');
         autocomplete="off"
     />
 
-    <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validatePasswordForm();">
+    <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top">
         <i class="fa-solid fa-pen fa-padding-right"></i>
         Update Avatar
     </button>

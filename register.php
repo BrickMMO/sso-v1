@@ -127,7 +127,7 @@ include('templates/login_header.php');
             Password <span id="password-error" class="w3-text-red"></span>
         </label>
 
-        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="validateRegisterForm(); return false;">
+        <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="validateMainForm(); return false;">
             <i class="fa-solid fa-pen fa-padding-right"></i>
             Register
         </button>
@@ -166,7 +166,7 @@ include('templates/login_header.php');
             .then((responseJson)=>{return responseJson});
     }
 
-    async function validateRegisterForm() {
+    async function validateMainForm() {
         let errors = 0;
 
         let first = document.getElementById("first");

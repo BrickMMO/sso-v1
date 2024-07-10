@@ -134,7 +134,7 @@ include('templates/message.php');
         Length <span id="length-error" class="w3-text-red"></span>
     </label>
 
-    <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateCityForm();">
+    <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">
         <i class="fa-solid fa-plus fa-padding-right"></i>
         Create City
     </button>
@@ -142,7 +142,7 @@ include('templates/message.php');
 
 <script>
 
-    function validateCityForm() {
+    function validateMainForm() {
         let errors = 0;
 
         let name = document.getElementById("name");
@@ -170,9 +170,6 @@ include('templates/message.php');
         }
 
         if (errors) return false;
-        
-        let form = document.getElementById('city-form');
-        form.submit();
     }
 
 </script>
