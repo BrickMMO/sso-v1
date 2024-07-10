@@ -11,7 +11,7 @@
 function header_redirect($url)
 {
 
-    if(ENV_DEBUG) echo 'Redirect: <a href="'.$url.'">'.$url.'</a>';
+    if(ENV_REDIRECT) echo 'Redirect: <a href="'.$url.'">'.$url.'</a>';
     else header('Location: '.$url);
 
     exit;

@@ -80,7 +80,7 @@
                 </button>
             <?php else: ?>
                 <button
-                    onclick="location.href='/city/create';"
+                    onclick="location.href='<?=ENV_ACCOUNT_DOMAIN?>/city/create';"
                     class="w3-border w3-border-gray w3-button w3-margin-left"
                 >
                    <i class="fa-solid fa-plus fa-padding-right"></i>

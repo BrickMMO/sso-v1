@@ -53,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         LIMIT 1';
     mysqli_query($connect, $query);
 
+    security_set_user_session($user['id']);
 
     message_set('Congratulations', 'A new city has been created.');
     header_redirect('/console/dashboard');
