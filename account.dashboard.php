@@ -2,6 +2,47 @@
 
 security_check();
 
+if(isset($_SESSION['invite']))
+{
+
+    $invite = invite_fetch($_SESSION['invite']);
+
+    $query = 'SELECT *
+        FROM city_user
+        WHERE user_id = '.$_user['id'].'
+        AND city_id = '.$invite['city_id'].'
+        LIMIT 1';
+    $result = mysqli_query($connect, $query);
+
+    if(mysqli_num_rows($result))
+    {
+        unset($_SESSION['invite']);
+
+        message_set('Error', 'you are already a member of this city.', 'red', true);
+        header_redirect('/account/dashboard');
+    }
+
+    $query = 'INSERT INTO city_user (
+            city_id,
+            user_id
+        ) VALUES (
+            '.$invite['city_id'].',
+            '.$_user['id'].'
+        )';
+    mysqli_query($connect, $query); 
+
+    unset($_SESSION['invite']);
+
+    message_set('Invite Success', 'Invitation to the new city has been accespted!', 'green', true);
+    header_redirect(ENV_CONSOLE_DOMAIN.'/action/city/select/id/'.$invite['city_id']);
+
+    debug_pre($_SESSION['invite']);
+    debug_pre($invite);
+
+
+    die('here');
+}
+
 if(isset($_GET['key']) && $_GET['key'] == 'verify')
 {
 
