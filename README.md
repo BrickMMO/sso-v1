@@ -16,6 +16,15 @@ To get this working setup some local domains in your /etc/hosts file:
 127.0.0.1       local.console.brickmmo.com
 ```
 
+Locate the default directory features and revise them to look like this:
+
+```
+<Directory />
+    Options Indexes FollowSymLinks
+    AllowOverride All
+</Directory>
+```
+
 And virtual servers in yur MAMP configuraiton:
 
 ```
