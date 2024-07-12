@@ -1,5 +1,7 @@
 <?php
 
+security_check();
+
 setcookie('jwt', '', time() - 3600, '/', 'brickmmo.com', false, false);
 unset($_SESSION['user']);
 unset($_SESSION['city']);
