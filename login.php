@@ -42,6 +42,9 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
         header_redirect('/login');
     }
 
+    // Ensure they have a city set in their profile
+    if(!$user['city_id']) user_set_city($user['id']);
+
     // Start session and store user data
     security_set_user_session($user['id']);
 
