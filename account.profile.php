@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_blank($_POST['last']) || 
         validate_email_exists($_POST['email'], 'users', $_user['id']))
     {
-        message_set('Login Error', 'There was an error with your profile information.', 'red');
+        message_set('Login Error', 'There was an error with your profile login information.', 'red');
         header_redirect('/account/profile');
     }
 

@@ -3,7 +3,7 @@
 if(security_is_logged_in())
 {
 
-    message_set('Already Logged In', 'You are currently logged in.');
+    message_set('Login Success', 'You are already logged in.');
     header_redirect(isset($_GET['url']) ? $_GET['url'] : '/account/dashboard');
 
 }
@@ -14,7 +14,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     if (
         !validate_email($_POST['email']))
     {
-        message_set('Login Error', 'There was an error with your email address.', 'red');
+        message_set('Forgot Password Error', 'There was an error with your email address.', 'red');
         header_redirect('/forgot');
     }
 
@@ -40,7 +40,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     }
 
-    message_set('Email Sent', 'If there is an account associated to this email address, you will receive an email with reset instructions.');
+    message_set('Forgot Password Success', 'If there is an account associated to this email address, you will receive an email message with reset instructions.');
     header_redirect('/login');
     
 }

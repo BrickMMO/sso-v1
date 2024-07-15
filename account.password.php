@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_blank($_POST['password_confirm']) || 
         $_POST['password'] != $_POST['password_confirm'])
     {
-        message_set('Password Error', 'There was an error with your password.', 'red');
+        message_set('Password Error', 'There was an error with your new password.', 'red');
         header_redirect('/account/password');
     }
 
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Set cookie
     security_set_user_cookie($_user['id']);
     
-    message_set('Success', 'Your password has been updated.');
+    message_set('Password Success', 'Your password has been updated.');
     header_redirect('/account/dashboard');
     
 }

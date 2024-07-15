@@ -10,7 +10,7 @@ if(security_is_logged_in())
 elseif(!user_fetch($_GET['hash']))
 {
 
-    message_set('Hash Error', 'There was an error with the password reset link, please try again.', 'red');
+    message_set('Password Reset Error', 'There was an error with the password reset link, please try again.', 'red');
     header_redirect('/forgot');
     
 }
@@ -21,7 +21,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
     if (
         !validate_password($_POST['password']))
     {
-        message_set('Login Error', 'There was an error with your password.', 'red');
+        message_set('Password Reset Error', 'There was an error with your password.', 'red');
         header_redirect('/reset/hash/'.$_GET['hash']);
     }
 
@@ -31,7 +31,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
         LIMIT 1';
     mysqli_query($connect, $query);
 
-    message_set('Password Reset', 'Your password has been reset. Please login using your new apssword.');
+    message_set('Password Reset Success', 'Your password has been reset. Please login using your new password.');
     header_redirect('/login');
     
 }

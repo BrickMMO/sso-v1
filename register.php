@@ -3,7 +3,7 @@
 if(security_is_logged_in())
 {
 
-    message_set('Already Logged In', 'You are currently logged in.');
+    message_set('Login Success', 'You are already logged in.');
     header_redirect(isset($_GET['url']) ? $_GET['url'] : '/account/dashboard');
 
 }
@@ -18,7 +18,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
         !validate_blank($_POST['last']) || 
         validate_email_exists($_POST['email'], 'users'))
     {
-        message_set('Login Error', 'There was an error with your registration information.', 'red');
+        message_set('Registration Error', 'There was an error with your registration information.', 'red');
         header_redirect('/register');
     }
 
@@ -58,7 +58,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     email_send($user['email'], user_name($user['id']), $message, 'Email Verification');
 
-    message_set('Success', 'Your account has been created. Please confirm your email address and then login.');
+    message_set('Registraton Success', 'Your account has been created. Please confirm your email address and then login.');
     header_redirect('/login');
     
 }

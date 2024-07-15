@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if (
         !validate_image($_FILES['avatar']))
     {
-        message_set('Image Error', 'There was an error with your uploaded image.', 'red');
+        message_set('Avatar Upload Error', 'There was an error with your uploaded image.', 'red');
         header_redirect('/account/avatar');
     }
 
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         LIMIT 1';
     mysqli_query($connect, $query);
     
-    message_set('Success', 'Your avatar has been updated.');
+    message_set('Avatar Upload Success', 'Your avatar has been updated.');
     header_redirect('/account/dashboard');
     
 }

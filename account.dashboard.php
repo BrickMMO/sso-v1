@@ -18,7 +18,7 @@ if(isset($_SESSION['invite']))
     {
         unset($_SESSION['invite']);
 
-        message_set('Error', 'you are already a member of this city.', 'red', true);
+        message_set('Invitation Error', 'You are already a member of this city.', 'red', true);
         header_redirect('/account/dashboard');
     }
 
@@ -33,14 +33,9 @@ if(isset($_SESSION['invite']))
 
     unset($_SESSION['invite']);
 
-    message_set('Invite Success', 'Invitation to the new city has been accespted!', 'green', true);
+    message_set('Invitation Success', 'Invitation to the new city has been accepted!', 'green', true);
     header_redirect(ENV_CONSOLE_DOMAIN.'/action/city/select/id/'.$invite['city_id']);
 
-    debug_pre($_SESSION['invite']);
-    debug_pre($invite);
-
-
-    die('here');
 }
 
 if(isset($_GET['key']) && $_GET['key'] == 'verify')
@@ -61,7 +56,7 @@ if(isset($_GET['key']) && $_GET['key'] == 'verify')
 
     email_send($_user['email'], user_name($_user['id']), $message, 'Email Verification');
 
-    message_set('Success', 'A verification email has been resent.');
+    message_set('Verification Success', 'A verification email has been resent.');
     header_redirect('/account/dashboard');
 
 }
