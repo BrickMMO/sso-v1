@@ -9,16 +9,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     if (
         !validate_blank($_POST['name']) || 
         !validate_blank($_POST['width']) || 
-        !validate_blank($_POST['length']))
+        !validate_blank($_POST['height']))
     {
-        message_set('Login Error', 'There was an error with your city information.', 'red');
+        message_set('New City Error', 'There was an error with your city information.', 'red');
         header_redirect('/city/create');
     }
 
     $query = 'INSERT INTO cities (
         name,
         width,
-        length,
+        height,
         user_id,
         date_multiplier,
         date_at,
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         ) VALUES (
          "'.addslashes($_POST['name']).'",
          "'.addslashes($_POST['width']).'",
-         "'.addslashes($_POST['length']).'",
+         "'.addslashes($_POST['height']).'",
          '.$_user['id'].',
          1,
          NOW(),
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     security_set_user_session($_user['id']);
 
-    message_set('Congratulations', 'A new city has been created.');
+    message_set('New City Success', 'Congratulations! A new city has been created.');
     header_redirect('/city/dashboard');
     
 }
@@ -123,15 +123,15 @@ include('templates/message.php');
     </label>
 
     <input 
-        name="length" 
+        name="height" 
         class="w3-input w3-border w3-margin-top" 
         type="number" 
-        id="length" 
+        id="height" 
         autocomplete="off" 
     />  
-    <label for="length" class="w3-text-gray">
+    <label for="height" class="w3-text-gray">
         <i class="fa-solid fa-ruler"></i>
-        Length <span id="length-error" class="w3-text-red"></span>
+        Height <span id="height-error" class="w3-text-red"></span>
     </label>
 
     <button class="w3-block w3-btn w3-orange w3-text-white w3-margin-top" onclick="return validateMainForm();">
@@ -161,11 +161,11 @@ include('templates/message.php');
             errors++;
         }
 
-        let length = document.getElementById("length");
-        let length_error = document.getElementById("length-error");
-        length_error.innerHTML = "";
-        if (length.value == "") {
-            length_error.innerHTML = "(length is required)";
+        let height = document.getElementById("height");
+        let height_error = document.getElementById("height-error");
+        height_error.innerHTML = "";
+        if (height.value == "") {
+            height_error.innerHTML = "(height is required)";
             errors++;
         }
 
