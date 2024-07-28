@@ -135,6 +135,13 @@ if(count($final_parts) == 1)
 {
     $_GET['key'] = array_shift($final_parts);
 }
+elseif(count($final_parts) % 2 == 1)
+{
+    while($next = array_shift($final_parts))
+    {
+        if($next) $_GET['key'][] = $next;
+    }
+}
 for($i = 0; $i < count($final_parts); $i += 2)
 {
     $_GET[$final_parts[$i]] = isset($final_parts[$i+1]) ? $final_parts[$i+1] : true;
