@@ -64,7 +64,7 @@ include('templates/message.php');
 
 <?php if(!$_user['url']): ?>
     <p>
-        Adding a URL to you profile will make your arrcount publicly visable at:
+        Adding a URL to your profile will make your account publicly visable at:
         <br />
         <a href="#"><?=ENV_ACCOUNT_DOMAIN?>/profile/<span id="your-url">&lt;YOUR_URL&gt;</span></a>
     </p>
