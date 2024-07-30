@@ -95,18 +95,18 @@ include('templates/main_header.php');
 
 </div>
 
-<?php if(!$_user['email_verified_at']): ?>
-    <div class="w3-border w3-padding w3-margin-top w3-margin-bottom w3-light-grey">
-        <h3>
-            <i class="fa-solid fa-envelope"></i>
-            Email Unverified
-        </h3>
-        <p>Verify your email address to unlock all BrickMMO console features.</p>
-        <a href="/account/dashboard/verify" class="w3-button w3-white w3-border">
-            <i class="fa-solid fa-arrow-rotate-right fa-padding-right"></i> Resend Verification Email
-        </a>
-    </div>
-<?php endif; ?>
+    <?php if(!$_user['email_verified_at']): ?>
+        <div class="w3-border w3-padding w3-margin-top w3-margin-bottom w3-light-grey">
+            <h3>
+                <i class="fa-solid fa-envelope"></i>
+                Email Unverified
+            </h3>
+            <p>Verify your email address to unlock all BrickMMO console features.</p>
+            <a href="/account/dashboard/verify" class="w3-button w3-white w3-border">
+                <i class="fa-solid fa-arrow-rotate-right fa-padding-right"></i> Resend Verification Email
+            </a>
+        </div>
+    <?php endif; ?>
 
 <div class="w3-border w3-padding w3-margin-top w3-margin-bottom">
 
@@ -115,6 +115,12 @@ include('templates/main_header.php');
             <i class="fa-solid fa-user fa-padding-right w3-text-dark-grey"></i>
             My Profile
             <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey"></i>
+        </a>
+        <hr>
+        <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/url" class="w3-block">
+            <i class="fa-solid fa-globe fa-padding-right w3-text-dark-grey"></i>
+            URL
+            <i class="fa-solid fa-chevron-right fa-pull-right w3-text-dark-grey" class="w3-display-right"></i>
         </a>
         <hr>
         <a href="<?=ENV_ACCOUNT_DOMAIN?>/account/avatar" class="w3-block">

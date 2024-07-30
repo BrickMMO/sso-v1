@@ -25,6 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         WHERE id = '.$_user['id'].'
         LIMIT 1';
     mysqli_query($connect, $query);
+
+    // Start session and store user data
+    security_set_user_session($_user['id']);
     
     message_set('Avatar Upload Success', 'Your avatar has been updated.');
     header_redirect('/account/dashboard');

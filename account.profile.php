@@ -24,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         LIMIT 1';
     mysqli_query($connect, $query);
 
+    // Start session and store user data
+    security_set_user_session($_user['id']);
+
     message_set('Profile Success', 'Your profile has been updated.');
     header_redirect('/account/dashboard');
     

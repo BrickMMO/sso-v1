@@ -1,13 +1,20 @@
 <?php
 
+$user = user_fetch($_GET['key'], 'url');
+
+if(!$user)
+{
+    message_set('Profile error', 'This profile does not exist.', 'red');
+    include('404.php');
+    die();
+}
+
 define('APP_NAME', 'Profile');
 
-define('PAGE_TITLE', 'TEST');
+define('PAGE_TITLE', $user['url']);
 
 include('templates/html_header.php');
 include('templates/login_header.php');
-
-$user = user_fetch($_GET['key']);
 
 ?>
 
@@ -16,7 +23,7 @@ $user = user_fetch($_GET['key']);
     <h1>PUBLIC PROFILE</h1>
 
     <h2>    
-        <?=user_name($_user['id'])?>
+        <?=user_name($user['id'])?>
         <br>
         <a href="https://github.com/<?=$user['github_username']?>">
             <i class="fa-brands fa-github"></i>
