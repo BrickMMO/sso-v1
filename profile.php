@@ -20,7 +20,7 @@ include('templates/login_header.php');
 
 <div class="w3-center">
 
-    <h1>PUBLIC PROFILE</h1>
+    <h1>BUILDER PROFILE</h1>
 
     <h2>    
         <?=user_name($user['id'])?>

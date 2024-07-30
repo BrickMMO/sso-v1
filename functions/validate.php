@@ -58,7 +58,7 @@ function validate_url_exists($url, $table, $id = false)
 
     $query = 'SELECT url
         FROM '.$table.'
-        WHERE url = "'.addslashes($email).'" ';
+        WHERE url = "'.addslashes($url).'" ';
     if($id) $query .= 'AND id != '.$id.' ';
     $query .= 'LIMIT 1';
     $result = mysqli_query($connect, $query);
@@ -88,6 +88,14 @@ function validate_blank($value)
 function validate_github($github)
 {
     return preg_match('/^[a-zA-Z0-9\-]{6,39}$/', $github);
+}
+
+/*
+ * Basic validation for a GitHub username
+ */
+function validate_alpha_numeric($value)
+{
+    return preg_match('/^[a-zA-Z0-9]+$/', $value);
 }
 
 /*

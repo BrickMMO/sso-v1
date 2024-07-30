@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     // Basic serverside validation
     if (
         !validate_blank($_POST['url']) || 
+        !validate_alpha_numeric($_POST['url']) || 
         validate_reserved_urls($_POST['url']) ||
         validate_url_exists($_POST['url'], 'users', $_user['id']))
     {
@@ -133,19 +134,30 @@ include('templates/message.php');
     }
 
     async function validateMainForm() {
+        const alphaNumeric = new RegExp(/[^a-zA-Z0-9]/g);
+        
         let errors = 0;
 
         let url = document.getElementById("url");
         let url_error = document.getElementById("url-error");
         url_error.innerHTML = "";
-        if (url.value == "") {
+        if (url.value == "") 
+        {
             url_error.innerHTML = "(URL is required)";
             errors++;
         }
-        else if (url.value.length < 3) {
+        else if (url.value.length < 3) 
+        {
             url_error.innerHTML = "(URL must be at least 3 characters)";
             errors++;
-        } else {
+        }
+        else if (alphaNumeric.test(url.value)) 
+        {
+            url_error.innerHTML = "(URL may only contain letters and numbers)";
+            errors++;
+        } 
+        else 
+        {
             const json = await validateExistingUrl(url.value);
             if(json.error == true)
             {
