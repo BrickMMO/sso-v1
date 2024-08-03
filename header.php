@@ -1,5 +1,4 @@
 
-
 (function () {
 
   <?php if(security_is_logged_in()): ?>
@@ -33,7 +32,7 @@
     link.rel = "stylesheet";
     head.append(link);
   }
-*/
+  */
 
   let fa = false;
   let faCheck = document.getElementsByTagName("script");
@@ -103,6 +102,9 @@
   i.classList.add("fa-solid");
   i.classList.add("fa-grip-vertical");
   aApps.append(i);
+
+  console.log(user);
+  console.log(user.avatar);
 
   if(user && user.avatar)
   {
