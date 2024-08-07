@@ -48,7 +48,7 @@ include('templates/message.php');
     <hr>
 
     <p>Revoking GitHub acccess from your BrickMMO account will:</p>
-    <ul>
+    <ul class="w3-ul w3-margin-bottom">
         <li>Remove all GitHub access from your BrickMMO account.</li>
         <li>
             Disable your BrickMMO 
@@ -71,7 +71,7 @@ include('templates/message.php');
     <hr>
 
     <p>Providing GitHub acccess from your BrickMMO account will:</p>
-    <ul>
+    <ul class="w3-ul w3-margin-bottom">
         <li>
             Enable your BrickMMO public profile.
         </li>

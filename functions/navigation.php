@@ -114,6 +114,37 @@ function navigation_array($selected = false)
                             'icon' => 'bm-events',
                             'url' => '/events/dashboard',
                             'title' => 'Events',
+                            'sub-pages' => [
+                                [
+                                    'title' => 'Dashboard',
+                                    'url' => '/events/dashboard',
+                                    'colour' => 'red'
+                                ],[
+                                    'title' => 'Event List',
+                                    'url' => '/events/list',
+                                    'colour' => 'red'
+                                ],[
+                                    'title' => 'Registration List',
+                                    'url' => '/events/registrations/list',
+                                    'colour' => 'red'
+                                ],[
+                                    'br' => '---'
+                                ],[
+                                    'title' => 'Visit Events App',
+                                    'url' => 'https://events.brickmmo.com',
+                                    'colour' => 'orange'
+                                ],[
+                                    'br' => '---'
+                                ],[
+                                    'title' => 'Uptime Report',
+                                    'url' => '/uptime/events',
+                                    'colour' => 'orange'
+                                ],[
+                                    'title' => 'Stats Report',
+                                    'url' => '/uptime/stats',
+                                    'colour' => 'orange'
+                                ]
+                            ]
                         ],[
                             'icon' => 'bm-qr-codes',
                             'url' => '/qr-codes/dashboard',
@@ -188,6 +219,33 @@ function navigation_array($selected = false)
                             'icon' => 'bm-colours',
                             'url' => '/colours/dashboard',
                             'title' => 'Colours',
+                            'sub-pages' => [
+                                [
+                                    'title' => 'Dashboard',
+                                    'url' => '/colours/dashboard',
+                                    'colour' => 'red'
+                                ],[
+                                    'title' => 'Import Colours',
+                                    'url' => '/colours/import',
+                                    'colour' => 'red'
+                                ],[
+                                    'br' => '---'
+                                ],[
+                                    'title' => 'Visit Colors App',
+                                    'url' => 'https://colours.brickmmo.com',
+                                    'colour' => 'orange'
+                                ],[
+                                    'br' => '---'
+                                ],[
+                                    'title' => 'Uptime Report',
+                                    'url' => '/uptime/colours',
+                                    'colour' => 'orange'
+                                ],[
+                                    'title' => 'Stats Report',
+                                    'url' => '/uptime/stats',
+                                    'colour' => 'orange'
+                                ]
+                            ]
                         ],[
                             'icon' => 'bm-parts',
                             'url' => '/parts/dashboard',
@@ -200,6 +258,41 @@ function navigation_array($selected = false)
                             'icon' => 'bm-media',
                             'url' => '/media/dashboard',
                             'title' => 'Media',
+                            'sub-pages' => [
+                                [
+                                    'title' => 'Dashboard',
+                                    'url' => '/media/dashboard',
+                                    'colour' => 'red'
+                                ],[
+                                    'title' => 'Images',
+                                    'url' => '/media/images',
+                                    'colour' => 'red'
+                                ],[
+                                    'title' => 'Videos',
+                                    'url' => '/media/videos',
+                                    'colour' => 'red'
+                                ],[
+                                    'title' => 'Tags',
+                                    'url' => '/media/tags',
+                                    'colour' => 'red'
+                                ],[
+                                    'br' => '---'
+                                ],[
+                                    'title' => 'Visit BrickMMO Media',
+                                    'url' => 'https://media.brickmmo.com',
+                                    'colour' => 'orange'
+                                ],[
+                                    'br' => '---'
+                                ],[
+                                    'title' => 'Uptime Report',
+                                    'url' => '/uptime/maps',
+                                    'colour' => 'orange'
+                                ],[
+                                    'title' => 'Stats Report',
+                                    'url' => '/uptime/maps',
+                                    'colour' => 'orange'
+                                ]
+                            ] 
                         ]
                     ],
                 ],[
@@ -230,10 +323,6 @@ function navigation_array($selected = false)
                                     'url' => '/github/results',
                                     'colour' => 'red'
                                 ],[
-                                    'title' => 'Rescan GitHub',
-                                    'url' => '/github/rescan',
-                                    'colour' => 'red'
-                                ],[
                                     'br' => '---'
                                 ],[
                                     'title' => 'Stats Report',
@@ -260,6 +349,7 @@ function navigation_array($selected = false)
     {
         
         $selected = '/'.$selected;
+        $selected = str_replace('//', '/', $selected);
         $selected = str_replace('.php', '', $selected);
         $selected = str_replace('.', '/', $selected);
         $selected = substr($selected, 0, strrpos($selected, '/'));
